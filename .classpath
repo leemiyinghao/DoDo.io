@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="tw/edu/ncu/softwareengineering/dodoio/Collide/|tw/edu/ncu/softwareengineering/dodoio/CollideObject/|tw/edu/ncu/softwareengineering/dodoio/Game/|tw/edu/ncu/softwareengineering/dodoio/GUI/" kind="src" path="java"/>
+	<classpathentry kind="lib" path="gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
