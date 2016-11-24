@@ -2,6 +2,8 @@ package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import java.awt.image.BufferedImage;
 
+import tw.edu.ncu.softwareengineering.dodoio.Collide.CircleCollider;
+
 public abstract class Character extends CollideObject {
 	public final String name;
 	public final String team;
