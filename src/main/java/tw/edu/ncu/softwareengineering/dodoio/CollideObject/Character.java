@@ -6,7 +6,8 @@ public abstract class Character extends CollideObject {
 	public final String name;
 	public final String team;
 	public final int[] expTable = {0, 2, 2, 2, 2, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
-	public final int radius;
+	private final int radius;
+	public final CircleCollider circleCollider;
 	private int deathmatchScore;
 	private int level;
 	int exp;
@@ -42,6 +43,8 @@ public abstract class Character extends CollideObject {
 		attackCD = 1;
 		skillCD = 10;
 		speed = 1;
+		
+		circleCollider = new CircleCollider(position, radius);
 	}
 	
 	/**call when get exp
@@ -76,18 +79,33 @@ public abstract class Character extends CollideObject {
 		deathmatchScore+=addScore;
 	}
 	
+	/**點技能點 HP +10
+	 * 
+	 */
 	public void upgradeHP() {
 		healthPoint+=10;
 	}
 	
+
+	/**點技能點 傷害 +10
+	 * 
+	 */
 	public void upgradeDP() {
 		damagePoint+=10;
 	}
 
+
+	/**點技能點 技能CD減為0.99倍
+	 * 
+	 */
 	public void upgradeCD() {
 		skillCD = skillCD*0.99;
 	}
 	
+	/**取得該角色的死鬥分數
+	 * 
+	 * @return
+	 */
 	public int getDMScore() {
 		return deathmatchScore;
 	}
@@ -99,12 +117,13 @@ public abstract class Character extends CollideObject {
 	public String getTeam() {
 		return team;
 	}
-	/**Get the CircleCollider for others code
+	
+	/**Get the CircleCollider collision checking
 	 * 
 	 * @return
 	 */
-	CircleCollider getCollider() {
-		//can't fill
+	public CircleCollider getCollider() {
+		return circleCollider;
 	}
 	
 	public void attack() {
@@ -115,5 +134,13 @@ public abstract class Character extends CollideObject {
 		//code for skill
 	}
 	
+	/**Only player do "attack", ohters do "collide"
+	 * 
+	 * @param attacker
+	 */
+	public void beAttacked(Character attacker){
+		this.beHarmed((int)attacker.damagePoint);
+		
+	}
 	
 }

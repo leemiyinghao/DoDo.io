@@ -39,11 +39,11 @@ public abstract class CollideObject {
 		return isInvincible;
 	}
 	
-	/**when player are attacked, check if it will dead and change the healthPoint
+	/**when player are attacked, check if it is invincible and change the healthPoint
 	 * 
 	 * @param damage
 	 */
-	protected void beAttacked(int damage) {
+	protected void beHarmed(int damage) {
 		if(this.isInvincible()) return;
 		
 		if(damage >= this.healthPoint) {

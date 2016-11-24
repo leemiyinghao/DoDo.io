@@ -25,7 +25,7 @@ public class CollideObjectManager {
 		//code: update to server
 	}
 	
-	/**it will return the instance of the object you want from object
+	/**return the instance from collideObjectList
 	 * 
 	 * exception: No collide object with ID(inputID) in collideObjectList
 	 * It will just print out this message, and you may get a null reference
@@ -34,9 +34,10 @@ public class CollideObjectManager {
 	 * @return
 	 */
 	public CollideObject queryObjectByID(int inputID){
-		CollideObject toFindObject = collideObjectList.get(0);
+		CollideObject toFindObject = null;
 		int counter = 0;
 		try {
+			toFindObject = collideObjectList.get(0);
 			do {
 				if(inputID == collideObjectList.get(counter).ID) {
 					toFindObject = collideObjectList.get(counter);
@@ -49,7 +50,7 @@ public class CollideObjectManager {
 				throw new Exception();
 		}
 		catch(Exception exception) {
-			System.out.println("No collide object with ID("+inputID+") in collideObjectList");
+			System.out.println("Exception: No collide object with ID("+inputID+") in collideObjectList");
 		}
 		
 		return toFindObject;
@@ -60,7 +61,7 @@ public class CollideObjectManager {
 	 * @param playerAttack
 	 * @param playerAttacked
 	 */
-	public void playerBeAttacked(Character playerAttack, Character playerAttacked) {
+	private void playerBeAttacked(Character playerAttack, Character playerAttacked) {
 		
 	}
 	/**Use this when player attack an obstacle
@@ -68,7 +69,7 @@ public class CollideObjectManager {
 	 * @param playerAttack
 	 * @param obstacleAttacked
 	 */
-	public void obstacleBeAttacked(Character playerAttack, Obstacle obstacleAttacked){
+	private void obstacleBeAttacked(Character playerAttack, Obstacle obstacleAttacked){
 		
 	}
 	/**Use this when player attack mob
@@ -76,7 +77,7 @@ public class CollideObjectManager {
 	 * @param playerAttack
 	 * @param mobAttacked
 	 */
-	public void mobBeAttacked(Character playerAttack, Mob mobAttacked) {
+	private void mobBeAttacked(Character playerAttack, Mob mobAttacked) {
 		
 	}
 	
