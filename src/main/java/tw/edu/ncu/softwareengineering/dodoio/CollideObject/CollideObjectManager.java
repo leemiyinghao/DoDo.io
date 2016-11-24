@@ -1,4 +1,4 @@
-package tw.edu.ncu.softwareengineering.dodoio.collideObject;
+package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

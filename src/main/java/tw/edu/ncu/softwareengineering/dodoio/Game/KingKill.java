@@ -1,4 +1,4 @@
-package tw.edu.ncu.softwareengineering.dodoio;
+package tw.edu.ncu.softwareengineering.dodoio.Game;
 
 public class KingKill extends Game{
 	public int friendPlayerKingID;

@@ -1,4 +1,6 @@
-package Collide;
+package tw.edu.ncu.softwareengineering.dodoio.Collide;
+
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Position;
 
 public class CircleCollider implements ICollider {
     private int radius;

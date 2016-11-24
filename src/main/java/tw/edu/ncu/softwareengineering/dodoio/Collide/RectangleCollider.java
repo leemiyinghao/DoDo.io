@@ -1,4 +1,4 @@
-package Collide;
+package tw.edu.ncu.softwareengineering.dodoio.Collide;
 
 public class RectangleCollider implements ICollider {
     private int leftTopX, leftTopY, rightBottomX, rightBottomY;

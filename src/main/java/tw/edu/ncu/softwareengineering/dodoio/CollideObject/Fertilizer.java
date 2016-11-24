@@ -1,4 +1,4 @@
-package tw.edu.ncu.softwareengineering.dodoio.collideObject;
+package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 public class Fertilizer extends Mob {
 	int radius;

@@ -1,4 +1,4 @@
-package tw.edu.ncu.softwareengineering.dodoio.collideObject;
+package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 public class Wanderer extends Mob{
 
