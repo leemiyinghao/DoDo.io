@@ -1,5 +1,7 @@
 package tw.edu.ncu.softwareengineering.dodoio.Game;
 
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
+
 public class DeathMatch extends Game{
 	void start(CollideObjectManager myObjManager, String IP, String playerName){
 		Server server = new Server(IP);
@@ -21,6 +23,11 @@ public class DeathMatch extends Game{
 		if (this.playerList.existNum == 1 && me.getHP() > 0.0)
 			updateNeed = 2;
 		return updateNeed;
+	}
+	@Override
+	void start(CollideObjectManager myObjManager, String IP, String playerName) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 
