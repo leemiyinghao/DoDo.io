@@ -1,4 +1,6 @@
-package tw.edu.ncu.softwareengineering.dodoio;
+package tw.edu.ncu.softwareengineering.dodoio.Game;
+
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
 
 public class KingKill extends Game{
 	public int friendPlayerKingID;
