@@ -1,4 +1,4 @@
-package tw.edu.ncu.softwareengineering.dodoio;
+package tw.edu.ncu.softwareengineering.dodoio.Game;
 
 public abstract class Game {
 	public int playerID;

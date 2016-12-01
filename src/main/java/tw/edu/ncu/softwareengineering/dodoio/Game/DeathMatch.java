@@ -1,4 +1,4 @@
-package tw.edu.ncu.softwareengineering.dodoio;
+package tw.edu.ncu.softwareengineering.dodoio.Game;
 
 public class DeathMatch extends Game{
 	void start(CollideObjectManager myObjManager, String IP, String playerName){
