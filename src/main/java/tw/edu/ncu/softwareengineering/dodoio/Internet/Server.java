@@ -2,15 +2,19 @@ package tw.edu.ncu.softwareengineering.dodoio.Internet;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Vector;
+import java.util.ArrayList;
 
 public class Server
 {
 	ServerSocket serversocket;
-	static Vector outputvc;
-	int idcount;
+	int idcount[];
+	ArrayList<InetAddress> clientaddresslist;
+	
 
 	public void startserver()
 	{
@@ -24,8 +28,13 @@ public class Server
 		try
 		{
 			serversocket = new ServerSocket(55555);
-			outputvc = new Vector();
-			idcount = 0;
+			
+			// initial idcount , 0 for deathmatch , 1 for killking
+			idcount = new int[2];
+			idcount[0] = 0;
+			idcount[1] = 0;
+			
+			clientaddresslist = new ArrayList<>();
 			
 			while(true)
 			{
@@ -34,11 +43,8 @@ public class Server
 				{
 					DataOutputStream wdata = new DataOutputStream(clientsocket.getOutputStream());
 					
-					wdata.writeInt(idcount + 1);
-					wdata.flush();
 					
-					outputvc.add(wdata);
-					++idcount;
+					clientaddresslist.add(clientsocket.getInetAddress());
 					
 					Thread thread = new Thread(new clientmanager(clientsocket));
 					thread.start();
@@ -49,6 +55,26 @@ public class Server
 		{
 			// TODO: handle exception
 			e.printStackTrace();
+		}
+	}
+	
+	public void broacast_update()
+	{
+		for(int i = 0 ; i < clientaddresslist.size() ; ++i)
+		{
+			try
+			{
+				DatagramSocket broacastsocket = new DatagramSocket();
+				
+			} 
+			catch (Exception e)
+			{
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			
+			
+			
 		}
 	}
 	
