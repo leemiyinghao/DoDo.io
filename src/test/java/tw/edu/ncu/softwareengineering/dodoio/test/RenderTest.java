@@ -1,18 +1,19 @@
 package tw.edu.ncu.softwareengineering.dodoio.test;
 
-import tw.edu.ncu.softwareengineering.dodoio.Graphic.Render;
+import tw.edu.ncu.softwareengineering.dodoio.Graphic.Renderer;
 import static org.junit.Assert.*;
 import org.junit.*;
 
 public class RenderTest{
     @Rule
-    private Render renderer;
+    private Renderer renderer;
     @before
     public void setup(){
-        this.renderer = new Render(null, null);
+        this.renderer = new Renderer(null, null);
     }
     @Test
-    public void testNewRender(){
-        assertEquals(renderer.test(1,1), 1+1);
+    public void testGameStat(){
+        renderer.setStat(GameStat.INGAME);
+        assertEquals(renderer.getStat(), GameStat.INGAME);
     }
 }
