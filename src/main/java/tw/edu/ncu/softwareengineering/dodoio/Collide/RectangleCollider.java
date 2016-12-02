@@ -6,12 +6,14 @@ public class RectangleCollider implements ICollider {
     private Position position = new Position(0, 0, 0);
     private Point[] points = new Point[4];
 
-    /**Create a rotated RectangleCollider
+    /**
+     * Create a rotated RectangleCollider
+     *
      * @param width
      * @param height
      * @param position
      */
-    public RectangleCollider(int width, int height, Position position) {
+    public RectangleCollider(Position position, int width, int height) {
         this.position.setPosition(position.getX(), position.getY(), position.getDirection());
         points[0] = rotatePoint(new Point(position.getX() - width / 2, position.getY() - height / 2), 2 * Math.PI * (1 - position.getDirection()));
         points[1] = rotatePoint(new Point(position.getX() + width / 2, position.getY() - height / 2), 2 * Math.PI * (1 - position.getDirection()));
@@ -22,6 +24,7 @@ public class RectangleCollider implements ICollider {
     public Position getPosition() {
         return position;
     }
+
     public Point[] getPoints() {
         return points;
     }
@@ -39,6 +42,7 @@ public class RectangleCollider implements ICollider {
 
     /**
      * Rotate a point with angle
+     *
      * @param p
      * @param angle
      * @return a rotated point
