@@ -6,6 +6,7 @@ public abstract class CollideObject {
 	protected Position position;
 	public BufferedImage appearance;
 	final int ID;
+	final int collideDamage = 30;
 	protected boolean isInvincible;
 	protected int healthPoint;
 	private boolean isDead;
@@ -29,7 +30,9 @@ public abstract class CollideObject {
 	 * 
 	 * @param whichObjectCollideThis
 	 */
-	public abstract void onCollide(CollideObject whichObjectCollideThis);
+	public void onCollide(CollideObject whichObjectCollideThis){
+		this.beHarmed(collideDamage);
+	}
 	
 	public Position getObjectPosition() {
 		return position;
@@ -39,11 +42,11 @@ public abstract class CollideObject {
 		return isInvincible;
 	}
 	
-	/**when player are attacked, check if it will dead and change the healthPoint
+	/**when player are attacked, check if it is invincible and change the healthPoint
 	 * 
 	 * @param damage
 	 */
-	protected void beAttacked(int damage) {
+	protected void beHarmed(int damage) {
 		if(this.isInvincible()) return;
 		
 		if(damage >= this.healthPoint) {
