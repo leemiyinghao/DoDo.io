@@ -161,23 +161,27 @@ public abstract class Character extends CollideObject {
 	public abstract void skill();
 	
 	/**Only player do "attack" by using attack or skill, others do "collide"
+	 * collide module will use as : 
+	 * collideObjectManage.collideObjectList[attackerIndx] = collideObjectList[attackedCharacterIndx].beAttacked(Character attacker);
 	 * 
 	 * @param attacker
 	 */
-	public void beAttacked(Character attacker){
+	public Character beAttacked(Character attacker){
 		this.beHarmed((int)attacker.damagePoint);
 		if(this.isDead()) {
-			didKill(attacker);
+			attacker = didKill(attacker);
 		}
 		//update data to server
+		return attacker;
 	}
 	
 	/**done everything when the character kill player
 	 * 
 	 * @param attacker
 	 */
-	private void didKill(Character attacker) {
+	private Character didKill(Character attacker) {
 		attacker.addDMScore(this.level);
+		return attacker;
 	}
 	
 	/**��o�Ө��⪺��������

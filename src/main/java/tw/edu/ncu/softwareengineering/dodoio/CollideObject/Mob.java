@@ -14,6 +14,21 @@ public abstract class Mob extends NonPlayer {
 		// TODO Auto-generated constructor stub
 	}
 	
+
+	/**Only player do "attack" by using attack or skill, others do "collide"
+	 * collide module will use as : 
+	 * collideObjectManage.collideObjectList[attackerIndx] = collideObjectList[attackedMobIndx].beAttacked(Character attacker);
+	 * 
+	 * @param attacker
+	 */
+	public Character beAttacked(Character attacker){
+		this.beHarmed((int)attacker.damagePoint);
+		if(isDead()){
+			attacker.addExp(exp);
+		}
+		return attacker;
+	}
+	
 	public CircleCollider getCircleCollider(){
 		return circleCollider;
 	}
