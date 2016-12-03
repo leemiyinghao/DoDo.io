@@ -12,13 +12,7 @@
 		</buildCommand>
 	</buildSpec>
 	<natures>
+		<nature>org.springsource.ide.eclipse.gradle.core.nature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>java</name>
-			<type>2</type>
-			<location>/home/leemiyinghao/CODE/DoDo.io/src/main/java</location>
-		</link>
-	</linkedResources>
 </projectDescription>

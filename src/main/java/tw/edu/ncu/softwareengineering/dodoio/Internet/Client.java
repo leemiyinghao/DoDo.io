@@ -2,7 +2,10 @@ package tw.edu.ncu.softwareengineering.dodoio.Internet;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.net.DatagramSocket;
 import java.net.Socket;
+
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
 
 public class Client
 {
@@ -11,7 +14,7 @@ public class Client
 	static DataOutputStream wdata;
 	static int userID;
 	
-	public Client()
+	public Client(int mode , CollideObjectManager collideObjectManager)
 	{
 		/*
 		 * Client constructor
@@ -24,6 +27,7 @@ public class Client
 			rdata = new DataInputStream(socket.getInputStream());
 			wdata = new DataOutputStream(socket.getOutputStream());
 			
+						
 			userID = rdata.readInt();
 			
 			Thread thread = new Thread(new datamanager());
@@ -37,7 +41,7 @@ public class Client
 		
 	}
 	
-	public void updatetoserver()
+	public void update()
 	{
 		
 	}
@@ -55,7 +59,16 @@ public class Client
 			
 			while(true)
 			{
-				
+				try
+				{
+					DatagramSocket recvbroacastsocket = new DatagramSocket(10000 + userID);
+					
+				}
+				catch (Exception e)
+				{
+					// TODO: handle exception
+					e.printStackTrace();
+				}
 			}
 		}
 	}
