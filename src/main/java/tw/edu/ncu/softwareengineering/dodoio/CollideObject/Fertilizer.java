@@ -27,13 +27,13 @@ public class Fertilizer extends Mob {
 	}
 
 	
-	public enum Size{
+	public static enum Size{
 		large,
 		medium,
 		small
 	}
 	
-	public enum Ability{
+	public static enum Ability{
 		Radius,
 		HP,
 		Exp

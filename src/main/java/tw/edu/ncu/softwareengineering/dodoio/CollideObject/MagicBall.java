@@ -6,14 +6,15 @@ import tw.edu.ncu.softwareengineering.dodoio.Collide.CircleCollider;
 
 public class MagicBall extends CollideObject implements Runnable{
 	private Magician player;
+	private int radius = 12;
 	private int damage;
 	private double traversal = 0;
 	private CircleCollider circleCollider;
-	int FPS = 20;//ÀH«K³]©w
+	int FPS = 20;//éš¨ä¾¿è¨­å®šçš„
 
 	protected MagicBall(int inputID, BufferedImage image, Position setPosition) {
 		super(inputID, image, setPosition);
-		// TODO Auto-generated constructor stub
+		circleCollider = new CircleCollider(position, radius);
 	}
 
 	/**fly through until its traversal out of range
@@ -36,7 +37,7 @@ public class MagicBall extends CollideObject implements Runnable{
 		dead();
 	}
 	
-	/**§â¶ZÂ÷§ë®g¦¨¦b¦a¹Ï¤W¹ê»Ú§ïÅÜªº¦ì¸m
+	/**input the traversal, the object will know where do it move to
 	 * 
 	 * @param setTraversal
 	 */

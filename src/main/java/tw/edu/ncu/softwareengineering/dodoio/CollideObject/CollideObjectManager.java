@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 
 public class CollideObjectManager{
-	public final int playerID;
 	Character player;
 	public ArrayList<CollideObject> collideObjectList;
 	
@@ -18,21 +17,22 @@ public class CollideObjectManager{
 	 * @param image
 	 * @param position
 	 */
-	public CollideObjectManager(int ID, String profession, String name, String team, BufferedImage image,Position position ) {
-		playerID = ID;
-		if(profession.equals("SwordMan")){
+	public CollideObjectManager() {
+		//code: update to server
+	}
+
+	public void addMainplayer(String chracterClass,int ID, String name, String team, BufferedImage image, Position position){
+		if(chracterClass.equals("SwordMan")){
 			player = new SwordMan(ID, name, team, image, position);
 		}
-		else if(profession.equals("Archer")){
+		else if(chracterClass.equals("Archer")){
 			player = new Archer(ID, name, team, image, position);
 		}
-		else if(profession.equals("Magician")){
+		else if(chracterClass.equals("Magician")){
 			player = new Magician(ID, name, team, image, position);
 		}
 		collideObjectList.add(player);
-		//code: update to server
 	}
-	
 	/**return the instance from collideObjectList
 	 * 
 	 * exception: No collide object with ID(inputID) in collideObjectList

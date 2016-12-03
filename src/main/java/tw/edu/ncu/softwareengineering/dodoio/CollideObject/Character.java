@@ -105,7 +105,7 @@ public abstract class Character extends CollideObject {
 		deathmatchScore+=addScore;
 	}
 	
-	/**ÂI§Þ¯àÂI HP +10
+	/**ï¿½Iï¿½Þ¯ï¿½ï¿½I HP +10
 	 * 
 	 * Exception: Run out of abilityPoint.
 	 */
@@ -123,7 +123,7 @@ public abstract class Character extends CollideObject {
 	}
 	
 
-	/**ÂI§Þ¯àÂI ¶Ë®` +10
+	/**ï¿½Iï¿½Þ¯ï¿½ï¿½I ï¿½Ë®` +10
 	 * 
 	 */
 	public void upgradeDP() {
@@ -140,7 +140,7 @@ public abstract class Character extends CollideObject {
 	}
 
 
-	/**ÂI§Þ¯àÂI §Þ¯àCD´î¬°0.99­¿
+	/**ï¿½Iï¿½Þ¯ï¿½ï¿½I ï¿½Þ¯ï¿½CDï¿½î¬°0.99ï¿½ï¿½
 	 * 
 	 */
 	public void upgradeCD() {
@@ -180,7 +180,7 @@ public abstract class Character extends CollideObject {
 		attacker.addDMScore(this.level);
 	}
 	
-	/**¨ú±o¸Ó¨¤¦âªº¦º°«¤À¼Æ
+	/**ï¿½ï¿½oï¿½Ó¨ï¿½ï¿½âªºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @return
 	 */
@@ -210,5 +210,11 @@ public abstract class Character extends CollideObject {
 	 */
 	public CircleCollider getCollider() {
 		return circleCollider;
+	}
+	
+	public static enum ChracterClass {
+		Archer,
+		Magician,
+		SwordMan
 	}
 }
