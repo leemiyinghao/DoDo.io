@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class CollideObjectManager{
 	Character player;
+	int recentIndex;
 	public ArrayList<CollideObject> collideObjectList;
 	
 	/**When this CollideObjectManager be create, initialize the user's character at the same time
@@ -32,6 +33,7 @@ public class CollideObjectManager{
 			player = new Magician(ID, name, team, image, position);
 		}
 		collideObjectList.add(player);
+		recentIndex = collideObjectList.indexOf(player);
 	}
 	/**return the instance from collideObjectList
 	 * 
@@ -41,14 +43,13 @@ public class CollideObjectManager{
 	 * @param inputID
 	 * @return
 	 */
-	public CollideObject queryObjectByID(int inputID){
-		CollideObject toFindObject = null;
+	public int queryObjectByID(int inputID){
+		int toFindObjectIndex = 0;
 		int counter = 0;
 		try {
-			toFindObject = collideObjectList.get(0);
 			do {
 				if(inputID == collideObjectList.get(counter).ID) {
-					toFindObject = collideObjectList.get(counter);
+					toFindObjectIndex = counter;
 					break;
 				}
 				counter++;
@@ -59,9 +60,10 @@ public class CollideObjectManager{
 		}
 		catch(Exception exception) {
 			System.out.println("Exception: No collide object with ID("+inputID+") in collideObjectList");
+			return -1;
 		}
 		
-		return toFindObject;
+		return toFindObjectIndex;
 	}
 	
 	public Character getMyPlayer() {
