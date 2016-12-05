@@ -8,17 +8,21 @@ public abstract class Character extends CollideObject {
 	public final String name;
 	public final String team;
 	public final int[] expTable = {0, 2, 2, 2, 2, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
-	public final int radius;
+	private final int radius = 25;
+	public final CircleCollider circleCollider;
 	private int deathmatchScore;
 	private int level;
-	int exp;
-	int maxHP;
-	int abilityPoint;
+	private int exp;
+	private int maxHP;
+	private int abilityPoint;
 	double recoveryCD;
 	double damagePoint;
 	double attackCD;
+	double attackCountDown;
 	double skillCD;
+	double skillCDCountDown;
 	double speed;
+	boolean attackActive = true, skillActive = true;
 	
 	/**Set the data of player
 	 * initialize the abilities of player
@@ -32,7 +36,6 @@ public abstract class Character extends CollideObject {
 	public Character(int setID, String setName, String setTeam, BufferedImage image, Position setPosition) {
 		super(setID, image, setPosition);
 		name = setName;
-		radius = 25;
 		team = setTeam;
 
 		deathmatchScore = 0;
@@ -44,12 +47,36 @@ public abstract class Character extends CollideObject {
 		attackCD = 1;
 		skillCD = 10;
 		speed = 1;
+		circleCollider = new CircleCollider(position, radius);
+		
+		Thread recoveryThread = new Thread(new Runnable(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				while(!isDead()){
+					try {
+						if(healthPoint < maxHP){
+							healthPoint++;
+							//Update
+						}
+						
+						Thread.sleep((long) (recoveryCD*1000));
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+			
+		});
+		recoveryThread.start();
 	}
 	
 	/**call when get exp
 	 * @param addExp
 	 */
-	void addExp(int addExp) {
+	public void addExp(int addExp) {
 		exp+=addExp;
 		levelUp();
 	}
@@ -78,18 +105,89 @@ public abstract class Character extends CollideObject {
 		deathmatchScore+=addScore;
 	}
 	
+	/**�I�ޯ��I HP +10
+	 * 
+	 * Exception: Run out of abilityPoint.
+	 */
 	public void upgradeHP() {
-		healthPoint+=10;
+		try{
+			if(abilityPoint <= 0)
+				throw new Exception();
+			healthPoint+=10;
+			abilityPoint--;
+		}
+		catch(Exception excp) {
+			System.out.println("Exception: Run out of abilityPoint.");
+			return;
+		}
 	}
 	
+
+	/**�I�ޯ��I �ˮ` +10
+	 * 
+	 */
 	public void upgradeDP() {
-		damagePoint+=10;
+		try{
+			if(abilityPoint <= 0)
+				throw new Exception();
+			damagePoint+=10;
+			abilityPoint--;
+		}
+		catch(Exception excp) {
+			System.out.println("Exception: Run out of abilityPoint.");
+			return;
+		}
 	}
 
+
+	/**�I�ޯ��I �ޯ�CD�0.99��
+	 * 
+	 */
 	public void upgradeCD() {
-		skillCD = skillCD*0.99;
+		try{
+			if(abilityPoint <= 0)
+				throw new Exception();
+			skillCD = skillCD*0.99;
+			abilityPoint--;
+		}
+		catch(Exception excp) {
+			System.out.println("Exception: Run out of abilityPoint.");
+			return;
+		}
 	}
 	
+	public abstract void attack();
+	
+	public abstract void skill();
+	
+	/**Only player do "attack" by using attack or skill, others do "collide"
+	 * collide module will use as : 
+	 * collideObjectManage.collideObjectList[attackerIndx] = collideObjectList[attackedCharacterIndx].beAttacked(Character attacker);
+	 * 
+	 * @param attacker
+	 */
+	public Character beAttacked(Character attacker){
+		this.beHarmed((int)attacker.damagePoint);
+		if(this.isDead()) {
+			attacker = didKill(attacker);
+		}
+		//update data to server
+		return attacker;
+	}
+	
+	/**done everything when the character kill player
+	 * 
+	 * @param attacker
+	 */
+	private Character didKill(Character attacker) {
+		attacker.addDMScore(this.level);
+		return attacker;
+	}
+	
+	/**��o�Ө��⪺��������
+	 * 
+	 * @return
+	 */
 	public int getDMScore() {
 		return deathmatchScore;
 	}
@@ -101,21 +199,26 @@ public abstract class Character extends CollideObject {
 	public String getTeam() {
 		return team;
 	}
-	/**Get the CircleCollider for others code
+	
+	public double getSpeed(){
+		return speed;
+	}
+	
+	public int getAbilityPoint() {
+		return abilityPoint;
+	}
+	
+	/**Get the CircleCollider collision checking
 	 * 
 	 * @return
 	 */
-	CircleCollider getCollider() {
-		//can't fill
+	public CircleCollider getCollider() {
+		return circleCollider;
 	}
 	
-	public void attack() {
-		//code for attack
+	public static enum ChracterClass {
+		Archer,
+		Magician,
+		SwordMan
 	}
-	
-	public void skill() {
-		//code for skill
-	}
-	
-	
 }
