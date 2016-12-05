@@ -2,19 +2,21 @@ package tw.edu.ncu.softwareengineering.dodoio.Internet;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import org.json.JSONObject;
+
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
+
 public class Server
 {
 	ServerSocket serversocket;
-	int idcount[];
-	ArrayList<InetAddress> clientaddresslist;
-	
+	ArrayList<ArrayList<InetAddress>> clientaddresslist;
+	ArrayList<ArrayList<Integer>> clientidlist;
+	CollideObjectManager[] collideObjectManager;
 
 	public void startserver()
 	{
@@ -29,12 +31,16 @@ public class Server
 		{
 			serversocket = new ServerSocket(55555);
 			
-			// initial idcount , 0 for deathmatch , 1 for killking
-			idcount = new int[2];
-			idcount[0] = 0;
-			idcount[1] = 0;
+			// initial client address list , id list
+			clientaddresslist.add(new ArrayList<InetAddress>());
+			clientaddresslist.add(new ArrayList<InetAddress>());
+			clientidlist.add(new ArrayList<Integer>());
+			clientidlist.add(new ArrayList<Integer>());
 			
-			clientaddresslist = new ArrayList<>();
+			
+			// initial collideObjectManager
+			
+			
 			
 			while(true)
 			{
@@ -42,9 +48,12 @@ public class Server
 				if(clientsocket.isConnected())
 				{
 					DataOutputStream wdata = new DataOutputStream(clientsocket.getOutputStream());
+					DataInputStream rdata = new DataInputStream(clientsocket.getInputStream());
 					
+					String newplayerstr = rdata.readUTF();
+					JSONObject newplayrejson = new JSONObject(newplayerstr);
 					
-					clientaddresslist.add(clientsocket.getInetAddress());
+					clientaddresslist.get(newplayrejson.getInt("mode")).add(clientsocket.getInetAddress());
 					
 					Thread thread = new Thread(new clientmanager(clientsocket));
 					thread.start();
@@ -58,24 +67,12 @@ public class Server
 		}
 	}
 	
-	public void broacast_update()
+	public void broacast_update(int mode)
 	{
-		for(int i = 0 ; i < clientaddresslist.size() ; ++i)
-		{
-			try
-			{
-				DatagramSocket broacastsocket = new DatagramSocket();
-				
-			} 
-			catch (Exception e)
-			{
-				// TODO: handle exception
-				e.printStackTrace();
-			}
-			
-			
-			
-		}
+		UDPbroacast broacaster = new UDPbroacast(clientaddresslist.get(mode), clientidlist.get(mode));
+		
+		// process the broacast data
+		
 	}
 	
 		
@@ -109,10 +106,24 @@ public class Server
 			/*
 			 * Implement run() for multi-thread
 			 * while loop to read the data from client
-			 * and broacast to every other client
+			 * and update to CDC
+			 * handle the inputstream exception
 			 */
+			
 			while(true)
 			{
+				try
+				{
+					String playerupdatestr = rdata.readUTF();
+					JSONObject playerupdatejson = new JSONObject(playerupdatestr);
+					
+					
+				} 
+				catch (Exception e)
+				{
+					// TODO: handle exception
+					e.printStackTrace();
+				}
 				
 			}
 		}
