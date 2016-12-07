@@ -4,17 +4,18 @@ import java.awt.image.BufferedImage;
 
 import tw.edu.ncu.softwareengineering.dodoio.Collide.CircleCollider;
 
-public class MagicBall extends CollideObject implements Runnable{
-	private Magician player;
-	private int radius = 12;
-	private int damage;
+public class MagicBall extends AttackObject{
+	Magician player;
+	int radius = 12;
 	private double traversal = 0;
 	private CircleCollider circleCollider;
 	int FPS = 20;//隨便設定的
 
-	protected MagicBall(int inputID, BufferedImage image, Position setPosition) {
+	protected MagicBall(int inputID, BufferedImage image, Position setPosition, Magician setPlayer) {
 		super(inputID, image, setPosition);
 		circleCollider = new CircleCollider(position, radius);
+		player = setPlayer;
+		damage = (int) player.damagePoint;
 	}
 
 	/**fly through until its traversal out of range
@@ -22,12 +23,11 @@ public class MagicBall extends CollideObject implements Runnable{
 	 */
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		while(traversal <= player.range){
+		while(traversal <= player.range && !isDead()){
 			try {
 				double magicBallSpeed = player.speed*4;
 				traversal+=magicBallSpeed;
-				casting(traversal);
+				position = Position.projection(magicBallSpeed, position);
 				Thread.sleep(1000/FPS);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -35,16 +35,6 @@ public class MagicBall extends CollideObject implements Runnable{
 			}
 		}
 		dead();
-	}
-	
-	/**input the traversal, the object will know where do it move to
-	 * 
-	 * @param setTraversal
-	 */
-	void casting(double setTraversal){
-		int x = (int) ((Math.cos(position.getDirection()*(2*Math.PI)))*setTraversal);
-		int y = (int) ((Math.sin(position.getDirection()*(2*Math.PI)))*setTraversal);
-		position.setPosition(position.getX()+x, position.getY()+y, position.getDirection());
 	}
 	
 	public CircleCollider getCircleCollider(){
