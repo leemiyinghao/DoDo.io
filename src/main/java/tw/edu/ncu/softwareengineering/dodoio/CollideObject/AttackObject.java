@@ -9,7 +9,6 @@ public abstract class AttackObject extends CollideObject implements Runnable{
 	protected AttackObject(int inputID, BufferedImage image,
 			Position setPosition) {
 		super(inputID, image, setPosition);
-		// TODO Auto-generated constructor stub
 	}
 	
 }
