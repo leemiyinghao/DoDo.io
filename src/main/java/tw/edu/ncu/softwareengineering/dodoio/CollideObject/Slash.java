@@ -30,7 +30,7 @@ public class Slash extends AttackObject{
 	@Override
 	public void run() {
 		double timeRested = slashTime;
-		while(timeRested > 0) {
+		while(timeRested > 0 && !isDead()) {
 			try {
 				timeRested = timeRested - 1/FPS;
 				Thread.sleep(1000/FPS);
