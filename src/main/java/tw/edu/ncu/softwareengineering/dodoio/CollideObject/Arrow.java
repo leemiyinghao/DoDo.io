@@ -2,17 +2,21 @@ package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import java.awt.image.BufferedImage;
 
-public class Arrow extends CollideObject implements Runnable{
-	private Archer player;
-	private int damage;
-	private double traversal = 0;
+import tw.edu.ncu.softwareengineering.dodoio.Collide.RectangleCollider;
+
+public class Arrow extends AttackObject{
+	Archer player;
+	double traversal = 0;
+	int height = 50;
+	int width = 4;
+	RectangleCollider rectangleCollider;
+	int FPS = 20;// set for no error. this is not real
 	
-	
-	
-	protected Arrow(int inputID, BufferedImage image, Position setPosition, Archer setPlayer, int setDamage) {
+	Arrow(int inputID, BufferedImage image, Position setPosition, Archer setPlayer) {
 		super(inputID, image, setPosition);
 		player = setPlayer;
-		// TODO Auto-generated constructor stub
+		damage = (int) player.damagePoint;
+		rectangleCollider = new RectangleCollider(setPosition, width, height);
 	}
 	
 	/**fly through until its traversal out of range
@@ -20,12 +24,11 @@ public class Arrow extends CollideObject implements Runnable{
 	 */
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		while(traversal <= player.range){
+		while(traversal <= player.range && !isDead()){
 			try {
 				double arrowSpeed = player.speed*4;
 				traversal+=arrowSpeed;
-				casting(traversal);
+				position = Position.projection(arrowSpeed, position);
 				Thread.sleep(1000/FPS);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -35,14 +38,9 @@ public class Arrow extends CollideObject implements Runnable{
 		dead();
 	}
 	
-	/**把距離投射成在地圖上實際移動到的位置
-	 * 
-	 * @param setTraversal
-	 */
-	void casting(double setTraversal){
-		int x = (int) ((Math.cos(position.getDirection()*(2*Math.PI)))*setTraversal);
-		int y = (int) ((Math.sin(position.getDirection()*(2*Math.PI)))*setTraversal);
-		position.setPosition(position.getX()+x, position.getY()+y, position.getDirection());
+	
+	public RectangleCollider getRectangleCollider() {
+		return rectangleCollider;
 	}
 	
 }

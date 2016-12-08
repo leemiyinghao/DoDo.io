@@ -9,7 +9,6 @@ public abstract class Character extends CollideObject {
 	public final String team;
 	public final int[] expTable = {0, 2, 2, 2, 2, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
 	private final int radius = 25;
-	public final CircleCollider circleCollider;
 	private int deathmatchScore;
 	private int level;
 	private int exp;
@@ -22,7 +21,6 @@ public abstract class Character extends CollideObject {
 	double skillCD;
 	double skillCDCountDown;
 	double speed;
-	boolean attackActive = true, skillActive = true;
 	
 	/**Set the data of player
 	 * initialize the abilities of player
@@ -47,7 +45,7 @@ public abstract class Character extends CollideObject {
 		attackCD = 1;
 		skillCD = 10;
 		speed = 1;
-		circleCollider = new CircleCollider(position, radius);
+		collider = new CircleCollider(position, radius);
 		
 		Thread recoveryThread = new Thread(new Runnable(){
 
@@ -56,12 +54,12 @@ public abstract class Character extends CollideObject {
 				// TODO Auto-generated method stub
 				while(!isDead()){
 					try {
+						Thread.sleep((long) (recoveryCD*1000));
 						if(healthPoint < maxHP){
 							healthPoint++;
 							//Update
 						}
 						
-						Thread.sleep((long) (recoveryCD*1000));
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -156,9 +154,9 @@ public abstract class Character extends CollideObject {
 		}
 	}
 	
-	public abstract void attack();
+	abstract AttackObject attack(int setID);
 	
-	public abstract void skill();
+	abstract AttackObject skill(int setID);
 	
 	/**Only player do "attack" by using attack or skill, others do "collide"
 	 * collide module will use as : 
@@ -206,14 +204,6 @@ public abstract class Character extends CollideObject {
 	
 	public int getAbilityPoint() {
 		return abilityPoint;
-	}
-	
-	/**Get the CircleCollider collision checking
-	 * 
-	 * @return
-	 */
-	public CircleCollider getCollider() {
-		return circleCollider;
 	}
 	
 	public static enum ChracterClass {

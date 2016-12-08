@@ -14,51 +14,15 @@ public class SwordMan extends Character {
 	}
 
 	@Override
-	public void attack() {
-		Thread attackThread = new Thread(new Runnable(){
-			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				if(attackActive){
-					//shoot arrow
-					attackActive = false;
-					try {
-						Thread.sleep((long) (attackCD*1000));
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					attackActive = true;
-				}
-			}
-		});
-		attackThread.start();
+	AttackObject attack(int setID) {
+		AttackObject slash = new Slash(setID, slashImage, position);
+		return slash;
 	}
 
 	@Override
-	public void skill() {
-
-		Thread skillThread = new Thread(new Runnable(){
-			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				if(skillActive){
-					//shoot arrow
-					skillActive = false;
-					try {
-						Thread.sleep((long) (skillCD*1000));
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					skillActive = true;
-				}
-			}
-		});
-		skillThread.start();
+	AttackObject skill(int setID) {
+		AttackObject slash = new SlashBig(setID, slashImage, position);
+		return slash;
 	}
-
 
 }
