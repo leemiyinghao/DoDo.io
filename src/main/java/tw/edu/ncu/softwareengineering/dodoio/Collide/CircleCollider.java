@@ -6,10 +6,10 @@ public class CircleCollider extends Collider {
     private int radius;
 
     /**
-     * Create a CircleCollider with position and radius
+     * Create a CircleCollider
      *
-     * @param position
-     * @param radius
+     * @param position the position of the collider
+     * @param radius   the radius of the collider
      */
     public CircleCollider(Position position, int radius) {
         super();
@@ -18,9 +18,7 @@ public class CircleCollider extends Collider {
     }
 
     /**
-     * return the radius of the collider
-     *
-     * @return
+     * @return the radius of the collider
      */
     public int getRadius() {
         return radius;

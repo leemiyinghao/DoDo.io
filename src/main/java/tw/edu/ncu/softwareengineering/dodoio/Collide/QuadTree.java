@@ -16,8 +16,8 @@ public class QuadTree {
     /**
      * create a quadtree with level and bound
      *
-     * @param level
-     * @param bound
+     * @param level the level of the quadtree
+     * @param bound the bound of the quadtree
      */
     public QuadTree(int level, Bound bound) {
         this.level = level;
@@ -56,15 +56,15 @@ public class QuadTree {
     /**
      * get the index of a circleCollider
      *
-     * @param collider
-     * @param horizontalMidpoint
-     * @param verticalMidpoint
-     * @return
+     * @param collider           a circle collider
+     * @param horizontalMidpoint the horizontalMidpoint of the bound
+     * @param verticalMidpoint   the verticalMidpoint of the bound
+     * @return the quadrant  which the collider is in, If the collider isn't in any quadrant return -1
      */
     private int getCircleIndex(CircleCollider collider, double horizontalMidpoint, double verticalMidpoint) {
         int index = -1;
-        int x = collider.getPosition().getX();
-        int y = collider.getPosition().getY();
+        int x = collider.position.getX();
+        int y = collider.position.getY();
         int radius = collider.getRadius();
         // Object can completely fit within the top quadrants
         boolean topQuadrant = y < verticalMidpoint && y + radius < verticalMidpoint;
@@ -88,10 +88,10 @@ public class QuadTree {
     /**
      * get the index of a rectangleCollider
      *
-     * @param collider
-     * @param horizontalMidpoint
-     * @param verticalMidpoint
-     * @return
+     * @param collider           a rectangle collider
+     * @param horizontalMidpoint the horizontalMidpoint of the bound
+     * @param verticalMidpoint   the verticalMidpoint of the bound
+     * @return the quadrant  which the collider is in, If the collider isn't in any quadrant return -1
      */
     private int getRectangleIndex(RectangleCollider collider, double horizontalMidpoint, double verticalMidpoint) {
         int index = -1;
@@ -142,6 +142,8 @@ public class QuadTree {
      * Determine which node the object belongs to. -1 means
      * object cannot completely fit within a child node and is part
      * of the parent node
+     *
+     * @param collideObject the collide object to be calc
      */
     private int getIndex(CollideObject collideObject) {
         double horizontalMidpoint = bound.getX() + (bound.getWidth() / 2);
@@ -156,6 +158,8 @@ public class QuadTree {
      * Insert the object into the quadtree. If the node
      * exceeds the capacity, it will split and add all
      * objects to their corresponding nodes.
+     *
+     * @param collideObject the collide object to be insert
      */
     public void insert(CollideObject collideObject) {
         if (nodes[0] != null) {
@@ -189,6 +193,9 @@ public class QuadTree {
 
     /**
      * Return all objects that could collide with the given object
+     *
+     * @param returnObjects a list  use to store result
+     * @param collideObject the collide object you want to get
      */
     public List retrieve(List returnObjects, CollideObject collideObject) {
         int index = getIndex(collideObject);
