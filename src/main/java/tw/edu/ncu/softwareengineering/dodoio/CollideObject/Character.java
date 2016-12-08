@@ -211,4 +211,10 @@ public abstract class Character extends CollideObject {
 		Magician,
 		SwordMan
 	}
+	
+	public static enum TeamName {
+		deathMatch,
+		teamBlue,
+		teamRed
+	}
 }
