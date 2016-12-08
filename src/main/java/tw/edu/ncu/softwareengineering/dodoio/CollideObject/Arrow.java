@@ -12,7 +12,7 @@ public class Arrow extends AttackObject{
 	RectangleCollider rectangleCollider;
 	int FPS = 20;// set for no error. this is not real
 	
-	public Arrow(int inputID, BufferedImage image, Position setPosition, Archer setPlayer) {
+	Arrow(int inputID, BufferedImage image, Position setPosition, Archer setPlayer) {
 		super(inputID, image, setPosition);
 		player = setPlayer;
 		damage = (int) player.damagePoint;

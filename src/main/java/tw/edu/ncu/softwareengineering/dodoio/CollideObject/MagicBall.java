@@ -15,6 +15,7 @@ public class MagicBall extends AttackObject{
 		super(inputID, image, setPosition);
 		circleCollider = new CircleCollider(position, radius);
 		player = setPlayer;
+		super.player = setPlayer;
 		damage = (int) player.damagePoint;
 	}
 
