@@ -154,30 +154,4 @@ public class CollideObjectManager{
 		skillThread.start();
 	}
 	
-	/**Use this when player attack an enemy player
-	 * 
-	 * @param playerAttack
-	 * @param playerAttacked
-	 */
-	private void playerBeAttacked(Character playerAttack, Character playerAttacked) {
-		
-	}
-	/**Use this when player attack an obstacle
-	 * 
-	 * @param playerAttack
-	 * @param obstacleAttacked
-	 */
-	private void obstacleBeAttacked(Character playerAttack, Obstacle obstacleAttacked) {
-		
-	}
-	/**Use this when player attack mob
-	 * 
-	 * @param playerAttack
-	 * @param mobAttacked
-	 */
-	private void mobBeAttacked(Character playerAttack, Mob mobAttacked) {
-		
-	}
-	
-	
 }

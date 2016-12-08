@@ -206,6 +206,10 @@ public abstract class Character extends CollideObject {
 		return abilityPoint;
 	}
 	
+	public int getLevel() {
+		return level;
+	}
+	
 	public static enum ChracterClass {
 		Archer,
 		Magician,
