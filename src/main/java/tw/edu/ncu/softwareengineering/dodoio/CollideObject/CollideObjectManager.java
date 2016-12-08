@@ -11,12 +11,33 @@ public class CollideObjectManager{
 	int recentIndex;
 	boolean playerAttackActive = true, playerSkillActive = true;
 	public ArrayList<CollideObject> collideObjectList;
+	private boolean mainPlayerAdded = false;
 	
 	public CollideObjectManager() {
 		//code: update to server
 	}
-
+	
+	/**add your player
+	 * 
+	 * Exception : Main player already exist.
+	 * 
+	 * @param chracterClass Archer, SwordMan, or Magician. Input which your player is.
+	 * @param ID
+	 * @param name player's name
+	 * @param team check the enum "TeamName" in Character 
+	 * @param image
+	 * @param position
+	 */
 	public void addMainplayer(String chracterClass,int ID, String name, String team, BufferedImage image, Position position){
+		try {
+			if(mainPlayerAdded)
+				throw new Exception();
+		}
+		catch(Exception excptn) {
+			System.out.println("Main player already exist.");
+			return;
+		}
+		
 		if(chracterClass.equals(ChracterClass.SwordMan)){
 			player = new SwordMan(ID, name, team, image, position);
 		}
@@ -28,10 +49,12 @@ public class CollideObjectManager{
 		}
 		collideObjectList.add(player);
 		recentIndex = collideObjectList.indexOf(player);
+		
+		mainPlayerAdded = true;
 	}
 	/**return the index from collideObjectList
 	 * 
-	 * exception: No collide object with ID(inputID) in collideObjectList, return -1
+	 * exception: No collide object with ID(inputID) in collideObjectList. return -1
 	 * 
 	 * @param inputID
 	 * @return
@@ -61,7 +84,7 @@ public class CollideObjectManager{
 	
 	/**get the index of main player in collideObjectList
 	 * 
-	 * Exception: There is no main player, return -1
+	 * Exception: There is no main player. return -1
 	 * 
 	 * @return
 	 */
@@ -82,6 +105,9 @@ public class CollideObjectManager{
 		return recentIndex;
 	}
 	
+	/**call when player attack(click left button)
+	 * The method will be block in CD time
+	 */
 	public void myPlayerAttack() {
 		try{
 			if(getMyPlayer() == -1)
@@ -117,6 +143,9 @@ public class CollideObjectManager{
 		
 	}
 	
+	/**call when player use skill(click right button)
+	 * The method will be block in CD time
+	 */
 	public void myPlayerSkill() {
 		try{
 			if(getMyPlayer() == -1)
