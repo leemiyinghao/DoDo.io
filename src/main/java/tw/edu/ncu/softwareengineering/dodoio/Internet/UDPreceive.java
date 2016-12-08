@@ -3,6 +3,8 @@ package tw.edu.ncu.softwareengineering.dodoio.Internet;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
+import org.json.JSONObject;
+
 import tw.edu.ncu.softwareengineering.dodoio.Game.Game;
 
 public class UDPreceive implements Runnable
@@ -31,6 +33,7 @@ public class UDPreceive implements Runnable
 			DatagramSocket socket = new DatagramSocket(10000);
 			DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 			String broacaststr;
+			JSONObject broacastobj;
 			
 			while(true)
 			{
@@ -38,6 +41,8 @@ public class UDPreceive implements Runnable
 				broacaststr = new String(packet.getData());
 				
 				// process string to object
+				broacastobj = new JSONObject(broacaststr);
+				
 			}
 			
 		} 

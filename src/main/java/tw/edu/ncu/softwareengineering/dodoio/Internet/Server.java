@@ -9,14 +9,23 @@ import java.util.ArrayList;
 
 import org.json.JSONObject;
 
-import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Archer;
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Magician;
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.SwordMan;
+
 
 public class Server
 {
 	ServerSocket serversocket;
 	ArrayList<ArrayList<InetAddress>> clientaddresslist;
 	ArrayList<ArrayList<Integer>> clientidlist;
-	CollideObjectManager[] collideObjectManager;
+	boolean teamcount;
+	CDC cdc;
+	
+	public int test(int a , int b)
+	{
+		return a + b;
+	}
 
 	public void startserver()
 	{
@@ -30,6 +39,7 @@ public class Server
 		try
 		{
 			serversocket = new ServerSocket(55555);
+			teamcount = true;
 			
 			// initial client address list , id list
 			clientaddresslist.add(new ArrayList<InetAddress>());
@@ -38,8 +48,8 @@ public class Server
 			clientidlist.add(new ArrayList<Integer>());
 			
 			
-			// initial collideObjectManager
-			
+			// initial CDC
+			cdc = new CDC();
 			
 			
 			while(true)
@@ -50,10 +60,40 @@ public class Server
 					DataOutputStream wdata = new DataOutputStream(clientsocket.getOutputStream());
 					DataInputStream rdata = new DataInputStream(clientsocket.getInputStream());
 					
-					String newplayerstr = rdata.readUTF();
-					JSONObject newplayrejson = new JSONObject(newplayerstr);
+					JSONObject newplayrejson = new JSONObject(rdata.readUTF());
 					
-					clientaddresslist.get(newplayrejson.getInt("mode")).add(clientsocket.getInetAddress());
+					int mode = newplayrejson.getInt("mode");
+					
+					clientaddresslist.get(mode).add(clientsocket.getInetAddress());
+					
+					String profession = newplayrejson.getString("profession");
+					int newid = cdc.collideObjectManager[mode].collideObjectList.size();
+					String teamname;
+					if(mode == 0)
+						teamname = "deathMatch";
+					else
+					{
+						if(teamcount)
+							teamname = "teamBlue"; 
+						else
+							teamname = "teamRed";
+						teamcount = !teamcount;
+					}
+					
+					if(profession.equals("SwordMan"))
+					{
+						cdc.collideObjectManager[mode].collideObjectList.add(new SwordMan(newid, newplayrejson.getString("name"), teamname, null, null));
+					}
+					else if(profession.equals("Archer"))
+					{
+						cdc.collideObjectManager[mode].collideObjectList.add(new Archer(newid, newplayrejson.getString("name"), teamname, null, null));
+					}
+					else 
+					{
+						cdc.collideObjectManager[mode].collideObjectList.add(new Magician(newid, newplayrejson.getString("name"), teamname, null, null));
+					}
+					
+					
 					
 					Thread thread = new Thread(new clientmanager(clientsocket));
 					thread.start();

@@ -14,7 +14,7 @@ public class Client
 	DataOutputStream wdata;
 	Game game;
 	
-	public Client(Game game , String name , int profession , int mode)
+	public Client(Game game , String name , String profession , int mode)
 	{
 		/*
 		 * Client constructor
@@ -38,6 +38,9 @@ public class Client
 			
 			String collidestr = rdata.readUTF();
 			JSONObject collidelist = new JSONObject(collidestr);
+			
+			// process collidelist for all client
+			
 						
 			Thread thread = new Thread(new UDPreceive(game));
 			thread.start();
