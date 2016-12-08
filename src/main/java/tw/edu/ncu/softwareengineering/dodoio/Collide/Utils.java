@@ -119,8 +119,9 @@ public class Utils {
     /**
      * return whether the two CollideObject a and b collides.
      *
-     * @param a
-     * @param b
+     * @param a a collide object
+     * @param b acollide object
+     * @return whether the two CollideObject a and b collides.
      */
     private boolean isCollide(CollideObject a, CollideObject b) {
         if (a.getCollider() instanceof CircleCollider && b.getCollider() instanceof CircleCollider)

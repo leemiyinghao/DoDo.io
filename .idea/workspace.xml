@@ -3,14 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1fc26dd8-3904-4c04-919f-12bfbb9ee8a1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Bound.java" afterPath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Bound.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/CircleCollider.java" afterPath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/CircleCollider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Collider.java" afterPath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Collider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Point.java" afterPath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Point.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/QuadTree.java" afterPath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/QuadTree.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/RectangleCollider.java" afterPath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/RectangleCollider.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Utils.java" afterPath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Utils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Vector.java" afterPath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Vector.java" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -110,7 +103,7 @@
       <file leaf-file-name="Vector.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Vector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
+            <state relative-caret-position="-256">
               <caret line="27" column="24" lean-forward="false" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
               <folding>
                 <element signature="e#747#748#0" expanded="true" />
@@ -139,7 +132,7 @@
       <file leaf-file-name="CircleCollider.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/CircleCollider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
+            <state relative-caret-position="-38">
               <caret line="10" column="51" lean-forward="true" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="51" />
               <folding />
             </state>
@@ -149,8 +142,8 @@
       <file leaf-file-name="Utils.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="141" column="9" lean-forward="true" selection-start-line="141" selection-start-column="9" selection-end-line="141" selection-end-column="9" />
+            <state relative-caret-position="133">
+              <caret line="123" column="62" lean-forward="false" selection-start-line="123" selection-start-column="62" selection-end-line="123" selection-end-column="62" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1071,11 +1064,18 @@
       <option name="project" value="LOCAL" />
       <updated>1481205493233</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="2016/12/9 12:57 finish Collide module and add some JavaDoc">
+      <created>1481216316949</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1481216316949</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15419000" />
+    <option name="totallyTimeSpent" value="15830000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1161,7 +1161,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="recreate branch" />
     <MESSAGE value="2016/12/8 21:57 change interface ICollider to abstract class Collider" />
-    <option name="LAST_COMMIT_MESSAGE" value="2016/12/8 21:57 change interface ICollider to abstract class Collider" />
+    <MESSAGE value="2016/12/9 12:57 finish Collide module and add some JavaDoc" />
+    <option name="LAST_COMMIT_MESSAGE" value="2016/12/9 12:57 finish Collide module and add some JavaDoc" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1503,14 +1504,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/CircleCollider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="51" lean-forward="true" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Collider.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -1535,9 +1528,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/RectangleCollider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="20" column="88" lean-forward="false" selection-start-line="20" selection-start-column="88" selection-end-line="20" selection-end-column="88" />
+          <folding>
+            <marker date="1481214898612" expanded="true" signature="2377:2384" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/CircleCollider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-38">
+          <caret line="10" column="51" lean-forward="true" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Vector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
+        <state relative-caret-position="-256">
           <caret line="27" column="24" lean-forward="false" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
           <folding>
             <element signature="e#747#748#0" expanded="true" />
@@ -1552,20 +1563,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/RectangleCollider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="20" column="88" lean-forward="false" selection-start-line="20" selection-start-column="88" selection-end-line="20" selection-end-column="88" />
-          <folding>
-            <marker date="1481214898612" expanded="true" signature="2377:2384" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="141" column="9" lean-forward="true" selection-start-line="141" selection-start-column="9" selection-end-line="141" selection-end-column="9" />
+        <state relative-caret-position="133">
+          <caret line="123" column="62" lean-forward="false" selection-start-line="123" selection-start-column="62" selection-end-line="123" selection-end-column="62" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
