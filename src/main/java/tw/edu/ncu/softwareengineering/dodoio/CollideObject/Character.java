@@ -9,7 +9,6 @@ public abstract class Character extends CollideObject {
 	public final String team;
 	public final int[] expTable = {0, 2, 2, 2, 2, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
 	private final int radius = 25;
-	public final CircleCollider circleCollider;
 	private int deathmatchScore;
 	private int level;
 	private int exp;
@@ -46,7 +45,7 @@ public abstract class Character extends CollideObject {
 		attackCD = 1;
 		skillCD = 10;
 		speed = 1;
-		circleCollider = new CircleCollider(position, radius);
+		collider = new CircleCollider(position, radius);
 		
 		Thread recoveryThread = new Thread(new Runnable(){
 
@@ -205,14 +204,6 @@ public abstract class Character extends CollideObject {
 	
 	public int getAbilityPoint() {
 		return abilityPoint;
-	}
-	
-	/**Get the CircleCollider collision checking
-	 * 
-	 * @return
-	 */
-	public CircleCollider getCollider() {
-		return circleCollider;
 	}
 	
 	public static enum ChracterClass {

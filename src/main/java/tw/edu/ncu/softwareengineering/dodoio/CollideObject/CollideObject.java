@@ -2,13 +2,16 @@ package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import java.awt.image.BufferedImage;
 
+import tw.edu.ncu.softwareengineering.dodoio.Collide.ICollider;
+
 public abstract class CollideObject {
 	protected Position position;
 	public BufferedImage appearance;
-	final int ID;
-	final int collideDamage = 30;
+	public final int ID;
+	public final int collideDamage = 30;
 	protected boolean isInvincible;
 	protected int healthPoint;
+	protected ICollider collider;
 	private boolean isDead;
 	
 	/**set data of the object
@@ -32,10 +35,6 @@ public abstract class CollideObject {
 	 */
 	public void onCollide(CollideObject whichObjectCollideThis){
 		this.beHarmed(collideDamage);
-	}
-	
-	public Position getObjectPosition() {
-		return position;
 	}
 	
 	public boolean isInvincible() {
@@ -66,6 +65,10 @@ public abstract class CollideObject {
 	
 	public Position getPosition(){
 		return position;
+	}
+	
+	public ICollider getCollider() {
+		return collider;
 	}
 	
 	public void move(Position nextPosition){

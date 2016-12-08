@@ -12,15 +12,6 @@ public class CollideObjectManager{
 	boolean playerAttackActive = true, playerSkillActive = true;
 	public ArrayList<CollideObject> collideObjectList;
 	
-	/**When this CollideObjectManager be create, initialize the user's character at the same time
-	 * 
-	 * @param ID
-	 * @param profession
-	 * @param name
-	 * @param team
-	 * @param image
-	 * @param position
-	 */
 	public CollideObjectManager() {
 		//code: update to server
 	}

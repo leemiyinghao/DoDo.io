@@ -8,7 +8,6 @@ public class Slash extends AttackObject{
 	SwordMan player;
 	int height = 35;
 	int width = 25;
-	RectangleCollider rectangleCollider;
 	int FPS = 20;// set for no error. this is not real
 	final double slashTime = 0.5;
 	
@@ -23,7 +22,7 @@ public class Slash extends AttackObject{
 	protected Slash(int inputID, BufferedImage image, Position setPosition, SwordMan setPlayer) {
 		super(inputID, image, setPosition);
 		player = setPlayer;
-		rectangleCollider = new RectangleCollider(setPosition, width, height);
+		collider = new RectangleCollider(setPosition, width, height);
 		
 		position = Position.projection(player.getRadius(), setPosition);
 	}
@@ -41,10 +40,6 @@ public class Slash extends AttackObject{
 			}
 		}
 		dead();
-	}
-	
-	RectangleCollider getRectangleCollider() {
-		return rectangleCollider;
 	}
 
 }

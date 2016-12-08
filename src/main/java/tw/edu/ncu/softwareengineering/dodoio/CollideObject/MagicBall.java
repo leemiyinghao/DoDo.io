@@ -8,12 +8,11 @@ public class MagicBall extends AttackObject{
 	Magician player;
 	int radius = 12;
 	private double traversal = 0;
-	private CircleCollider circleCollider;
 	int FPS = 20;//隨便設定的
 
 	protected MagicBall(int inputID, BufferedImage image, Position setPosition, Magician setPlayer) {
 		super(inputID, image, setPosition);
-		circleCollider = new CircleCollider(position, radius);
+		collider = new CircleCollider(position, radius);
 		player = setPlayer;
 		super.player = setPlayer;
 		damage = (int) player.damagePoint;
@@ -36,10 +35,6 @@ public class MagicBall extends AttackObject{
 			}
 		}
 		dead();
-	}
-	
-	public CircleCollider getCircleCollider(){
-		return circleCollider;
 	}
 	
 }
