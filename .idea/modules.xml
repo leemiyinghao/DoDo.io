@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DoDo.io.iml" filepath="$PROJECT_DIR$/.idea/modules/DoDo.io.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DoDo.Io.iml" filepath="$PROJECT_DIR$/.idea/modules/DoDo.Io.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DoDo.Io_main.iml" filepath="$PROJECT_DIR$/.idea/modules/DoDo.Io_main.iml" group="DoDo.Io" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DoDo.Io_test.iml" filepath="$PROJECT_DIR$/.idea/modules/DoDo.Io_test.iml" group="DoDo.Io" />
     </modules>
   </component>
 </project>
