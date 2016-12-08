@@ -2,8 +2,7 @@ package tw.edu.ncu.softwareengineering.dodoio.Collide;
 
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Position;
 
-public class RectangleCollider implements ICollider {
-    private Position position = new Position(0, 0, 0);
+public class RectangleCollider extends Collider {
     private Point[] points = new Point[4];
 
     /**
@@ -14,20 +13,12 @@ public class RectangleCollider implements ICollider {
      * @param position
      */
     public RectangleCollider(Position position, int width, int height) {
+        super();
         this.position.setPosition(position.getX(), position.getY(), position.getDirection());
         points[0] = rotatePoint(new Point(position.getX() - width / 2, position.getY() - height / 2), 2 * Math.PI * (1 - position.getDirection()));
         points[1] = rotatePoint(new Point(position.getX() + width / 2, position.getY() - height / 2), 2 * Math.PI * (1 - position.getDirection()));
         points[2] = rotatePoint(new Point(position.getX() - width / 2, position.getY() + height / 2), 2 * Math.PI * (1 - position.getDirection()));
         points[3] = rotatePoint(new Point(position.getX() + width / 2, position.getY() + height / 2), 2 * Math.PI * (1 - position.getDirection()));
-    }
-
-    /**
-     * return the position of the collider
-     *
-     * @return
-     */
-    public Position getPosition() {
-        return position;
     }
 
     /**
