@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1fc26dd8-3904-4c04-919f-12bfbb9ee8a1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Vector.java" afterPath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Vector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/RectangleCollider.java" afterPath="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/RectangleCollider.java" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -40,22 +40,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1102">
               <caret line="70" column="18" lean-forward="false" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="18" />
-              <folding>
-                <element signature="e#775#776#0" expanded="false" />
-                <element signature="e#810#811#0" expanded="false" />
-                <element signature="e#851#852#0" expanded="false" />
-                <element signature="e#873#874#0" expanded="false" />
-                <element signature="e#908#909#0" expanded="false" />
-                <element signature="e#934#935#0" expanded="false" />
-                <element signature="e#1287#1288#0" expanded="false" />
-                <element signature="e#1312#1313#0" expanded="false" />
-                <element signature="e#1346#1347#0" expanded="false" />
-                <element signature="e#1368#1369#0" expanded="false" />
-                <element signature="e#1412#1413#0" expanded="false" />
-                <element signature="e#1442#1443#0" expanded="false" />
-                <element signature="e#1527#1528#0" expanded="false" />
-                <element signature="e#1547#1548#0" expanded="false" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -90,15 +75,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RectangleCollider.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="RectangleCollider.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/RectangleCollider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="20" column="88" lean-forward="false" selection-start-line="20" selection-start-column="88" selection-end-line="20" selection-end-column="88" />
+            <state relative-caret-position="-232">
+              <caret line="20" column="141" lean-forward="false" selection-start-line="20" selection-start-column="141" selection-end-line="20" selection-end-column="141" />
               <folding>
-                <element signature="e#1313#1314#0" expanded="false" />
-                <element signature="e#1342#1343#0" expanded="false" />
-                <marker date="1481214898612" expanded="true" signature="2377:2384" ph="{...}" />
+                <marker date="1481271389840" expanded="true" signature="2377:2384" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -107,22 +90,19 @@
       <file leaf-file-name="QuadTree.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/QuadTree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1178">
-              <caret line="65" column="41" lean-forward="false" selection-start-line="65" selection-start-column="41" selection-end-line="65" selection-end-column="41" />
+            <state relative-caret-position="2660">
+              <caret line="143" column="25" lean-forward="false" selection-start-line="143" selection-start-column="25" selection-end-line="143" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Vector.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Vector.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Vector.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1102">
-              <caret line="68" column="24" lean-forward="true" selection-start-line="68" selection-start-column="24" selection-end-line="68" selection-end-column="24" />
-              <folding>
-                <element signature="e#593#594#0" expanded="true" />
-                <element signature="e#617#618#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="76">
+              <caret line="68" column="24" lean-forward="false" selection-start-line="68" selection-start-column="24" selection-end-line="68" selection-end-column="24" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -142,10 +122,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="190">
               <caret line="10" column="51" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="51" />
-              <folding>
-                <element signature="e#646#647#0" expanded="false" />
-                <element signature="e#675#676#0" expanded="false" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -153,7 +130,7 @@
       <file leaf-file-name="Utils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
+            <state relative-caret-position="2223">
               <caret line="123" column="62" lean-forward="false" selection-start-line="123" selection-start-column="62" selection-end-line="123" selection-end-column="62" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -491,9 +468,9 @@
         <option value="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Point.java" />
         <option value="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Collider.java" />
         <option value="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/QuadTree.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/RectangleCollider.java" />
         <option value="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Utils.java" />
         <option value="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Vector.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/RectangleCollider.java" />
       </list>
     </option>
   </component>
@@ -524,6 +501,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -609,8 +588,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -625,6 +602,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Java8測試" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -1030,7 +1008,8 @@
       <updated>1480598196925</updated>
       <workItem from="1481198514375" duration="797000" />
       <workItem from="1481199338913" duration="745000" />
-      <workItem from="1481255267174" duration="103000" />
+      <workItem from="1481255267174" duration="457000" />
+      <workItem from="1481270232942" duration="808000" />
     </task>
     <task id="LOCAL-00001" summary="recreate branch">
       <created>1481198932584</created>
@@ -1060,11 +1039,18 @@
       <option name="project" value="LOCAL" />
       <updated>1481216687276</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="2016/12/9 11:49 fix Vector by implement Comparable">
+      <created>1481255429555</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1481255429555</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16101000" />
+    <option name="totallyTimeSpent" value="17263000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1087,21 +1073,21 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295082" sideWeight="0.5030257" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295082" sideWeight="0.4969743" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295082" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26096824" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2647504" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1152,7 +1138,8 @@
     <MESSAGE value="2016/12/8 21:57 change interface ICollider to abstract class Collider" />
     <MESSAGE value="2016/12/9 12:57 finish Collide module and add some JavaDoc" />
     <MESSAGE value="2016/12/9 01:04 add some JavaDoc" />
-    <option name="LAST_COMMIT_MESSAGE" value="2016/12/9 01:04 add some JavaDoc" />
+    <MESSAGE value="2016/12/9 11:49 fix Vector by implement Comparable" />
+    <option name="LAST_COMMIT_MESSAGE" value="2016/12/9 11:49 fix Vector by implement Comparable" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1168,9 +1155,7 @@
         <state relative-caret-position="380">
           <caret line="20" column="88" lean-forward="false" selection-start-line="20" selection-start-column="88" selection-end-line="20" selection-end-column="88" />
           <folding>
-            <element signature="e#1313#1314#0" expanded="false" />
-            <element signature="e#1342#1343#0" expanded="false" />
-            <marker date="1481214898612" expanded="true" signature="2377:2384" ph="{...}" />
+            <marker date="1481271389840" expanded="true" signature="2377:2384" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1187,10 +1172,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
           <caret line="27" column="24" lean-forward="false" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
-          <folding>
-            <element signature="e#593#594#0" expanded="true" />
-            <element signature="e#617#618#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1206,10 +1188,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="10" column="51" lean-forward="true" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="51" />
-          <folding>
-            <element signature="e#646#647#0" expanded="false" />
-            <element signature="e#675#676#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1241,22 +1220,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#775#776#0" expanded="false" />
-            <element signature="e#810#811#0" expanded="false" />
-            <element signature="e#851#852#0" expanded="false" />
-            <element signature="e#873#874#0" expanded="false" />
-            <element signature="e#908#909#0" expanded="false" />
-            <element signature="e#934#935#0" expanded="false" />
-            <element signature="e#1287#1288#0" expanded="false" />
-            <element signature="e#1312#1313#0" expanded="false" />
-            <element signature="e#1346#1347#0" expanded="false" />
-            <element signature="e#1368#1369#0" expanded="false" />
-            <element signature="e#1412#1413#0" expanded="false" />
-            <element signature="e#1442#1443#0" expanded="false" />
-            <element signature="e#1527#1528#0" expanded="false" />
-            <element signature="e#1547#1548#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1472,22 +1436,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1102">
           <caret line="70" column="18" lean-forward="false" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="18" />
-          <folding>
-            <element signature="e#775#776#0" expanded="false" />
-            <element signature="e#810#811#0" expanded="false" />
-            <element signature="e#851#852#0" expanded="false" />
-            <element signature="e#873#874#0" expanded="false" />
-            <element signature="e#908#909#0" expanded="false" />
-            <element signature="e#934#935#0" expanded="false" />
-            <element signature="e#1287#1288#0" expanded="false" />
-            <element signature="e#1312#1313#0" expanded="false" />
-            <element signature="e#1346#1347#0" expanded="false" />
-            <element signature="e#1368#1369#0" expanded="false" />
-            <element signature="e#1412#1413#0" expanded="false" />
-            <element signature="e#1442#1443#0" expanded="false" />
-            <element signature="e#1527#1528#0" expanded="false" />
-            <element signature="e#1547#1548#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1507,14 +1456,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/QuadTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1178">
-          <caret line="65" column="41" lean-forward="false" selection-start-line="65" selection-start-column="41" selection-end-line="65" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/CollideObject/Magician.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -1523,26 +1464,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/RectangleCollider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="88" lean-forward="false" selection-start-line="20" selection-start-column="88" selection-end-line="20" selection-end-column="88" />
-          <folding>
-            <element signature="e#1313#1314#0" expanded="false" />
-            <element signature="e#1342#1343#0" expanded="false" />
-            <marker date="1481214898612" expanded="true" signature="2377:2384" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/CircleCollider.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="10" column="51" lean-forward="false" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="51" />
-          <folding>
-            <element signature="e#646#647#0" expanded="false" />
-            <element signature="e#675#676#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1556,7 +1482,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
+        <state relative-caret-position="2223">
           <caret line="123" column="62" lean-forward="false" selection-start-line="123" selection-start-column="62" selection-end-line="123" selection-end-column="62" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1564,13 +1490,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/QuadTree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2660">
+          <caret line="143" column="25" lean-forward="false" selection-start-line="143" selection-start-column="25" selection-end-line="143" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/Vector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1102">
-          <caret line="68" column="24" lean-forward="true" selection-start-line="68" selection-start-column="24" selection-end-line="68" selection-end-column="24" />
+        <state relative-caret-position="76">
+          <caret line="68" column="24" lean-forward="false" selection-start-line="68" selection-start-column="24" selection-end-line="68" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/tw/edu/ncu/softwareengineering/dodoio/Collide/RectangleCollider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-232">
+          <caret line="20" column="141" lean-forward="false" selection-start-line="20" selection-start-column="141" selection-end-line="20" selection-end-column="141" />
           <folding>
-            <element signature="e#593#594#0" expanded="true" />
-            <element signature="e#617#618#0" expanded="true" />
+            <marker date="1481271389840" expanded="true" signature="2377:2384" ph="{...}" />
           </folding>
         </state>
       </provider>

@@ -15,10 +15,10 @@ public class RectangleCollider extends Collider {
     public RectangleCollider(Position position, int width, int height) {
         super();
         this.position.setPosition(position.getX(), position.getY(), position.getDirection());
-        points[0] = rotatePoint(new Point(position.getX() - width / 2, position.getY() - height / 2), 2 * Math.PI * (1 - position.getDirection()));
-        points[1] = rotatePoint(new Point(position.getX() - width / 2, position.getY() + height / 2), 2 * Math.PI * (1 - position.getDirection()));
-        points[2] = rotatePoint(new Point(position.getX() + width / 2, position.getY() + height / 2), 2 * Math.PI * (1 - position.getDirection()));
-        points[3] = rotatePoint(new Point(position.getX() + width / 2, position.getY() - height / 2), 2 * Math.PI * (1 - position.getDirection()));
+        points[0] = rotatePoint(new Point(position.getX() - width / 2, position.getY() - height / 2), 2 * Math.PI * position.getDirection());
+        points[1] = rotatePoint(new Point(position.getX() - width / 2, position.getY() + height / 2), 2 * Math.PI * position.getDirection());
+        points[2] = rotatePoint(new Point(position.getX() + width / 2, position.getY() + height / 2), 2 * Math.PI * position.getDirection());
+        points[3] = rotatePoint(new Point(position.getX() + width / 2, position.getY() - height / 2), 2 * Math.PI * position.getDirection());
     }
 
     /**
@@ -42,7 +42,7 @@ public class RectangleCollider extends Collider {
     /**
      * Rotate a point with angle
      *
-     * @param p point to be rotated
+     * @param p     point to be rotated
      * @param angle rotate angle, in radian
      * @return a rotated point
      */
@@ -51,11 +51,11 @@ public class RectangleCollider extends Collider {
         double x = p.x - position.getX();
         double y = p.y - position.getY();
         //multiply rotate matrix
-        x = Math.round(Math.cos(angle) * x - Math.sin(angle) * y);
-        y = Math.round(Math.sin(angle) * x + Math.cos(angle) * y);
+        double mx = Math.round(Math.cos(angle) * x - Math.sin(angle) * y);
+        double my = Math.round(Math.sin(angle) * x + Math.cos(angle) * y);
         //change origin to 0,0
-        x += position.getX();
-        y += position.getY();
-        return new Point(x, y);
+        mx += position.getX();
+        my += position.getY();
+        return new Point(mx, my);
     }
 }
