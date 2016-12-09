@@ -4,7 +4,7 @@ import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
 
 public abstract class Game {
 	public CollideObjectManager myObjManager;
-	abstract void start(String playerName, CollideObjectManager.Profession profession, int gameMode);
+	abstract void start(String playerName, CollideObjectManager.ChracterClass profession, int gameMode);
 	abstract int update();
 	
 }

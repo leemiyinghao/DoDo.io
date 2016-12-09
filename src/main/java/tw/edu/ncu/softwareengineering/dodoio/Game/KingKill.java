@@ -1,13 +1,15 @@
 package tw.edu.ncu.softwareengineering.dodoio.Game;
 
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
+import tw.edu.ncu.softwareengineering.dodoio.Internet.Client;
 
 public class KingKill extends Game{
 	private int friendPlayerKingID;
 	private int enemyPlayerKingID;
-	void start(CollideObjectManager myObjManager, String playerName){
-		//int myid = 0; //must be changed!
-		//this.setPlayerID(myid);
+	void start(String playerName, CollideObjectManager.ChracterClass profession, int gameMode){
+		//need to get friend and enemy King ID
+		this.myObjManager = new CollideObjectManager(this);
+		Client client = new Client(this, playerName, profession, gameMode);
 	}
 	int update() {
 		/*return 0 for nothing happened (game continue)!
@@ -30,14 +32,8 @@ public class KingKill extends Game{
 	public int getFriendPlayerKingID() {
 		return friendPlayerKingID;
 	}
-	public void setFriendPlayerKingID(int friendPlayerKingID) {
-		this.friendPlayerKingID = friendPlayerKingID;
-	}
+	
 	public int getEnemyPlayerKingID() {
 		return enemyPlayerKingID;
 	}
-	public void setEnemyPlayerKingID(int enemyPlayerKingID) {
-		this.enemyPlayerKingID = enemyPlayerKingID;
-	}
-
 }
