@@ -11,7 +11,7 @@ public class SlashBig extends Slash{
 		super(inputID, image, setPosition, setPlayer);
 		damage = damage*3;
 		width = 52;
-		rectangleCollider = new RectangleCollider(setPosition, width, height);
+		collider = new RectangleCollider(setPosition, width, height);
 	}
 
 }

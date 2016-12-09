@@ -73,6 +73,7 @@ public abstract class CollideObject {
 	
 	public void move(Position nextPosition){
 		position = nextPosition;
+		collider.update(nextPosition);
 	}
 	/**To get "if the object is dead?"
 	 * 

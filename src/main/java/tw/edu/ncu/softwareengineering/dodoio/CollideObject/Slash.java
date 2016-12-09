@@ -24,7 +24,7 @@ public class Slash extends AttackObject{
 		player = setPlayer;
 		collider = new RectangleCollider(setPosition, width, height);
 		
-		position = Position.projection(player.getRadius(), setPosition);
+		move(Position.projection(player.getRadius(), setPosition));
 	}
 
 	@Override
