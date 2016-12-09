@@ -1,6 +1,6 @@
 package tw.edu.ncu.softwareengineering.dodoio.Collide;
 
-public class Vector {
+public class Vector implements Comparable<Vector> {
     private double x;
     private double y;
 
@@ -57,5 +57,21 @@ public class Vector {
      */
     public Vector normalized() {
         return new Vector(x / magnitude(), y / magnitude());
+    }
+
+    @Override
+    public int compareTo(Vector o) {
+        if (x < o.x)
+            return -1;
+        else if (x > o.x)
+            return 1;
+        else {
+            if (y < o.y)
+                return -1;
+            else if (y > o.y)
+                return 1;
+            else
+                return 0;
+        }
     }
 }
