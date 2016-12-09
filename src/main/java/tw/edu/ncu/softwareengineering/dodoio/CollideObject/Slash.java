@@ -2,13 +2,10 @@ package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import java.awt.image.BufferedImage;
 
-import tw.edu.ncu.softwareengineering.dodoio.Collide.RectangleCollider;
-
 public class Slash extends AttackObject{
 	SwordMan player;
 	int height = 35;
 	int width = 25;
-	RectangleCollider rectangleCollider;
 	int FPS = 20;// set for no error. this is not real
 	final double slashTime = 0.5;
 	
@@ -23,15 +20,15 @@ public class Slash extends AttackObject{
 	protected Slash(int inputID, BufferedImage image, Position setPosition, SwordMan setPlayer) {
 		super(inputID, image, setPosition);
 		player = setPlayer;
-		rectangleCollider = new RectangleCollider(setPosition, width, height);
+		collider = new RectangleCollider(setPosition, width, height);
 		
-		position = Position.projection(player.getRadius(), setPosition);
+		move(Position.projection(player.getRadius(), setPosition));
 	}
 
 	@Override
 	public void run() {
 		double timeRested = slashTime;
-		while(timeRested > 0) {
+		while(timeRested > 0 && !isDead()) {
 			try {
 				timeRested = timeRested - 1/FPS;
 				Thread.sleep(1000/FPS);
@@ -41,10 +38,6 @@ public class Slash extends AttackObject{
 			}
 		}
 		dead();
-	}
-	
-	RectangleCollider getRectangleCollider() {
-		return rectangleCollider;
 	}
 
 }

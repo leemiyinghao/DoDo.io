@@ -2,6 +2,8 @@ package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import java.awt.image.BufferedImage;
 
+import tw.edu.ncu.softwareengineering.dodoio.Collide.CircleCollider;
+
 public class Fertilizer extends Mob {
 	public final int[][] breedTable = {{75, 300, 1}, {50, 600, 2}, {25, 1200, 4}};// breedTable[size][ability]
 	
@@ -24,6 +26,8 @@ public class Fertilizer extends Mob {
 			healthPoint = breedTable[2][1];
 			exp = breedTable[2][2];
 		}
+		
+		collider = new CircleCollider(setPosition, radius);
 	}
 
 	
