@@ -2,11 +2,12 @@ package tw.edu.ncu.softwareengineering.dodoio.Game;
 
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character;
+import tw.edu.ncu.softwareengineering.dodoio.Internet.Client;
 
 public class DeathMatch extends Game{
-	void start(CollideObjectManager myObjManager, String playerName){
-		int myid = 0; //must be changed!
-		this.setPlayerID(myid);
+	void start(String playerName, CollideObjectManager.Profession profession, int gameMode){
+		this.myObjManager = new CollideObjectManager(this);
+		Client client = new Client(this, playerName, profession, gameMode);
 	}
 	int update() {
 		int updateNeed = 0;

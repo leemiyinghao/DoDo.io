@@ -6,8 +6,8 @@ public class KingKill extends Game{
 	private int friendPlayerKingID;
 	private int enemyPlayerKingID;
 	void start(CollideObjectManager myObjManager, String playerName){
-		int myid = 0; //must be changed!
-		this.setPlayerID(myid);
+		//int myid = 0; //must be changed!
+		//this.setPlayerID(myid);
 	}
 	int update() {
 		/*return 0 for nothing happened (game continue)!
