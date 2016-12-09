@@ -2,6 +2,8 @@ package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import java.awt.image.BufferedImage;
 
+import tw.edu.ncu.softwareengineering.dodoio.Collide.CircleCollider;
+
 public class Wanderer extends Mob{
 	private int speed = 1;
 	private int direction = 0;
@@ -11,6 +13,7 @@ public class Wanderer extends Mob{
 		healthPoint = 1200;
 		exp = 4;
 		radius = 120;
+		collider = new CircleCollider(setPosition, radius);
 		startWander();
 	}
 	

@@ -96,8 +96,8 @@ public class Utils {
         for (Vector axis : axes) {
             double minProjA = new Vector(a.getPoints()[0].x, a.getPoints()[0].y).dotProduct(axis);
             double maxProjA = new Vector(a.getPoints()[0].x, a.getPoints()[0].y).dotProduct(axis);
-            double minProjB = new Vector(a.getPoints()[0].x, a.getPoints()[0].y).dotProduct(axis);
-            double maxProjB = new Vector(a.getPoints()[0].x, a.getPoints()[0].y).dotProduct(axis);
+            double minProjB = new Vector(b.getPoints()[0].x, b.getPoints()[0].y).dotProduct(axis);
+            double maxProjB = new Vector(b.getPoints()[0].x, b.getPoints()[0].y).dotProduct(axis);
             for (int i = 1; i < 3; i++) {
                 double curDPA = new Vector(a.getPoints()[i].x, a.getPoints()[i].y).dotProduct(axis);
                 double curDPB = new Vector(b.getPoints()[i].x, b.getPoints()[i].y).dotProduct(axis);

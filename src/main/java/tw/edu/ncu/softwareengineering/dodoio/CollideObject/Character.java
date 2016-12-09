@@ -9,7 +9,6 @@ public abstract class Character extends CollideObject {
 	public final String team;
 	public final int[] expTable = {0, 2, 2, 2, 2, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
 	private final int radius = 25;
-	public final CircleCollider circleCollider;
 	private int deathmatchScore;
 	private int level;
 	private int exp;
@@ -46,7 +45,7 @@ public abstract class Character extends CollideObject {
 		attackCD = 1;
 		skillCD = 10;
 		speed = 1;
-		circleCollider = new CircleCollider(position, radius);
+		collider = new CircleCollider(position, radius);
 		
 		Thread recoveryThread = new Thread(new Runnable(){
 
@@ -104,7 +103,7 @@ public abstract class Character extends CollideObject {
 		deathmatchScore+=addScore;
 	}
 	
-	/**�I�ޯ��I HP +10
+	/**HP +10
 	 * 
 	 * Exception: Run out of abilityPoint.
 	 */
@@ -122,7 +121,7 @@ public abstract class Character extends CollideObject {
 	}
 	
 
-	/**�I�ޯ��I �ˮ` +10
+	/**damagePoint+10
 	 * 
 	 */
 	public void upgradeDP() {
@@ -139,7 +138,7 @@ public abstract class Character extends CollideObject {
 	}
 
 
-	/**�I�ޯ��I �ޯ�CD�0.99��
+	/**skillCD *0.99
 	 * 
 	 */
 	public void upgradeCD() {
@@ -155,8 +154,18 @@ public abstract class Character extends CollideObject {
 		}
 	}
 	
+	/**
+	 * get a new attack object for attacking
+	 * @param setID
+	 * @return
+	 */
 	abstract AttackObject attack(int setID);
 	
+	/**
+	 * get a new attack object for attacking
+	 * @param setID
+	 * @return
+	 */
 	abstract AttackObject skill(int setID);
 	
 	/**Only player do "attack" by using attack or skill, others do "collide"
@@ -183,7 +192,7 @@ public abstract class Character extends CollideObject {
 		return attacker;
 	}
 	
-	/**��o�Ө��⪺��������
+	/**for death match
 	 * 
 	 * @return
 	 */
@@ -195,6 +204,10 @@ public abstract class Character extends CollideObject {
 		return radius;
 	}
 	
+	/**
+	 * get team name
+	 * @return
+	 */
 	public String getTeam() {
 		return team;
 	}
@@ -207,17 +220,19 @@ public abstract class Character extends CollideObject {
 		return abilityPoint;
 	}
 	
-	/**Get the CircleCollider collision checking
-	 * 
-	 * @return
-	 */
-	public CircleCollider getCollider() {
-		return circleCollider;
+	public int getLevel() {
+		return level;
 	}
 	
 	public static enum ChracterClass {
 		Archer,
 		Magician,
 		SwordMan
+	}
+	
+	public static enum TeamName {
+		deathMatch,
+		teamBlue,
+		teamRed
 	}
 }
