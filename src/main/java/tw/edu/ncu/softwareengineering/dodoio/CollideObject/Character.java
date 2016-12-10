@@ -46,7 +46,7 @@ public abstract class Character extends CollideObject {
 		skillCD = 10;
 		speed = 1;
 		collider = new CircleCollider(position, radius);
-		
+		// 不用這個Thread算，在manager做
 		Thread recoveryThread = new Thread(new Runnable(){
 
 			@Override
@@ -77,6 +77,7 @@ public abstract class Character extends CollideObject {
 	public void addExp(int addExp) {
 		exp+=addExp;
 		levelUp();
+		
 	}
 	
 	/**call this when get exp
@@ -92,6 +93,7 @@ public abstract class Character extends CollideObject {
 			abilityPoint++;
 			
 		}
+		// update to client
 	}
 	
 	/**for death match game
@@ -155,14 +157,14 @@ public abstract class Character extends CollideObject {
 	}
 	
 	/**
-	 * get a new attack object for attacking
+	 * tell server you do attack
 	 * @param setID
 	 * @return
 	 */
 	abstract AttackObject attack(int setID);
 	
 	/**
-	 * get a new attack object for attacking
+	 * tell server you do attack
 	 * @param setID
 	 * @return
 	 */
@@ -174,22 +176,11 @@ public abstract class Character extends CollideObject {
 	 * 
 	 * @param attacker
 	 */
-	public Character beAttacked(Character attacker){
+	public void beAttacked(Character attacker){
 		this.beHarmed((int)attacker.damagePoint);
 		if(this.isDead()) {
-			attacker = didKill(attacker);
+			attacker.addDMScore(this.level);
 		}
-		//update data to server
-		return attacker;
-	}
-	
-	/**done everything when the character kill player
-	 * 
-	 * @param attacker
-	 */
-	private Character didKill(Character attacker) {
-		attacker.addDMScore(this.level);
-		return attacker;
 	}
 	
 	/**for death match

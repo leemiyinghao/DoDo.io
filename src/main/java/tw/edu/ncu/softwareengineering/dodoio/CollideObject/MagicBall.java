@@ -19,7 +19,7 @@ public class MagicBall extends AttackObject{
 	}
 
 	/**fly through until its traversal out of range
-	 * 
+	 * use update by the time offset, not thread
 	 */
 	@Override
 	public void run() {

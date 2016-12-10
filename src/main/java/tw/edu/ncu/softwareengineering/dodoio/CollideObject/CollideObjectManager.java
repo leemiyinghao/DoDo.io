@@ -1,23 +1,26 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character.ChracterClass;
+import tw.edu.ncu.softwareengineering.dodoio.Game.Game;
 
 
 public class CollideObjectManager{
 	Character player;
 	int recentIndex;
-	boolean playerAttackActive = true, playerSkillActive = true;
+	Game game;
+	boolean playerAttackActive = true, playerSkillActive = true;// initial at constructor if needed
 	public ArrayList<CollideObject> collideObjectList;
-	private boolean mainPlayerAdded = false;
+	public Image[] collideObjectImages;
 	
-	public CollideObjectManager() {
+	public CollideObjectManager(Game game) {
 		//code: update to server
 	}
 	
-	/**add your player
+	/**set your player
 	 * 
 	 * Exception : Main player already exist.
 	 * 
@@ -27,64 +30,41 @@ public class CollideObjectManager{
 	 * @param team check the enum "TeamName" in Character 
 	 * @param image
 	 * @param position
+	 * @throws Exception 
 	 */
-	public void addMainplayer(String chracterClass,int ID, String name, String team, BufferedImage image, Position position){
-		try {
-			if(mainPlayerAdded)
-				throw new Exception();
-		}
-		catch(Exception excptn) {
-			System.out.println("Main player already exist.");
-			return;
-		}
-		
-		if(chracterClass.equals(ChracterClass.SwordMan)){
-			player = new SwordMan(ID, name, team, image, position);
-		}
-		else if(chracterClass.equals(ChracterClass.Archer)){
-			player = new Archer(ID, name, team, image, position);
-		}
-		else if(chracterClass.equals(ChracterClass.Magician)){
-			player = new Magician(ID, name, team, image, position);
-		}
-		collideObjectList.add(player);
-		recentIndex = collideObjectList.indexOf(player);
-		
-		mainPlayerAdded = true;
+	public void setMainPlayer(Character setPlayer) throws Exception{
+		if(player != null)
+			throw new Exception("Main player already exist.");
+		player = setPlayer;
 	}
 	/**return the index from collideObjectList
 	 * 
-	 * exception: No collide object with ID(inputID) in collideObjectList. return -1
+	 * exception: No collide object with ID(inputID) in collideObjectList.
 	 * 
 	 * @param inputID
 	 * @return
+	 * @throws Exception 
 	 */
-	public int queryObjectByID(int inputID){
+	public int queryObjectByID(int inputID) throws Exception{
 		int toFindObjectIndex = 0;
 		int counter = 0;
-		try {
-			do {
-				if(inputID == collideObjectList.get(counter).ID) {
-					toFindObjectIndex = counter;
-					break;
-				}
-				counter++;
-			}while(collideObjectList.size() > counter);
-			
-			if(collideObjectList.size()==counter)
-				throw new Exception();
-		}
-		catch(Exception exception) {
-			System.out.println("Exception: No collide object with ID("+inputID+") in collideObjectList");
-			return -1;
-		}
+		do {
+			if(inputID == collideObjectList.get(counter).ID) {
+				toFindObjectIndex = counter;
+				break;
+			}
+			counter++;
+		}while(collideObjectList.size() > counter);
+		
+		if(collideObjectList.size()==counter)
+			throw new Exception("Exception: No collide object with ID("+inputID+") in collideObjectList");
 		
 		return toFindObjectIndex;
 	}
 	
 	/**get the index of main player in collideObjectList
 	 * 
-	 * Exception: There is no main player. return -1
+	 * Exception: There is no main player.
 	 * 
 	 * @return
 	 */
@@ -105,12 +85,12 @@ public class CollideObjectManager{
 		return recentIndex;
 	}
 	
-	/**call when player attack(click left button)
+	/**call when server get a message that a player attack(click left button)
 	 * The method will be block in CD time
 	 */
-	public void myPlayerAttack() {
+	public void playerAttack(int attckPlayerID, int newAttackObjectID) {
 		try{
-			if(getMyPlayer() == -1)
+			if(queryObjectByID(attckPlayerID) == -1)
 				throw new Exception();
 		}
 		catch(Exception exception) {
@@ -181,6 +161,27 @@ public class CollideObjectManager{
 			}
 		});
 		skillThread.start();
+	}
+	
+	/**
+	 * update main player recovery, attackCD, skillCD ... by time offset
+	 * oldtime 
+	 */
+	
+	public static enum collideObjecctClass {
+		Archer,
+		Arrow,
+		ArrowStrong,
+		Chaser,
+		Fertilizer,
+		MagicBall,
+		MagicBallBig,
+		Magician,
+		Obsatcle,
+		Slash,
+		SlashBig,
+		SwordMan,
+		Wanderer
 	}
 	
 }
