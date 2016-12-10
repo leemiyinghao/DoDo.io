@@ -1,15 +1,12 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
-import java.awt.image.BufferedImage;
-
 import tw.edu.ncu.softwareengineering.dodoio.Collide.RectangleCollider;
 
 public class Slash extends AttackObject{
-	SwordMan player;
 	int height = 35;
 	int width = 25;
 	int FPS = 20;// set for no error. this is not real
-	final double slashTime = 0.5;
+	double slashTime = 0.5;
 	
 	/**
 	 * move the slash region out of swordman's body
@@ -19,27 +16,33 @@ public class Slash extends AttackObject{
 	 * @param setPosition
 	 * @param setPlayer
 	 */
-	protected Slash(int inputID, BufferedImage image, Position setPosition, SwordMan setPlayer) {
-		super(inputID, image, setPosition);
+	protected Slash(int setID, String setName, String setTeam,
+			Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
+		super(setID, setName, setTeam, setPosition, cOManager, className, setPlayer);
 		player = setPlayer;
 		collider = new RectangleCollider(setPosition, width, height);
+		isInvincible = true;
 		
 		move(Position.projection(player.getRadius(), setPosition));
 	}
-
+	
+	/**
+	 * update it slash time, let it dead when run out of slashTime 
+	 */
 	@Override
-	public void run() {
-		double timeRested = slashTime;
-		while(timeRested > 0 && !isDead()) {
-			try {
-				timeRested = timeRested - 1/FPS;
-				Thread.sleep(1000/FPS);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	public void update() {
+		long newTime = date.getTime();
+		long updateTime = oldTime - newTime;
+		while(updateTime >= 0) {
+			if(!isDead() && slashTime > 0) {
+				slashTime -= 1000/FPS;
 			}
+			else {
+				dead();
+				break;
+			}
+			updateTime -= 1000/FPS;
 		}
-		dead();
 	}
-
+	
 }

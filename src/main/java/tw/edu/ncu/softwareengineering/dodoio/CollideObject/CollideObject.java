@@ -1,19 +1,20 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import java.awt.Image;
-import java.awt.image.BufferedImage;
+import java.util.Date;
 
 import tw.edu.ncu.softwareengineering.dodoio.Collide.ICollider;
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager.collideObjecctClass;
 
 public abstract class CollideObject {
 	protected Position position;
 	public Image appearance;
 	public final int ID;
 	public final int collideDamage = 30;
-	public final Image[] imageTable;
 	protected boolean isInvincible;
 	protected int healthPoint;
 	protected ICollider collider;
+	protected Date date;
 	private boolean isDead;
 	
 	/**set data of the object
@@ -22,9 +23,10 @@ public abstract class CollideObject {
 	 * @param image
 	 * @param setPosition
 	 */
-	protected CollideObject(int inputID, Position setPosition) {
+	protected CollideObject(int inputID, Position setPosition, CollideObjectManager cOManager, int className) {
+		date = new Date();
 		ID = inputID;
-		appearance = image;// 
+		appearance = cOManager.collideObjectImages[className];
 		position = setPosition;
 		healthPoint = 1000;
 		isInvincible = false;

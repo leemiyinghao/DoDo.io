@@ -1,15 +1,17 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
-import java.awt.image.BufferedImage;
-
-public abstract class AttackObject extends CollideObject implements Runnable{
+public abstract class AttackObject extends NonPlayer{
 	Character player;
 	int damage;
+	long oldTime;
 	
-	protected AttackObject(int inputID, BufferedImage image,
-			Position setPosition) {
-		super(inputID, image, setPosition);
+	protected AttackObject(int setID, String setName, String setTeam,
+			Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
+		super(setID, setName, setTeam, setPosition, cOManager, className);
+		player = setPlayer;
+		oldTime = date.getTime();
 	}
+	public abstract void update();
 	
 	public int getDamage() {
 		return damage;

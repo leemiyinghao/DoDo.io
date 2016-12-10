@@ -17,6 +17,7 @@ public class CollideObjectManager{
 	public Image[] collideObjectImages;
 	
 	public CollideObjectManager(Game game) {
+		this.game = game;
 		//code: update to server
 	}
 	

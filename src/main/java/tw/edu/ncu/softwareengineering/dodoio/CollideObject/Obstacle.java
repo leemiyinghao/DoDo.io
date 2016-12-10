@@ -1,15 +1,14 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
-import java.awt.image.BufferedImage;
-
 import tw.edu.ncu.softwareengineering.dodoio.Collide.RectangleCollider;
 
 public class Obstacle extends NonPlayer {
 	public final int width;
 	public final int height;
 
-	protected Obstacle(int inputID, BufferedImage image, Position setPosition,int setWidth, int setHeight, boolean destroyable) {
-		super(inputID, image, setPosition);
+	protected Obstacle(int setID, String setName, String setTeam, Position setPosition,
+			CollideObjectManager cOManager, int className, int setWidth, int setHeight, boolean destroyable) {
+		super(setID, setName, setTeam, setPosition, cOManager, className);
 		width = setWidth;
 		height = setHeight;
 		
