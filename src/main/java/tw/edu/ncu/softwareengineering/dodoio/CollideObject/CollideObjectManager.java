@@ -43,7 +43,7 @@ public class CollideObjectManager{
 	 * 
 	 * @param inputID
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception No collide object with inputID in collideObjectList
 	 */
 	public int queryObjectByID(int inputID) throws Exception{
 		int toFindObjectIndex = 0;
@@ -67,100 +67,17 @@ public class CollideObjectManager{
 	 * Exception: There is no main player.
 	 * 
 	 * @return
+	 * @throws Exception There is no main player!
 	 */
-	public int getMyPlayer() {
-		try{
-			if(player == null)
-				throw new Exception();
-			
-			if(!(collideObjectList.get(recentIndex).ID == player.ID))
-				recentIndex = queryObjectByID(player.ID);
-			player = (Character) collideObjectList.get(recentIndex);
-		}
-		catch(Exception exception) {
-			System.out.println("There is no main player!");
-			return -1;
-		}
+	public int getMyPlayer() throws Exception {
+		if(player == null)
+			throw new Exception("There is no main player!");
+		
+		if(!(collideObjectList.get(recentIndex).ID == player.ID))
+			recentIndex = queryObjectByID(player.ID);
+		player = (Character) collideObjectList.get(recentIndex);
 		
 		return recentIndex;
-	}
-	
-	/**call when server get a message that a player attack(click left button)
-	 * The method will be block in CD time
-	 */
-	public void playerAttack(int attckPlayerID, int newAttackObjectID) {
-		try{
-			if(queryObjectByID(attckPlayerID) == -1)
-				throw new Exception();
-		}
-		catch(Exception exception) {
-			System.out.println("There is no main player!");
-			return;
-		}
-		
-		Thread attackThread = new Thread(new Runnable(){
-
-			@Override
-			public void run() {
-				if(playerAttackActive) {
-					playerAttackActive = false;
-					// get ID for attackObject from server
-					AttackObject attackObject = ((Character) collideObjectList.get(getMyPlayer())).attack(client.getNewID());
-					collideObjectList.add(attackObject);
-					
-					Thread attackObjectThread = new Thread((Runnable) collideObjectList.get(collideObjectList.indexOf(attackObject)));
-					attackObjectThread.start();
-					try {
-						Thread.sleep((long) (((Character) collideObjectList.get(getMyPlayer())).attackCD*1000));
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					playerAttackActive = true;
-				}
-			}
-		});
-		attackThread.start();
-		
-	}
-	
-	/**call when player use skill(click right button)
-	 * The method will be block in CD time
-	 */
-	public void myPlayerSkill() {
-		try{
-			if(getMyPlayer() == -1)
-				throw new Exception();
-		}
-		catch(Exception exception) {
-			System.out.println("There is no main player!");
-			return;
-		}
-		
-		Thread skillThread = new Thread(new Runnable(){
-
-			@Override
-			public void run() {
-				if(playerSkillActive) {
-					
-					try {
-							playerSkillActive = false;
-						// get ID for attackObject from server
-						AttackObject attackObject = ((Character) collideObjectList.get(getMyPlayer())).skill(client.getNewID());
-						collideObjectList.add(attackObject);
-						
-						Thread attackObjectThread = new Thread((Runnable) collideObjectList.get(collideObjectList.indexOf(attackObject)));
-						attackObjectThread.start();
-						
-						Thread.sleep((long) (((Character) collideObjectList.get(getMyPlayer())).skillCD*1000));
-
-						playerSkillActive = true;
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		});
-		skillThread.start();
 	}
 	
 	/**

@@ -19,12 +19,11 @@ public abstract class Mob extends NonPlayer {
 	 * 
 	 * @param attacker
 	 */
-	public Character beAttacked(Character attacker){
+	public void beAttacked(Character attacker){
 		this.beHarmed((int)attacker.damagePoint);
 		if(isDead()){
 			attacker.addExp(exp);
 		}
-		return attacker;
 	}
 	
 }

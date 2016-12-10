@@ -25,7 +25,6 @@ public class Obstacle extends NonPlayer {
 	 */
 	public void beAttacked(Character attacker){
 		this.beHarmed((int)attacker.damagePoint);
-		//update data to server
 	}
 	
 }

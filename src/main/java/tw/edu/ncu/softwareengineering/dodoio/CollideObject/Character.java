@@ -108,52 +108,37 @@ public abstract class Character extends CollideObject {
 	/**HP +10
 	 * 
 	 * Exception: Run out of abilityPoint.
+	 * @throws Exception Run out of abilityPoint.
 	 */
-	public void upgradeHP() {
-		try{
-			if(abilityPoint <= 0)
-				throw new Exception();
-			healthPoint+=10;
-			abilityPoint--;
-		}
-		catch(Exception excp) {
-			System.out.println("Exception: Run out of abilityPoint.");
-			return;
-		}
+	public void upgradeHP() throws Exception {
+		if(abilityPoint <= 0)
+			throw new Exception("Exception: Run out of abilityPoint.");
+		healthPoint+=10;
+		abilityPoint--;
 	}
 	
 
 	/**damagePoint+10
+	 * @throws Exception Run out of abilityPoint.
 	 * 
 	 */
-	public void upgradeDP() {
-		try{
-			if(abilityPoint <= 0)
-				throw new Exception();
-			damagePoint+=10;
-			abilityPoint--;
-		}
-		catch(Exception excp) {
-			System.out.println("Exception: Run out of abilityPoint.");
-			return;
-		}
+	public void upgradeDP() throws Exception {
+		if(abilityPoint <= 0)
+			throw new Exception("Exception: Run out of abilityPoint.");
+		damagePoint+=10;
+		abilityPoint--;
 	}
 
 
 	/**skillCD *0.99
+	 * @throws Exception Run out of abilityPoint.
 	 * 
 	 */
-	public void upgradeCD() {
-		try{
-			if(abilityPoint <= 0)
-				throw new Exception();
-			skillCD = skillCD*0.99;
-			abilityPoint--;
-		}
-		catch(Exception excp) {
-			System.out.println("Exception: Run out of abilityPoint.");
-			return;
-		}
+	public void upgradeCD() throws Exception {
+		if(abilityPoint <= 0)
+			throw new Exception("Exception: Run out of abilityPoint.");
+		skillCD = skillCD*0.99;
+		abilityPoint--;
 	}
 	
 	/**
@@ -171,8 +156,6 @@ public abstract class Character extends CollideObject {
 	abstract AttackObject skill(int setID);
 	
 	/**Only player do "attack" by using attack or skill, others do "collide"
-	 * collide module will use as : 
-	 * collideObjectManage.collideObjectList[attackerIndx] = collideObjectList[attackedCharacterIndx].beAttacked(Character attacker);
 	 * 
 	 * @param attacker
 	 */
