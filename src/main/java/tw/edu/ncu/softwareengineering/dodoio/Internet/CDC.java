@@ -12,4 +12,5 @@ public class CDC
 		collideObjectManager[0] = new CollideObjectManager();
 		collideObjectManager[1] = new CollideObjectManager();
 	}
+	
 }

@@ -5,9 +5,8 @@ import tw.edu.ncu.softwareengineering.dodoio.Collide.CircleCollider;
 public class Chaser extends Mob{
 	int speed;
 	
-	protected Chaser(int setID, String setName, String setTeam,
-			Position setPosition, CollideObjectManager cOManager, int className) {
-		super(setID, setName, setTeam, setPosition, cOManager, className);
+	protected Chaser(int setID, Position setPosition, CollideObjectManager cOManager, int className) {
+		super(setID, setPosition, cOManager, className);
 		radius = 15;
 		speed = 6;
 		collider = new CircleCollider(setPosition, radius);
@@ -15,5 +14,10 @@ public class Chaser extends Mob{
 	
 	public int getSpeed() {
 		return speed;
+	}
+
+	@Override
+	public void update() {
+		
 	}
 }

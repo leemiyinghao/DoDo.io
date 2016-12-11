@@ -1,6 +1,6 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
-import java.awt.image.BufferedImage;
+import tw.edu.ncu.softwareengineering.dodoio.Collide.RectangleCollider;
 
 public class Arrow extends AttackObject{
 	double traversal = 0;
@@ -10,9 +10,8 @@ public class Arrow extends AttackObject{
 	RectangleCollider rectangleCollider;
 	int FPS = 20;// set for no error. this is not real
 	
-	Arrow(int setID, String setName, String setTeam,
-			Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
-		super(setID, setName, setTeam, setPosition, cOManager, className, setPlayer);
+	Arrow(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
+		super(setID, setPosition, cOManager, className, setPlayer);
 		damage = (int) player.damagePoint;
 		range = (int) (player.getSpeed()*5);
 		rectangleCollider = new RectangleCollider(setPosition, width, height);

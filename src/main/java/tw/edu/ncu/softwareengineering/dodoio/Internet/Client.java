@@ -4,7 +4,10 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
 
-import org.json.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
 import tw.edu.ncu.softwareengineering.dodoio.Game.Game;
 
 public class Client
@@ -14,7 +17,7 @@ public class Client
 	DataOutputStream wdata;
 	Game game;
 	
-	public Client(Game game , String name , String profession , int mode)
+	public Client(Game game , String name , CollideObjectManager.collideObjecctClass profession , int mode)
 	{
 		/*
 		 * Client constructor
@@ -28,16 +31,17 @@ public class Client
 			socket = new Socket("127.0.0.1" , 55555);
 			rdata = new DataInputStream(socket.getInputStream());
 			wdata = new DataOutputStream(socket.getOutputStream());
+			Gson gson = new Gson();
 			
-			JSONObject charactdata = new JSONObject();
-			charactdata.put("name", name);
-			charactdata.put("profession", profession);
-			charactdata.put("mode", mode);
+			JsonObject charactdata = new JsonObject();
+			charactdata.addProperty("name", name);
+			charactdata.addProperty("profession", profession.toString());
+			charactdata.addProperty("mode", mode);
 			
 			wdata.writeUTF(charactdata.toString());
 			
 			String collidestr = rdata.readUTF();
-			JSONObject collidelist = new JSONObject(collidestr);
+			JsonObject collidelist = gson.fromJson(collidestr, JsonObject.class);
 			
 			// process collidelist for all client
 			

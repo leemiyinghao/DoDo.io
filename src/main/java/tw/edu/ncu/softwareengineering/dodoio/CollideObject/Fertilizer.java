@@ -6,9 +6,9 @@ public class Fertilizer extends Mob {
 	public final int[][] breedTable = {{75, 300, 1}, {50, 600, 2}, {25, 1200, 4}};// breedTable[size][ability]
 	
 
-	public Fertilizer(int setID, String setName, String setTeam,
-			Position setPosition, CollideObjectManager cOManager, int className, Size setSize) {
-		super(setID, setName, setTeam, setPosition, cOManager, className);
+	public Fertilizer(int setID, Position setPosition, CollideObjectManager cOManager,
+			int className, Size setSize) {
+		super(setID, setPosition, cOManager, className);
 		// TODO Auto-generated constructor stub
 		if(setSize.equals(Size.large)){
 			radius = breedTable[0][0];
@@ -40,6 +40,11 @@ public class Fertilizer extends Mob {
 		Radius,
 		HP,
 		Exp
+	}
+
+	@Override
+	public void update() {
+		
 	}
 
 }

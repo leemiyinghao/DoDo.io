@@ -7,9 +7,12 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import org.json.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Archer;
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager.collideObjecctClass;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Magician;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.SwordMan;
 
@@ -60,13 +63,14 @@ public class Server
 					DataOutputStream wdata = new DataOutputStream(clientsocket.getOutputStream());
 					DataInputStream rdata = new DataInputStream(clientsocket.getInputStream());
 					
-					JSONObject newplayrejson = new JSONObject(rdata.readUTF());
-					
-					int mode = newplayrejson.getInt("mode");
+					Gson gson = new Gson();
+					JsonObject newplayrejson = gson.fromJson(rdata.readUTF(), JsonObject.class);
+
+					int mode = newplayrejson.get("mode").getAsInt();
 					
 					clientaddresslist.get(mode).add(clientsocket.getInetAddress());
 					
-					String profession = newplayrejson.getString("profession");
+					String profession = newplayrejson.get("profession").getAsString();
 					int newid = cdc.collideObjectManager[mode].collideObjectList.size();
 					String teamname;
 					if(mode == 0)
@@ -80,18 +84,20 @@ public class Server
 						teamcount = !teamcount;
 					}
 					
-					if(profession.equals("SwordMan"))
+					if(profession.equals(collideObjecctClass.SwordMan.toString()))
 					{
-						cdc.collideObjectManager[mode].collideObjectList.add(new SwordMan(newid, newplayrejson.getString("name"), teamname, null, null));
+						cdc.collideObjectManager[mode].collideObjectList.add(new SwordMan(newid, newplayrejson.get("name").getAsString(), teamname, null, null, 0));
 					}
-					else if(profession.equals("Archer"))
+					else if(profession.equals(collideObjecctClass.Archer.toString()))
 					{
-						cdc.collideObjectManager[mode].collideObjectList.add(new Archer(newid, newplayrejson.getString("name"), teamname, null, null));
+						cdc.collideObjectManager[mode].collideObjectList.add(new Archer(newid, newplayrejson.get("name").getAsString(), teamname, null, null, 0));
 					}
 					else 
 					{
-						cdc.collideObjectManager[mode].collideObjectList.add(new Magician(newid, newplayrejson.getString("name"), teamname, null, null));
+						cdc.collideObjectManager[mode].collideObjectList.add(new Magician(newid, newplayrejson.get("name").getAsString(), teamname, null, null, 0));
 					}
+					
+					
 					
 					
 					
@@ -150,12 +156,17 @@ public class Server
 			 * handle the inputstream exception
 			 */
 			
+			Gson gson = new Gson();
+			JsonObject playerupdatejson;
+			
 			while(true)
 			{
 				try
 				{
 					String playerupdatestr = rdata.readUTF();
-					JSONObject playerupdatejson = new JSONObject(playerupdatestr);
+					
+					
+					playerupdatejson = gson.fromJson(playerupdatestr, JsonObject.class);
 					
 					
 				} 

@@ -5,9 +5,8 @@ public abstract class AttackObject extends NonPlayer{
 	int damage;
 	long oldTime;
 	
-	protected AttackObject(int setID, String setName, String setTeam,
-			Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
-		super(setID, setName, setTeam, setPosition, cOManager, className);
+	protected AttackObject(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
+		super(setID, setPosition, cOManager, className);
 		player = setPlayer;
 		oldTime = date.getTime();
 	}

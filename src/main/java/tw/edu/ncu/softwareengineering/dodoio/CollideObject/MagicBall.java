@@ -8,9 +8,8 @@ public class MagicBall extends AttackObject{
 	private double traversal = 0;
 	int FPS = 20;//隨便設定的
 
-	protected MagicBall(int setID, String setName, String setTeam,
-			Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
-		super(setID, setName, setTeam, setPosition, cOManager, className, setPlayer);
+	protected MagicBall(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
+		super(setID, setPosition, cOManager, className, setPlayer);
 		collider = new CircleCollider(position, radius);
 		range = (int) (player.getSpeed()*3);// maybe the range is for the arrow fly for 5 seconds
 		player = setPlayer;

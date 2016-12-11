@@ -8,9 +8,8 @@ public class Wanderer extends Mob{
 	private long oldTime;
 	final int FPS = 20;
 	
-	public Wanderer(int setID, String setName, String setTeam,
-			Position setPosition, CollideObjectManager cOManager, int className) {
-		super(setID, setName, setTeam, setPosition, cOManager, className);
+	public Wanderer(int setID, Position setPosition, CollideObjectManager cOManager, int className) {
+		super(setID, setPosition, cOManager, className);
 		healthPoint = 1200;
 		exp = 4;
 		radius = 120;

@@ -17,9 +17,8 @@ public class Slash extends AttackObject{
 	 * @param setPosition
 	 * @param setPlayer
 	 */
-	protected Slash(int setID, String setName, String setTeam,
-			Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
-		super(setID, setName, setTeam, setPosition, cOManager, className, setPlayer);
+	protected Slash(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
+		super(setID, setPosition, cOManager, className, setPlayer);
 		player = setPlayer;
 		collider = new RectangleCollider(setPosition, width, height);
 		

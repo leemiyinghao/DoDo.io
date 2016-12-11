@@ -3,7 +3,8 @@ package tw.edu.ncu.softwareengineering.dodoio.Internet;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
-import org.json.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import tw.edu.ncu.softwareengineering.dodoio.Game.Game;
 
@@ -33,7 +34,8 @@ public class UDPreceive implements Runnable
 			DatagramSocket socket = new DatagramSocket(10000);
 			DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 			String broacaststr;
-			JSONObject broacastobj;
+			Gson gson = new Gson();
+			JsonObject broacastobj;
 			
 			while(true)
 			{
@@ -41,7 +43,8 @@ public class UDPreceive implements Runnable
 				broacaststr = new String(packet.getData());
 				
 				// process string to object
-				broacastobj = new JSONObject(broacaststr);
+				broacastobj = gson.fromJson(broacaststr, JsonObject.class);
+				
 				
 			}
 			
