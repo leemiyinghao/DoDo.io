@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character.TeamName;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Fertilizer.Size;
 import tw.edu.ncu.softwareengineering.dodoio.Game.Game;
 
@@ -65,7 +66,7 @@ public class CollideObjectManager{
 	 * @throws Exception No such kind of collideObject.
 	 */
 	public void addCharacter(collideObjecctClass className, int inputID, Position setPosition,
-			String setName, String setTeam) throws Exception {
+			String setName, TeamName setTeam) throws Exception {
 		CollideObject toAddObject;
 		if(className == collideObjecctClass.Archer) {
 			toAddObject = new Archer(inputID, setName, setTeam, setPosition, this, className.ordinal());
