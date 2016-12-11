@@ -149,9 +149,9 @@ public class QuadTree {
         double horizontalMidpoint = bound.getX() + (bound.getWidth() / 2);
         double verticalMidpoint = bound.getY() + (bound.getHeight() / 2);
         if (collideObject.getCollider() instanceof CircleCollider)
-            return getCircleIndex(collideObject.getCollider(), horizontalMidpoint, verticalMidpoint);
+            return getCircleIndex((CircleCollider) collideObject.getCollider(), horizontalMidpoint, verticalMidpoint);
         else
-            return getRectangleIndex(collideObject.getCollider(), horizontalMidpoint, verticalMidpoint);
+            return getRectangleIndex((RectangleCollider) collideObject.getCollider(), horizontalMidpoint, verticalMidpoint);
     }
 
     /**
