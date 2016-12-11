@@ -1,7 +1,7 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -41,19 +41,19 @@ public class CollideObjectManager{
 	
 	private void loadImages() throws IOException {
 		collideObjectImages = new BufferedImage[collideObjecctClass.values().length];
-		collideObjectImages[collideObjecctClass.Archer.ordinal()] = ImageIO.read(new File("Resource/Archer.png"));
-		collideObjectImages[collideObjecctClass.Arrow.ordinal()] = ImageIO.read(new File("Resource/Arrow.png"));
-		collideObjectImages[collideObjecctClass.ArrowStrong.ordinal()] = ImageIO.read(new File("Resource/ArrowStrong.png"));
-		collideObjectImages[collideObjecctClass.Chaser.ordinal()] = ImageIO.read(new File("Resource/Chaser.png"));
-		collideObjectImages[collideObjecctClass.Fertilizer.ordinal()] = ImageIO.read(new File("Resource/Fertilizer.png"));
-		collideObjectImages[collideObjecctClass.MagicBall.ordinal()] = ImageIO.read(new File("Resource/MagicBall.png"));
-		collideObjectImages[collideObjecctClass.MagicBallBig.ordinal()] = ImageIO.read(new File("Resource/MagicBallBig.png"));
-		collideObjectImages[collideObjecctClass.Magician.ordinal()] = ImageIO.read(new File("Resource/Magician.png"));
-		collideObjectImages[collideObjecctClass.Obsatcle.ordinal()] = ImageIO.read(new File("Resource/Obsatcle.png"));
-		collideObjectImages[collideObjecctClass.Slash.ordinal()] = ImageIO.read(new File("Resource/Slash.png"));;
-		collideObjectImages[collideObjecctClass.SlashBig.ordinal()] = ImageIO.read(new File("Resource/SlashBig.png"));
-		collideObjectImages[collideObjecctClass.SwordMan.ordinal()] = ImageIO.read(new File("Resource/SwordMan.png"));
-		collideObjectImages[collideObjecctClass.Wanderer.ordinal()] = ImageIO.read(new File("Resource/Wanderer.png"));
+		collideObjectImages[collideObjecctClass.Archer.ordinal()] = ImageIO.read(new FileInputStream("Resource/Archer.png"));
+		collideObjectImages[collideObjecctClass.Arrow.ordinal()] = ImageIO.read(new FileInputStream("Resource/Arrow.png"));
+		collideObjectImages[collideObjecctClass.ArrowStrong.ordinal()] = ImageIO.read(new FileInputStream("Resource/ArrowStrong.png"));
+		collideObjectImages[collideObjecctClass.Chaser.ordinal()] = ImageIO.read(new FileInputStream("Resource/Chaser.png"));
+		collideObjectImages[collideObjecctClass.Fertilizer.ordinal()] = ImageIO.read(new FileInputStream("Resource/Fertilizer.png"));
+		collideObjectImages[collideObjecctClass.MagicBall.ordinal()] = ImageIO.read(new FileInputStream("Resource/MagicBall.png"));
+		collideObjectImages[collideObjecctClass.MagicBallBig.ordinal()] = ImageIO.read(new FileInputStream("Resource/MagicBallBig.png"));
+		collideObjectImages[collideObjecctClass.Magician.ordinal()] = ImageIO.read(new FileInputStream("Resource/Magician.png"));
+		collideObjectImages[collideObjecctClass.Obstacle.ordinal()] = ImageIO.read(new FileInputStream("Resource/Obstacle.png"));
+		collideObjectImages[collideObjecctClass.Slash.ordinal()] = ImageIO.read(new FileInputStream("Resource/Slash.png"));;
+		collideObjectImages[collideObjecctClass.SlashBig.ordinal()] = ImageIO.read(new FileInputStream("Resource/SlashBig.png"));
+		collideObjectImages[collideObjecctClass.SwordMan.ordinal()] = ImageIO.read(new FileInputStream("Resource/SwordMan.png"));
+		collideObjectImages[collideObjecctClass.Wanderer.ordinal()] = ImageIO.read(new FileInputStream("Resource/Wanderer.png"));
 	}
 	
 	/**
@@ -150,7 +150,7 @@ public class CollideObjectManager{
 		
 		CollideObject toAddObject;
 		
-		if(className == collideObjecctClass.Obsatcle) {
+		if(className == collideObjecctClass.Obstacle) {
 			toAddObject = new Obstacle(inputID, setPosition, this, className.ordinal(), width, height, setDestroyable);
 			collideObjectList.add(toAddObject);
 		}
@@ -283,7 +283,7 @@ public class CollideObjectManager{
 		MagicBall,
 		MagicBallBig,
 		Magician,
-		Obsatcle,
+		Obstacle,
 		Slash,
 		SlashBig,
 		SwordMan,
