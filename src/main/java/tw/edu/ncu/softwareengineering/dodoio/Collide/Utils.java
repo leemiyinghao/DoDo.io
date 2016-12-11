@@ -124,10 +124,17 @@ public class Utils {
      * @return whether the two CollideObject a and b collides.
      */
     private boolean isCollide(CollideObject a, CollideObject b) {
-        if (a.getCollider() instanceof CircleCollider && b.getCollider() instanceof CircleCollider)
-            return checkCircleCollide(a.getCollider(), b.getCollider());
-        else
-            return SAT(a.getCollider(), b.getCollider());
+        if (a.getCollider() instanceof CircleCollider) {
+            if (b.getCollider() instanceof CircleCollider)
+                return checkCircleCollide((CircleCollider) a.getCollider(), (CircleCollider) b.getCollider());
+            else
+                return SAT((CircleCollider) a.getCollider(), (RectangleCollider) b.getCollider());
+        } else {
+            if (b.getCollider() instanceof CircleCollider)
+                return SAT((RectangleCollider) a.getCollider(), (CircleCollider) b.getCollider());
+            else
+                return SAT((RectangleCollider) a.getCollider(), (RectangleCollider) b.getCollider());
+        }
     }
 
     /**
