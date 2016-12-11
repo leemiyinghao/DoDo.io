@@ -1,13 +1,13 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.Date;
 
 import tw.edu.ncu.softwareengineering.dodoio.Collide.ICollider;
 
 public abstract class CollideObject {
 	protected Position position;
-	public Image appearance;
+	public BufferedImage  appearance;
 	public final int ID;
 	public final int collideDamage = 30;
 	protected boolean isInvincible;

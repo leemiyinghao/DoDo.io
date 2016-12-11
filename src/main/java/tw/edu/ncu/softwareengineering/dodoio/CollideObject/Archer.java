@@ -1,7 +1,5 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
-import java.awt.Image;
-
 
 public class Archer extends Character {
 	
