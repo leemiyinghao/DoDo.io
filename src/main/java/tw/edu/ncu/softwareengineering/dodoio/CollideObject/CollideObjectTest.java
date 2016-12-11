@@ -8,8 +8,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character.TeamName;
+
 public class CollideObjectTest {
+	CollideObjectManager manager;
 	Archer playerTest;
+	SwordMan attackerTest;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -20,18 +24,41 @@ public class CollideObjectTest {
 
 	@Before
 	public void setUp() throws Exception {
-		playerTest = new Archer(1, "test", Character.TeamName.deathMatch, 
-				new Position(0, 0, 0), new CollideObjectManager(), 
-				CollideObjectManager.collideObjecctClass.Archer);
+		manager = new CollideObjectManager();
+		playerTest = new Archer(1, "archerX", Character.TeamName.deathMatch, new Position(0, 0, 0), 
+				manager, CollideObjectManager.collideObjecctClass.Archer.ordinal());
+		attackerTest = new SwordMan(2, "attackerX", Character.TeamName.deathMatch
+				, new Position(1, 1, 0), manager, 
+				CollideObjectManager.collideObjecctClass.SwordMan.ordinal());
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		playerTest = null;
+		attackerTest = null;
+		manager = null;
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testOnCollide() {
+		playerTest.onCollide(null);
+		assertEquals("after collide it should be harm", 200 - playerTest.collideDamage, playerTest.getHP());
+	}
+
+	@Test
+	public void testInvincible() {
+		playerTest.isInvincible = true;
+		assertEquals("now it is invictcible", true, playerTest.isInvincible());
+		playerTest.onCollide(null);
+		assertEquals("after collide it can't be harm", 200, playerTest.getHP());
+		playerTest.beAttacked(attackerTest);
+		assertEquals("after attacked it can't be harm", 200, playerTest.getHP());
+	}
+	
+	public void testAttackToDead() {
+		attackerTest.damagePoint = 10000;
+		playerTest.beAttacked(attackerTest);
+		assertEquals("archerX will die", true, playerTest.isDead());
 	}
 
 }
