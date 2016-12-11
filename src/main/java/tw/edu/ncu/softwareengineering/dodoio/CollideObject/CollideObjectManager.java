@@ -16,9 +16,20 @@ public class CollideObjectManager{
 	public ArrayList<CollideObject> collideObjectList;
 	public Image[] collideObjectImages;
 	
+	/**
+	 * this is for client(DOM)
+	 * @param game the game of this client
+	 */
 	public CollideObjectManager(Game game) {
 		this.game = game;
 		//code: update to server
+	}
+	
+	/**
+	 * this is for CDC
+	 */
+	public CollideObjectManager() {
+		
 	}
 	
 	/**set your player
