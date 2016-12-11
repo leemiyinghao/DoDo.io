@@ -1,6 +1,5 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
-import java.awt.Image;
 import tw.edu.ncu.softwareengineering.dodoio.Collide.CircleCollider;
 
 public abstract class Character extends CollideObject {
@@ -66,6 +65,7 @@ public abstract class Character extends CollideObject {
 	 * count skill CD
 	 * count attack CD
 	 */
+	@Override
 	public void update() {
 		long newTime = date.getTime();
 		long updateTime = newTime - oldTime;

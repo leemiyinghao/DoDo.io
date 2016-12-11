@@ -4,7 +4,6 @@ import java.awt.Image;
 import java.util.Date;
 
 import tw.edu.ncu.softwareengineering.dodoio.Collide.ICollider;
-import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager.collideObjecctClass;
 
 public abstract class CollideObject {
 	protected Position position;
@@ -44,6 +43,8 @@ public abstract class CollideObject {
 	public boolean isInvincible() {
 		return isInvincible;
 	}
+	
+	abstract public void update();
 	
 	/**when player are attacked, check if it is invincible and change the healthPoint
 	 * 

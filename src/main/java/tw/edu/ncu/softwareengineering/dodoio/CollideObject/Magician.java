@@ -1,7 +1,5 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
-import java.awt.Image;
-
 public class Magician extends Character{
 
 	public Magician(int setID, String setName, String setTeam, Position setPosition,

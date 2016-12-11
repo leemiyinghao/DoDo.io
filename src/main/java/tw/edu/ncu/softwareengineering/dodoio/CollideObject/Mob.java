@@ -4,9 +4,8 @@ public abstract class Mob extends NonPlayer {
 	int radius;
 	int exp;
 	
-	protected Mob(int setID, String setName, String setTeam,
-			Position setPosition, CollideObjectManager cOManager, int className) {
-		super(setID, setName, setTeam, setPosition, cOManager, className);
+	protected Mob(int setID, Position setPosition, CollideObjectManager cOManager, int className) {
+		super(setID, setPosition, cOManager, className);
 		// TODO Auto-generated constructor stub
 	}
 	

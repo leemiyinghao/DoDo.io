@@ -1,10 +1,9 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character.ChracterClass;
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Fertilizer.Size;
 import tw.edu.ncu.softwareengineering.dodoio.Game.Game;
 
 
@@ -32,6 +31,146 @@ public class CollideObjectManager{
 		
 	}
 	
+	/**
+	 * add character to list
+	 * @param className
+	 * @param inputID
+	 * @param setPosition
+	 * @param setName
+	 * @param setTeam
+	 * @throws Exception No such kind of collideObject.
+	 */
+	public void addCharacter(collideObjecctClass className, int inputID, Position setPosition,
+			String setName, String setTeam) throws Exception {
+		CollideObject toAddObject;
+		if(className == collideObjecctClass.Archer) {
+			toAddObject = new Archer(inputID, setName, setTeam, setPosition, this, className.ordinal());
+			collideObjectList.add(toAddObject);
+		}
+		else if(className == collideObjecctClass.Magician) {
+			toAddObject = new Magician(inputID, setName, setTeam, setPosition, this, className.ordinal());
+			collideObjectList.add(toAddObject);
+		}
+		else if(className == collideObjecctClass.SwordMan) {
+			toAddObject = new SwordMan(inputID, setName, setTeam, setPosition, this, className.ordinal());
+			collideObjectList.add(toAddObject);
+		}
+		else
+			throw new Exception("No such kind of collideObject.");
+		
+		toAddObject = null;
+	}
+	
+	/**
+	 * add attack object into list
+	 * @param className
+	 * @param inputID
+	 * @param setPosition
+	 * @param setPlayer
+	 * @throws Exception No such kind of collideObject.
+	 */
+	public void addAttackObject(collideObjecctClass className, int inputID, 
+			Position setPosition, Character setPlayer) throws Exception {
+		CollideObject toAddObject;
+		if(className == collideObjecctClass.Arrow) {
+			toAddObject = new Arrow(inputID, setPosition, this, className.ordinal(), setPlayer);
+			collideObjectList.add(toAddObject);
+		}
+		else if(className == collideObjecctClass.ArrowStrong) {
+			toAddObject = new ArrowStrong(inputID, setPosition, this, className.ordinal(), setPlayer);
+			collideObjectList.add(toAddObject);
+		}
+		else if(className == collideObjecctClass.MagicBall) {
+			toAddObject = new MagicBall(inputID, setPosition, this, className.ordinal(), setPlayer);
+			collideObjectList.add(toAddObject);
+		}
+		else if(className == collideObjecctClass.MagicBallBig) {
+			toAddObject = new MagicBallBig(inputID, setPosition, this, className.ordinal(), setPlayer);
+			collideObjectList.add(toAddObject);
+		}
+		else if(className == collideObjecctClass.Slash) {
+			toAddObject = new Slash(inputID, setPosition, this, className.ordinal(), setPlayer);
+			collideObjectList.add(toAddObject);
+		}
+		else if(className == collideObjecctClass.SlashBig) {
+			toAddObject = new SlashBig(inputID, setPosition, this, className.ordinal(), setPlayer);
+			collideObjectList.add(toAddObject);
+		}
+		else
+			throw new Exception("No such kind of collideObject.");
+		
+		toAddObject = null;
+	}
+	
+	/**
+	 * add obstacle into list
+	 * @param className
+	 * @param inputID
+	 * @param setPosition
+	 * @param width
+	 * @param height
+	 * @param setDestroyable
+	 * @throws Exception No such kind of collideObject.
+	 */
+	public void addObsatcle(collideObjecctClass className, int inputID, 
+			Position setPosition, int width, int height, boolean setDestroyable) throws Exception {
+		CollideObject toAddObject;
+		
+		if(className == collideObjecctClass.Obsatcle) {
+			toAddObject = new Obstacle(inputID, setPosition, this, className.ordinal(), width, height, setDestroyable);
+			collideObjectList.add(toAddObject);
+		}
+		else
+			throw new Exception("No such kind of collideObject.");
+		
+		toAddObject = null;
+	}
+	
+	/**
+	 * add fertilizer into list
+	 * @param className
+	 * @param inputID
+	 * @param setPosition
+	 * @param setSize
+	 * @throws Exception No such kind of collideObject.
+	 */
+	public void addFertilizer(collideObjecctClass className, int inputID, 
+			Position setPosition, Size setSize) throws Exception {
+		CollideObject toAddObject;
+		if(className == collideObjecctClass.Fertilizer) {
+			toAddObject = new Fertilizer(inputID, setPosition, this, className.ordinal(), setSize);
+			collideObjectList.add(toAddObject);
+		}
+		else
+			throw new Exception("No such kind of collideObject.");
+		
+		toAddObject = null;
+	}
+	
+	/**
+	 * add chaser or wanderer into list
+	 * @param className
+	 * @param inputID
+	 * @param setPosition
+	 * @throws Exception No such kind of collideObject.
+	 */
+	public void addNotFertilizerMob(collideObjecctClass className, int inputID, 
+			Position setPosition) throws Exception {
+		CollideObject toAddObject;
+		if(className == collideObjecctClass.Chaser) {
+			toAddObject = new Chaser(inputID, setPosition, this, className.ordinal());
+			collideObjectList.add(toAddObject);
+		}
+		else if(className == collideObjecctClass.Wanderer) {
+			toAddObject = new Wanderer(inputID, setPosition, this, className.ordinal());
+			collideObjectList.add(toAddObject);
+		}
+		else
+			throw new Exception("No such kind of collideObject.");
+		
+		toAddObject = null;
+	}
+	
 	/**set your player
 	 * 
 	 * Exception : Main player already exist.
@@ -49,53 +188,51 @@ public class CollideObjectManager{
 			throw new Exception("Main player already exist.");
 		player = setPlayer;
 	}
-	/**return the index from collideObjectList
-	 * 
-	 * exception: No collide object with ID(inputID) in collideObjectList.
+	
+	/**return the collideObject queried by ID from collideObjectList
 	 * 
 	 * @param inputID
 	 * @return
 	 * @throws Exception No collide object with inputID in collideObjectList
 	 */
-	public int queryObjectByID(int inputID) throws Exception{
-		int toFindObjectIndex = 0;
+	public CollideObject queryObjectByID(int inputID) throws Exception{
+		CollideObject toFindObject = null;
 		int counter = 0;
 		do {
 			if(inputID == collideObjectList.get(counter).ID) {
-				toFindObjectIndex = counter;
+				toFindObject = collideObjectList.get(counter);
 				break;
 			}
 			counter++;
 		}while(collideObjectList.size() > counter);
 		
-		if(collideObjectList.size()==counter)
+		if(collideObjectList.size()==counter) {
 			throw new Exception("Exception: No collide object with ID("+inputID+") in collideObjectList");
+		}
 		
-		return toFindObjectIndex;
+		return toFindObject;
 	}
 	
-	/**get the index of main player in collideObjectList
-	 * 
-	 * Exception: There is no main player.
+	/**get the main player in collideObjectList
 	 * 
 	 * @return
 	 * @throws Exception There is no main player!
 	 */
-	public int getMyPlayer() throws Exception {
+	public Character getMyPlayer() throws Exception {
 		if(player == null)
 			throw new Exception("There is no main player!");
 		
-		if(!(collideObjectList.get(recentIndex).ID == player.ID))
-			recentIndex = queryObjectByID(player.ID);
-		player = (Character) collideObjectList.get(recentIndex);
-		
-		return recentIndex;
+		return player;
 	}
 	
 	/**
-	 * update main player recovery, attackCD, skillCD ... by time offset
-	 * oldtime 
+	 * update all the collide object in the list for convenience
 	 */
+	public void updateAllCollideObjects() {
+		for(int i=0; i<collideObjectList.size(); i++) {
+			collideObjectList.get(i).update();
+		}
+	}
 	
 	public static enum collideObjecctClass {
 		Archer,
