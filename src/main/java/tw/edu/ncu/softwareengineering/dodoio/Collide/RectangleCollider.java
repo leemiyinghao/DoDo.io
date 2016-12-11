@@ -30,11 +30,11 @@ public class RectangleCollider extends Collider {
 
     @Override
     public void update(Position position) {
-        int XOffset = position.getX() - this.position.getX();
-        int YOffset = position.getY() - this.position.getY();
+        int xOffset = position.getX() - this.position.getX();
+        int yOffset = position.getY() - this.position.getY();
         for (Point point : points) {
-            point.x += XOffset;
-            point.y += YOffset;
+            point.x += xOffset;
+            point.y += yOffset;
         }
         this.position.setPosition(position.getX(), position.getY(), position.getDirection());
     }
