@@ -63,10 +63,13 @@ public class CollideObjectManager{
 	 * @param setPosition
 	 * @param setName
 	 * @param setTeam
-	 * @throws Exception No such kind of collideObject.
+	 * @throws Exception No such kind of collideObject. / client try to add collide object.
 	 */
 	public void addCharacter(collideObjecctClass className, int inputID, Position setPosition,
 			String setName, TeamName setTeam) throws Exception {
+		if(game != null)
+			throw new Exception("client try to add collide object");
+		
 		CollideObject toAddObject;
 		if(className == collideObjecctClass.Archer) {
 			toAddObject = new Archer(inputID, setName, setTeam, setPosition, this, className.ordinal());
@@ -92,10 +95,13 @@ public class CollideObjectManager{
 	 * @param inputID
 	 * @param setPosition
 	 * @param setPlayer
-	 * @throws Exception No such kind of collideObject.
+	 * @throws Exception No such kind of collideObject. / client try to add collide object.
 	 */
 	public void addAttackObject(collideObjecctClass className, int inputID, 
 			Position setPosition, Character setPlayer) throws Exception {
+		if(game != null)
+			throw new Exception("client try to add collide object");
+		
 		CollideObject toAddObject;
 		if(className == collideObjecctClass.Arrow) {
 			toAddObject = new Arrow(inputID, setPosition, this, className.ordinal(), setPlayer);
@@ -135,10 +141,13 @@ public class CollideObjectManager{
 	 * @param width
 	 * @param height
 	 * @param setDestroyable
-	 * @throws Exception No such kind of collideObject.
+	 * @throws Exception No such kind of collideObject. / client try to add collide object.
 	 */
 	public void addObsatcle(collideObjecctClass className, int inputID, 
 			Position setPosition, int width, int height, boolean setDestroyable) throws Exception {
+		if(game != null)
+			throw new Exception("client try to add collide object");
+		
 		CollideObject toAddObject;
 		
 		if(className == collideObjecctClass.Obsatcle) {
@@ -157,10 +166,13 @@ public class CollideObjectManager{
 	 * @param inputID
 	 * @param setPosition
 	 * @param setSize
-	 * @throws Exception No such kind of collideObject.
+	 * @throws Exception No such kind of collideObject. / client try to add collide object.
 	 */
 	public void addFertilizer(collideObjecctClass className, int inputID, 
 			Position setPosition, Size setSize) throws Exception {
+		if(game != null)
+			throw new Exception("client try to add collide object");
+		
 		CollideObject toAddObject;
 		if(className == collideObjecctClass.Fertilizer) {
 			toAddObject = new Fertilizer(inputID, setPosition, this, className.ordinal(), setSize);
@@ -177,10 +189,13 @@ public class CollideObjectManager{
 	 * @param className
 	 * @param inputID
 	 * @param setPosition
-	 * @throws Exception No such kind of collideObject.
+	 * @throws Exception No such kind of collideObject. / client try to add collide object.
 	 */
 	public void addNotFertilizerMob(collideObjecctClass className, int inputID, 
 			Position setPosition) throws Exception {
+		if(game != null)
+			throw new Exception("client try to add collide object");
+		
 		CollideObject toAddObject;
 		if(className == collideObjecctClass.Chaser) {
 			toAddObject = new Chaser(inputID, setPosition, this, className.ordinal());
