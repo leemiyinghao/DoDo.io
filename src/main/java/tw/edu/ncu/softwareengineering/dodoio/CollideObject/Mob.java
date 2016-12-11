@@ -10,7 +10,6 @@ public abstract class Mob extends NonPlayer {
 	
 	protected Mob(int inputID, BufferedImage image, Position setPosition) {
 		super(inputID, image, setPosition);
-		// TODO Auto-generated constructor stub
 	}
 	
 

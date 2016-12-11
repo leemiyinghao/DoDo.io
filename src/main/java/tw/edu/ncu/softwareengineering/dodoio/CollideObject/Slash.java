@@ -2,8 +2,6 @@ package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import java.awt.image.BufferedImage;
 
-import tw.edu.ncu.softwareengineering.dodoio.Collide.RectangleCollider;
-
 public class Slash extends AttackObject{
 	SwordMan player;
 	int height = 35;
@@ -24,13 +22,13 @@ public class Slash extends AttackObject{
 		player = setPlayer;
 		collider = new RectangleCollider(setPosition, width, height);
 		
-		position = Position.projection(player.getRadius(), setPosition);
+		move(Position.projection(player.getRadius(), setPosition));
 	}
 
 	@Override
 	public void run() {
 		double timeRested = slashTime;
-		while(timeRested > 0) {
+		while(timeRested > 0 && !isDead()) {
 			try {
 				timeRested = timeRested - 1/FPS;
 				Thread.sleep(1000/FPS);

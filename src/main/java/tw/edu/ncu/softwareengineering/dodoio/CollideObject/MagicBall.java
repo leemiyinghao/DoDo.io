@@ -27,7 +27,7 @@ public class MagicBall extends AttackObject{
 			try {
 				double magicBallSpeed = player.speed*4;
 				traversal+=magicBallSpeed;
-				position = Position.projection(magicBallSpeed, position);
+				move(Position.projection(magicBallSpeed, position));
 				Thread.sleep(1000/FPS);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

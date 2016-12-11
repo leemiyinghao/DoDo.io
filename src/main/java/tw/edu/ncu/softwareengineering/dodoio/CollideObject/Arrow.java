@@ -2,8 +2,6 @@ package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import java.awt.image.BufferedImage;
 
-import tw.edu.ncu.softwareengineering.dodoio.Collide.RectangleCollider;
-
 public class Arrow extends AttackObject{
 	Archer player;
 	double traversal = 0;
@@ -28,7 +26,7 @@ public class Arrow extends AttackObject{
 			try {
 				double arrowSpeed = player.speed*4;
 				traversal+=arrowSpeed;
-				position = Position.projection(arrowSpeed, position);
+				move(Position.projection(arrowSpeed, position));
 				Thread.sleep(1000/FPS);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

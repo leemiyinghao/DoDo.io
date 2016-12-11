@@ -2,8 +2,6 @@ package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import java.awt.image.BufferedImage;
 
-import tw.edu.ncu.softwareengineering.dodoio.Collide.RectangleCollider;
-
 public class Obstacle extends NonPlayer {
 	public final int width;
 	public final int height;
