@@ -1,7 +1,6 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
-import java.awt.image.BufferedImage;
-
+import java.awt.Image;
 import tw.edu.ncu.softwareengineering.dodoio.Collide.CircleCollider;
 
 public abstract class Character extends CollideObject {
@@ -14,12 +13,15 @@ public abstract class Character extends CollideObject {
 	private int exp;
 	private int maxHP;
 	private int abilityPoint;
+	private long oldTime;
 	double recoveryCD;
 	double damagePoint;
 	double attackCD;
 	double attackCountDown;
+	boolean attackActive;
 	double skillCD;
-	double skillCDCountDown;
+	double skillCountDown;
+	boolean skillActive;
 	double speed;
 	
 	/**Set the data of player
@@ -31,8 +33,10 @@ public abstract class Character extends CollideObject {
 	 * @param image
 	 * @param setPosition
 	 */
-	public Character(int setID, String setName, String setTeam, BufferedImage image, Position setPosition) {
-		super(setID, image, setPosition);
+	public Character(int setID, String setName, String setTeam, Position setPosition, CollideObjectManager cOManager, int className) {
+		super(setID, setPosition, cOManager, className);
+		oldTime = date.getTime();
+		
 		name = setName;
 		team = setTeam;
 
@@ -42,33 +46,68 @@ public abstract class Character extends CollideObject {
 		healthPoint = maxHP;
 		recoveryCD = 2;
 		damagePoint = 100;
-		attackCD = 1;
-		skillCD = 10;
-		speed = 1;
+		speed = 5;
 		collider = new CircleCollider(position, radius);
 		
-		Thread recoveryThread = new Thread(new Runnable(){
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				while(!isDead()){
-					try {
-						Thread.sleep((long) (recoveryCD*1000));
-						if(healthPoint < maxHP){
-							healthPoint++;
-							//Update
-						}
-						
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
+		attackCD = 1;
+		attackCountDown = 0;
+		attackActive = true;
+		
+		skillCD = 10;
+		skillCountDown = 0;
+		skillActive = true;
+		
+	}
+	
+	/**
+	 * The update function for character
+	 * update : 
+	 * recovery
+	 * count skill CD
+	 * count attack CD
+	 */
+	public void update() {
+		long newTime = date.getTime();
+		long updateTime = newTime - oldTime;
+		recover(updateTime);
+		countAttackCD(updateTime);
+		countSkillCD(updateTime);
+		oldTime = newTime;
+	}
+	
+	private void recover(long updateTime) {
+		while(updateTime < 0) {
+			if(healthPoint >= maxHP) {
+				healthPoint = maxHP;
+				break;
 			}
-			
-		});
-		recoveryThread.start();
+			healthPoint++;
+			updateTime = (long) (updateTime - recoveryCD*1000);
+		}
+	}
+	
+	private void countAttackCD(long updateTime) {
+		if(!attackActive) {
+			if(attackCountDown - (int) updateTime/1000 <= 0) {
+				attackCountDown = 0;
+				attackActive = true;
+			}
+			else {
+				attackCountDown -= (int) updateTime/1000;
+			}
+		}
+	}
+
+	private void countSkillCD(long updateTime) {
+		if(!skillActive) {
+			if(skillCountDown - (int) updateTime/1000 <= 0) {
+				skillCountDown = 0;
+				skillActive = true;
+			}
+			else {
+				skillCountDown -= (int) updateTime/1000;
+			}
+		}
 	}
 	
 	/**call when get exp
@@ -77,6 +116,7 @@ public abstract class Character extends CollideObject {
 	public void addExp(int addExp) {
 		exp+=addExp;
 		levelUp();
+		
 	}
 	
 	/**call this when get exp
@@ -92,6 +132,7 @@ public abstract class Character extends CollideObject {
 			abilityPoint++;
 			
 		}
+		// update to client
 	}
 	
 	/**for death match game
@@ -106,90 +147,66 @@ public abstract class Character extends CollideObject {
 	/**HP +10
 	 * 
 	 * Exception: Run out of abilityPoint.
+	 * @throws Exception Run out of abilityPoint.
 	 */
-	public void upgradeHP() {
-		try{
-			if(abilityPoint <= 0)
-				throw new Exception();
-			healthPoint+=10;
-			abilityPoint--;
-		}
-		catch(Exception excp) {
-			System.out.println("Exception: Run out of abilityPoint.");
-			return;
-		}
+	public void upgradeHP() throws Exception {
+		if(abilityPoint <= 0)
+			throw new Exception("Exception: Run out of abilityPoint.");
+		healthPoint+=10;
+		abilityPoint--;
 	}
 	
 
 	/**damagePoint+10
+	 * @throws Exception Run out of abilityPoint.
 	 * 
 	 */
-	public void upgradeDP() {
-		try{
-			if(abilityPoint <= 0)
-				throw new Exception();
-			damagePoint+=10;
-			abilityPoint--;
-		}
-		catch(Exception excp) {
-			System.out.println("Exception: Run out of abilityPoint.");
-			return;
-		}
+	public void upgradeDP() throws Exception {
+		if(abilityPoint <= 0)
+			throw new Exception("Exception: Run out of abilityPoint.");
+		damagePoint+=10;
+		abilityPoint--;
 	}
 
 
 	/**skillCD *0.99
+	 * @throws Exception Run out of abilityPoint.
 	 * 
 	 */
-	public void upgradeCD() {
-		try{
-			if(abilityPoint <= 0)
-				throw new Exception();
-			skillCD = skillCD*0.99;
-			abilityPoint--;
-		}
-		catch(Exception excp) {
-			System.out.println("Exception: Run out of abilityPoint.");
-			return;
-		}
+	public void upgradeCD() throws Exception {
+		if(abilityPoint <= 0)
+			throw new Exception("Exception: Run out of abilityPoint.");
+		skillCD = skillCD*0.99;
+		abilityPoint--;
 	}
 	
 	/**
-	 * get a new attack object for attacking
+	 * tell server you do attack
 	 * @param setID
 	 * @return
 	 */
-	abstract AttackObject attack(int setID);
+	public void attack() {
+		// tell server you do attack
+	}
 	
 	/**
-	 * get a new attack object for attacking
+	 * tell server you do attack
 	 * @param setID
 	 * @return
 	 */
-	abstract AttackObject skill(int setID);
+	public void skill() {
+		// tell server you do skill
+	}
 	
 	/**Only player do "attack" by using attack or skill, others do "collide"
-	 * collide module will use as : 
-	 * collideObjectManage.collideObjectList[attackerIndx] = collideObjectList[attackedCharacterIndx].beAttacked(Character attacker);
 	 * 
 	 * @param attacker
 	 */
-	public Character beAttacked(Character attacker){
+	public void beAttacked(Character attacker){
 		this.beHarmed((int)attacker.damagePoint);
 		if(this.isDead()) {
-			attacker = didKill(attacker);
+			attacker.addDMScore(this.level);
 		}
-		//update data to server
-		return attacker;
-	}
-	
-	/**done everything when the character kill player
-	 * 
-	 * @param attacker
-	 */
-	private Character didKill(Character attacker) {
-		attacker.addDMScore(this.level);
-		return attacker;
 	}
 	
 	/**for death match
