@@ -1,12 +1,9 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
-import java.awt.image.BufferedImage;
-
 public class ArrowStrong extends Arrow{
 
-	ArrowStrong(int inputID, BufferedImage image, Position setPosition,
-			Archer setPlayer) {
-		super(inputID, image, setPosition, setPlayer);
+	ArrowStrong(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
+		super(setID, setPosition, cOManager, className, setPlayer);
 		damage = (int) (player.damagePoint*2.5);
 	}
 

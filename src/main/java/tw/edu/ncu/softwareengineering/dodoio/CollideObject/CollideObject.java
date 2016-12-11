@@ -1,17 +1,19 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import java.awt.image.BufferedImage;
+import java.util.Date;
 
 import tw.edu.ncu.softwareengineering.dodoio.Collide.ICollider;
 
 public abstract class CollideObject {
 	protected Position position;
-	public BufferedImage appearance;
+	public BufferedImage  appearance;
 	public final int ID;
 	public final int collideDamage = 30;
 	protected boolean isInvincible;
 	protected int healthPoint;
 	protected ICollider collider;
+	protected Date date;
 	private boolean isDead;
 	
 	/**set data of the object
@@ -20,9 +22,10 @@ public abstract class CollideObject {
 	 * @param image
 	 * @param setPosition
 	 */
-	protected CollideObject(int inputID, BufferedImage image, Position setPosition) {
+	protected CollideObject(int inputID, Position setPosition, CollideObjectManager cOManager, int className) {
+		date = new Date();
 		ID = inputID;
-		appearance = image;
+		appearance = cOManager.collideObjectImages[className];
 		position = setPosition;
 		healthPoint = 1000;
 		isInvincible = false;
@@ -40,6 +43,8 @@ public abstract class CollideObject {
 	public boolean isInvincible() {
 		return isInvincible;
 	}
+	
+	abstract public void update();
 	
 	/**when player are attacked, check if it is invincible and change the healthPoint
 	 * 

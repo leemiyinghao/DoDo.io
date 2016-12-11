@@ -1,23 +1,217 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
-import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character.ChracterClass;
+import javax.imageio.ImageIO;
+
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character.TeamName;
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Fertilizer.Size;
+import tw.edu.ncu.softwareengineering.dodoio.Game.Game;
 
 
 public class CollideObjectManager{
 	Character player;
 	int recentIndex;
-	boolean playerAttackActive = true, playerSkillActive = true;
+	Game game;
+	boolean playerAttackActive = true, playerSkillActive = true;// initial at constructor if needed
 	public ArrayList<CollideObject> collideObjectList;
-	private boolean mainPlayerAdded = false;
+	public BufferedImage[] collideObjectImages;
 	
-	public CollideObjectManager() {
+	/**
+	 * this is for client(DOM)
+	 * @param game the game of this client
+	 * @throws IOException 
+	 */
+	public CollideObjectManager(Game game) throws IOException {
+		this.game = game;
+		loadImages();
 		//code: update to server
 	}
 	
-	/**add your player
+	/**
+	 * this is for CDC
+	 * @throws IOException 
+	 */
+	public CollideObjectManager() throws IOException {
+		loadImages();
+	}
+	
+	private void loadImages() throws IOException {
+		collideObjectImages = new BufferedImage[collideObjecctClass.values().length];
+		collideObjectImages[collideObjecctClass.Archer.ordinal()] = ImageIO.read(new File("Resource/Archer.png"));
+		collideObjectImages[collideObjecctClass.Arrow.ordinal()] = ImageIO.read(new File("Resource/Arrow.png"));
+		collideObjectImages[collideObjecctClass.ArrowStrong.ordinal()] = ImageIO.read(new File("Resource/ArrowStrong.png"));
+		collideObjectImages[collideObjecctClass.Chaser.ordinal()] = ImageIO.read(new File("Resource/Chaser.png"));
+		collideObjectImages[collideObjecctClass.Fertilizer.ordinal()] = ImageIO.read(new File("Resource/Fertilizer.png"));
+		collideObjectImages[collideObjecctClass.MagicBall.ordinal()] = ImageIO.read(new File("Resource/MagicBall.png"));
+		collideObjectImages[collideObjecctClass.MagicBallBig.ordinal()] = ImageIO.read(new File("Resource/MagicBallBig.png"));
+		collideObjectImages[collideObjecctClass.Magician.ordinal()] = ImageIO.read(new File("Resource/Magician.png"));
+		collideObjectImages[collideObjecctClass.Obsatcle.ordinal()] = ImageIO.read(new File("Resource/Obsatcle.png"));
+		collideObjectImages[collideObjecctClass.Slash.ordinal()] = ImageIO.read(new File("Resource/Slash.png"));;
+		collideObjectImages[collideObjecctClass.SlashBig.ordinal()] = ImageIO.read(new File("Resource/SlashBig.png"));
+		collideObjectImages[collideObjecctClass.SwordMan.ordinal()] = ImageIO.read(new File("Resource/SwordMan.png"));
+		collideObjectImages[collideObjecctClass.Wanderer.ordinal()] = ImageIO.read(new File("Resource/Wanderer.png"));
+	}
+	
+	/**
+	 * add character to list
+	 * @param className
+	 * @param inputID
+	 * @param setPosition
+	 * @param setName
+	 * @param setTeam
+	 * @throws Exception No such kind of collideObject. / client try to add collide object.
+	 */
+	public void addCharacter(collideObjecctClass className, int inputID, Position setPosition,
+			String setName, TeamName setTeam) throws Exception {
+		if(game != null)
+			throw new Exception("client try to add collide object");
+		
+		CollideObject toAddObject;
+		if(className == collideObjecctClass.Archer) {
+			toAddObject = new Archer(inputID, setName, setTeam, setPosition, this, className.ordinal());
+			collideObjectList.add(toAddObject);
+		}
+		else if(className == collideObjecctClass.Magician) {
+			toAddObject = new Magician(inputID, setName, setTeam, setPosition, this, className.ordinal());
+			collideObjectList.add(toAddObject);
+		}
+		else if(className == collideObjecctClass.SwordMan) {
+			toAddObject = new SwordMan(inputID, setName, setTeam, setPosition, this, className.ordinal());
+			collideObjectList.add(toAddObject);
+		}
+		else
+			throw new Exception("No such kind of collideObject.");
+		
+		toAddObject = null;
+	}
+	
+	/**
+	 * add attack object into list
+	 * @param className
+	 * @param inputID
+	 * @param setPosition
+	 * @param setPlayer
+	 * @throws Exception No such kind of collideObject. / client try to add collide object.
+	 */
+	public void addAttackObject(collideObjecctClass className, int inputID, 
+			Position setPosition, Character setPlayer) throws Exception {
+		if(game != null)
+			throw new Exception("client try to add collide object");
+		
+		CollideObject toAddObject;
+		if(className == collideObjecctClass.Arrow) {
+			toAddObject = new Arrow(inputID, setPosition, this, className.ordinal(), setPlayer);
+			collideObjectList.add(toAddObject);
+		}
+		else if(className == collideObjecctClass.ArrowStrong) {
+			toAddObject = new ArrowStrong(inputID, setPosition, this, className.ordinal(), setPlayer);
+			collideObjectList.add(toAddObject);
+		}
+		else if(className == collideObjecctClass.MagicBall) {
+			toAddObject = new MagicBall(inputID, setPosition, this, className.ordinal(), setPlayer);
+			collideObjectList.add(toAddObject);
+		}
+		else if(className == collideObjecctClass.MagicBallBig) {
+			toAddObject = new MagicBallBig(inputID, setPosition, this, className.ordinal(), setPlayer);
+			collideObjectList.add(toAddObject);
+		}
+		else if(className == collideObjecctClass.Slash) {
+			toAddObject = new Slash(inputID, setPosition, this, className.ordinal(), setPlayer);
+			collideObjectList.add(toAddObject);
+		}
+		else if(className == collideObjecctClass.SlashBig) {
+			toAddObject = new SlashBig(inputID, setPosition, this, className.ordinal(), setPlayer);
+			collideObjectList.add(toAddObject);
+		}
+		else
+			throw new Exception("No such kind of collideObject.");
+		
+		toAddObject = null;
+	}
+	
+	/**
+	 * add obstacle into list
+	 * @param className
+	 * @param inputID
+	 * @param setPosition
+	 * @param width
+	 * @param height
+	 * @param setDestroyable
+	 * @throws Exception No such kind of collideObject. / client try to add collide object.
+	 */
+	public void addObsatcle(collideObjecctClass className, int inputID, 
+			Position setPosition, int width, int height, boolean setDestroyable) throws Exception {
+		if(game != null)
+			throw new Exception("client try to add collide object");
+		
+		CollideObject toAddObject;
+		
+		if(className == collideObjecctClass.Obsatcle) {
+			toAddObject = new Obstacle(inputID, setPosition, this, className.ordinal(), width, height, setDestroyable);
+			collideObjectList.add(toAddObject);
+		}
+		else
+			throw new Exception("No such kind of collideObject.");
+		
+		toAddObject = null;
+	}
+	
+	/**
+	 * add fertilizer into list
+	 * @param className
+	 * @param inputID
+	 * @param setPosition
+	 * @param setSize
+	 * @throws Exception No such kind of collideObject. / client try to add collide object.
+	 */
+	public void addFertilizer(collideObjecctClass className, int inputID, 
+			Position setPosition, Size setSize) throws Exception {
+		if(game != null)
+			throw new Exception("client try to add collide object");
+		
+		CollideObject toAddObject;
+		if(className == collideObjecctClass.Fertilizer) {
+			toAddObject = new Fertilizer(inputID, setPosition, this, className.ordinal(), setSize);
+			collideObjectList.add(toAddObject);
+		}
+		else
+			throw new Exception("No such kind of collideObject.");
+		
+		toAddObject = null;
+	}
+	
+	/**
+	 * add chaser or wanderer into list
+	 * @param className
+	 * @param inputID
+	 * @param setPosition
+	 * @throws Exception No such kind of collideObject. / client try to add collide object.
+	 */
+	public void addNotFertilizerMob(collideObjecctClass className, int inputID, 
+			Position setPosition) throws Exception {
+		if(game != null)
+			throw new Exception("client try to add collide object");
+		
+		CollideObject toAddObject;
+		if(className == collideObjecctClass.Chaser) {
+			toAddObject = new Chaser(inputID, setPosition, this, className.ordinal());
+			collideObjectList.add(toAddObject);
+		}
+		else if(className == collideObjecctClass.Wanderer) {
+			toAddObject = new Wanderer(inputID, setPosition, this, className.ordinal());
+			collideObjectList.add(toAddObject);
+		}
+		else
+			throw new Exception("No such kind of collideObject.");
+		
+		toAddObject = null;
+	}
+	
+	/**set your player
 	 * 
 	 * Exception : Main player already exist.
 	 * 
@@ -27,160 +221,73 @@ public class CollideObjectManager{
 	 * @param team check the enum "TeamName" in Character 
 	 * @param image
 	 * @param position
+	 * @throws Exception 
 	 */
-	public void addMainplayer(String chracterClass,int ID, String name, String team, BufferedImage image, Position position){
-		try {
-			if(mainPlayerAdded)
-				throw new Exception();
-		}
-		catch(Exception excptn) {
-			System.out.println("Main player already exist.");
-			return;
-		}
-		
-		if(chracterClass.equals(ChracterClass.SwordMan)){
-			player = new SwordMan(ID, name, team, image, position);
-		}
-		else if(chracterClass.equals(ChracterClass.Archer)){
-			player = new Archer(ID, name, team, image, position);
-		}
-		else if(chracterClass.equals(ChracterClass.Magician)){
-			player = new Magician(ID, name, team, image, position);
-		}
-		collideObjectList.add(player);
-		recentIndex = collideObjectList.indexOf(player);
-		
-		mainPlayerAdded = true;
+	public void setMainPlayer(Character setPlayer) throws Exception{
+		if(player != null)
+			throw new Exception("Main player already exist.");
+		player = setPlayer;
 	}
-	/**return the index from collideObjectList
-	 * 
-	 * exception: No collide object with ID(inputID) in collideObjectList. return -1
+	
+	/**return the collideObject queried by ID from collideObjectList
 	 * 
 	 * @param inputID
 	 * @return
+	 * @throws Exception No collide object with inputID in collideObjectList
 	 */
-	public int queryObjectByID(int inputID){
-		int toFindObjectIndex = 0;
+	public CollideObject queryObjectByID(int inputID) throws Exception{
+		CollideObject toFindObject = null;
 		int counter = 0;
-		try {
-			do {
-				if(inputID == collideObjectList.get(counter).ID) {
-					toFindObjectIndex = counter;
-					break;
-				}
-				counter++;
-			}while(collideObjectList.size() > counter);
-			
-			if(collideObjectList.size()==counter)
-				throw new Exception();
-		}
-		catch(Exception exception) {
-			System.out.println("Exception: No collide object with ID("+inputID+") in collideObjectList");
-			return -1;
+		do {
+			if(inputID == collideObjectList.get(counter).ID) {
+				toFindObject = collideObjectList.get(counter);
+				break;
+			}
+			counter++;
+		}while(collideObjectList.size() > counter);
+		
+		if(collideObjectList.size()==counter) {
+			throw new Exception("Exception: No collide object with ID("+inputID+") in collideObjectList");
 		}
 		
-		return toFindObjectIndex;
+		return toFindObject;
 	}
 	
-	/**get the index of main player in collideObjectList
-	 * 
-	 * Exception: There is no main player. return -1
+	/**get the main player in collideObjectList
 	 * 
 	 * @return
+	 * @throws Exception There is no main player!
 	 */
-	public int getMyPlayer() {
-		try{
-			if(player == null)
-				throw new Exception();
-			
-			if(!(collideObjectList.get(recentIndex).ID == player.ID))
-				recentIndex = queryObjectByID(player.ID);
-			player = (Character) collideObjectList.get(recentIndex);
-		}
-		catch(Exception exception) {
-			System.out.println("There is no main player!");
-			return -1;
-		}
+	public Character getMyPlayer() throws Exception {
+		if(player == null)
+			throw new Exception("There is no main player!");
 		
-		return recentIndex;
+		return player;
 	}
 	
-	/**call when player attack(click left button)
-	 * The method will be block in CD time
+	/**
+	 * update all the collide object in the list for convenience
 	 */
-	public void myPlayerAttack() {
-		try{
-			if(getMyPlayer() == -1)
-				throw new Exception();
+	public void updateAllCollideObjects() {
+		for(int i=0; i<collideObjectList.size(); i++) {
+			collideObjectList.get(i).update();
 		}
-		catch(Exception exception) {
-			System.out.println("There is no main player!");
-			return;
-		}
-		
-		Thread attackThread = new Thread(new Runnable(){
-
-			@Override
-			public void run() {
-				if(playerAttackActive) {
-					playerAttackActive = false;
-					// get ID for attackObject from server
-					AttackObject attackObject = ((Character) collideObjectList.get(getMyPlayer())).attack(client.getNewID());
-					collideObjectList.add(attackObject);
-					
-					Thread attackObjectThread = new Thread((Runnable) collideObjectList.get(collideObjectList.indexOf(attackObject)));
-					attackObjectThread.start();
-					try {
-						Thread.sleep((long) (((Character) collideObjectList.get(getMyPlayer())).attackCD*1000));
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					playerAttackActive = true;
-				}
-			}
-		});
-		attackThread.start();
-		
 	}
 	
-	/**call when player use skill(click right button)
-	 * The method will be block in CD time
-	 */
-	public void myPlayerSkill() {
-		try{
-			if(getMyPlayer() == -1)
-				throw new Exception();
-		}
-		catch(Exception exception) {
-			System.out.println("There is no main player!");
-			return;
-		}
-		
-		Thread skillThread = new Thread(new Runnable(){
-
-			@Override
-			public void run() {
-				if(playerSkillActive) {
-					
-					try {
-							playerSkillActive = false;
-						// get ID for attackObject from server
-						AttackObject attackObject = ((Character) collideObjectList.get(getMyPlayer())).skill(client.getNewID());
-						collideObjectList.add(attackObject);
-						
-						Thread attackObjectThread = new Thread((Runnable) collideObjectList.get(collideObjectList.indexOf(attackObject)));
-						attackObjectThread.start();
-						
-						Thread.sleep((long) (((Character) collideObjectList.get(getMyPlayer())).skillCD*1000));
-
-						playerSkillActive = true;
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		});
-		skillThread.start();
+	public static enum collideObjecctClass {
+		Archer,
+		Arrow,
+		ArrowStrong,
+		Chaser,
+		Fertilizer,
+		MagicBall,
+		MagicBallBig,
+		Magician,
+		Obsatcle,
+		Slash,
+		SlashBig,
+		SwordMan,
+		Wanderer
 	}
 	
 }
