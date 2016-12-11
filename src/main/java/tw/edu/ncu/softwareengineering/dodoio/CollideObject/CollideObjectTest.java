@@ -9,7 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CollideObjectTest {
-
+	Archer playerTest;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -20,6 +20,9 @@ public class CollideObjectTest {
 
 	@Before
 	public void setUp() throws Exception {
+		playerTest = new Archer(1, "test", Character.TeamName.deathMatch, 
+				new Position(0, 0, 0), new CollideObjectManager(), 
+				CollideObjectManager.collideObjecctClass.Archer);
 	}
 
 	@After

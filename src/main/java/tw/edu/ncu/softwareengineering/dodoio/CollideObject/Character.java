@@ -4,7 +4,7 @@ import tw.edu.ncu.softwareengineering.dodoio.Collide.CircleCollider;
 
 public abstract class Character extends CollideObject {
 	public final String name;
-	public final String team;
+	public final int team;
 	public final int[] expTable = {0, 2, 2, 2, 2, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
 	private final int radius = 25;
 	private int deathmatchScore;
@@ -32,12 +32,12 @@ public abstract class Character extends CollideObject {
 	 * @param image
 	 * @param setPosition
 	 */
-	public Character(int setID, String setName, String setTeam, Position setPosition, CollideObjectManager cOManager, int className) {
+	public Character(int setID, String setName, TeamName setTeam, Position setPosition, CollideObjectManager cOManager, int className) {
 		super(setID, setPosition, cOManager, className);
 		oldTime = date.getTime();
 		
 		name = setName;
-		team = setTeam;
+		team = setTeam.ordinal();
 
 		deathmatchScore = 0;
 		level = 1;
@@ -225,7 +225,7 @@ public abstract class Character extends CollideObject {
 	 * get team name
 	 * @return
 	 */
-	public String getTeam() {
+	public int getTeam() {
 		return team;
 	}
 	
