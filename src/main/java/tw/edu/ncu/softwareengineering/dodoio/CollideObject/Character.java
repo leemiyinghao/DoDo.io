@@ -186,7 +186,11 @@ public abstract class Character extends CollideObject {
 	 * @return
 	 */
 	public void attack() {
-		// tell server you do attack
+		if(attackActive) {
+			attackActive = false;
+			attackCountDown = attackCD;
+			// tell server you do attack
+		}
 	}
 	
 	/**
@@ -195,7 +199,11 @@ public abstract class Character extends CollideObject {
 	 * @return
 	 */
 	public void skill() {
-		// tell server you do skill
+		if(skillActive) {
+			skillActive = false;
+			skillCountDown = skillCD;
+			// tell server you do skill
+		}
 	}
 	
 	/**Only player do "attack" by using attack or skill, others do "collide"
