@@ -18,9 +18,7 @@ public class Slash extends AttackObject{
 	 */
 	protected Slash(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
 		super(setID, setPosition, cOManager, className, setPlayer);
-		player = setPlayer;
 		collider = new RectangleCollider(setPosition, width, height);
-		isInvincible = true;
 		
 		move(Position.projection(player.getRadius(), setPosition));
 	}
@@ -43,5 +41,5 @@ public class Slash extends AttackObject{
 			updateTime -= 1000/FPS;
 		}
 	}
-	
+
 }
