@@ -8,12 +8,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character.TeamName;
+import tw.edu.ncu.softwareengineering.dodoio.Collide.CircleCollider;
 
 public class CollideObjectTest {
 	CollideObjectManager manager;
 	Archer playerTest;
 	SwordMan attackerTest;
+	Magician attackerTest2;
+	int miliSecond = 1000;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -30,23 +32,26 @@ public class CollideObjectTest {
 		attackerTest = new SwordMan(2, "attackerX", Character.TeamName.deathMatch
 				, new Position(1, 1, 0), manager, 
 				CollideObjectManager.collideObjecctClass.SwordMan.ordinal());
+		attackerTest2 = new Magician(3, "MagicianX", Character.TeamName.deathMatch, new Position(18, 50, 0.441),
+				manager, CollideObjectManager.collideObjecctClass.Magician.ordinal());
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		playerTest = null;
 		attackerTest = null;
+		attackerTest2 = null;
 		manager = null;
 	}
 
 	@Test
-	public void testOnCollide() {
+	public void onCollideTest() {
 		playerTest.onCollide(null);
 		assertEquals("after collide it should be harm", 200 - playerTest.collideDamage, playerTest.getHP());
 	}
 
 	@Test
-	public void testInvincible() {
+	public void invincibleTest() {
 		playerTest.isInvincible = true;
 		assertEquals("now it is invictcible", true, playerTest.isInvincible());
 		playerTest.onCollide(null);
@@ -55,13 +60,15 @@ public class CollideObjectTest {
 		assertEquals("after attacked it can't be harm", 200, playerTest.getHP());
 	}
 	
-	public void testAttackToDead() {
+	@Test
+	public void attackToDeadTest() {
 		attackerTest.damagePoint = 10000;
 		playerTest.beAttacked(attackerTest);
 		assertEquals("archerX will die", true, playerTest.isDead());
 	}
 	
-	public void testGetHP() {
+	@Test
+	public void getHPTest() {
 		int[] xTest = {670, 2, 6, 77, 100000, 6849521, 243, 6, 50};
 		for(int i=0; i<xTest.length; i++) {
 			playerTest.healthPoint = xTest[i];
@@ -69,4 +76,19 @@ public class CollideObjectTest {
 		}
 	}
 	
+	@Test
+	public void getPositionTest() {
+		Position setPosition = new Position(3, 80, 0.556);
+		playerTest.position = setPosition;
+		assertEquals("player position move to 3,80,0.566", setPosition, playerTest.getPosition());
+		setPosition = null;
+	}
+	
+	@Test
+	public void isDeadTest() {
+		assertFalse("player still alive", playerTest.isDead());
+		playerTest.dead();
+		assertTrue("player die", playerTest.isDead());
+	}
+
 }

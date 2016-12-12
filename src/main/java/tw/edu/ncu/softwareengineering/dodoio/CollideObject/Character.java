@@ -5,12 +5,14 @@ import tw.edu.ncu.softwareengineering.dodoio.Collide.CircleCollider;
 public abstract class Character extends CollideObject {
 	public final String name;
 	public final int team;
+	public final int levelMax = 30;
 	public final int[] expTable = {0, 2, 2, 2, 2, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10};
+	int[] expAccumulationTable;
 	private final int radius = 25;
 	private int deathmatchScore;
-	private int level;
-	private int exp;
-	private int maxHP;
+	        int level;
+	        int exp;
+	        int maxHP;
 	private int abilityPoint;
 	private long oldTime;
 	double recoveryCD;
@@ -58,6 +60,11 @@ public abstract class Character extends CollideObject {
 		skillCountDown = 0;
 		skillActive = true;
 		
+		expAccumulationTable = new int[levelMax];
+		expAccumulationTable[0] = expTable[0];
+		for(int i=1; i<levelMax; i++) {
+			expAccumulationTable[i] = expAccumulationTable[i-1]+expTable[i];
+		}
 	}
 	
 	/**
@@ -80,44 +87,52 @@ public abstract class Character extends CollideObject {
 	void recover(long updateTime) {
 		while(updateTime > 0) {
 			if(healthPoint >= maxHP) {
-				healthPoint = maxHP;
-				recoveryPointBuffer = 0;
 				break;
 			}
-			healthPoint++;
-			updateTime = (long) (updateTime - recoveryCD*1000);
-		}
-		recoveryPointBuffer += 1 + updateTime/(recoveryCD*1000);
-		if(recoveryPointBuffer > 1) {
-			recoveryPointBuffer--;
-			if(healthPoint >= maxHP) {
-				healthPoint = maxHP;
-				recoveryPointBuffer = 0;
+			if(updateTime/1000 >= recoveryCD) {
+				healthPoint++;
+				updateTime = (long) (updateTime - recoveryCD*1000);
 			}
+			else
+				break;
+		}
+		double addTime = updateTime/1000.0;
+		recoveryPointBuffer += (addTime);
+		
+		if(recoveryPointBuffer >= recoveryCD) {
+			recoveryPointBuffer -= recoveryCD;
 			healthPoint++;
+		}
+		
+		if(healthPoint >= maxHP) {
+			healthPoint = maxHP;
+			recoveryPointBuffer = 0;
 		}
 	}
 	
 	void countAttackCD(long updateTime) {
+		double updateTimeSecond = (updateTime/1000.0);
 		if(!attackActive) {
-			if(attackCountDown - (int) updateTime/1000 <= 0) {
+			if(attackCountDown - updateTimeSecond <= 0) {
 				attackCountDown = 0;
 				attackActive = true;
 			}
 			else {
-				attackCountDown -= (int) updateTime/1000;
+				attackCountDown -= updateTimeSecond;
 			}
 		}
 	}
 
 	void countSkillCD(long updateTime) {
+		double updateTimeSecond = (updateTime/1000.0);
 		if(!skillActive) {
-			if(skillCountDown - (int) updateTime/1000 <= 0) {
+			
+			if(skillCountDown - updateTimeSecond <= 0) {
 				skillCountDown = 0;
 				skillActive = true;
 			}
 			else {
-				skillCountDown -= (int) updateTime/1000;
+				skillCountDown -= updateTimeSecond;
 			}
 		}
 	}
@@ -134,7 +149,7 @@ public abstract class Character extends CollideObject {
 	/**call this when get exp
 	 */
 	void levelUp() {
-		while(exp < expTable[level]) {
+		while(exp > expTable[level] && level < levelMax) {
 			exp -= expTable[level];
 			level++;
 			maxHP++;
