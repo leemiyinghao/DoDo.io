@@ -60,5 +60,14 @@ public class CollideObjectTest {
 		playerTest.beAttacked(attackerTest);
 		assertEquals("archerX will die", true, playerTest.isDead());
 	}
+	
+	public void testGetHP() {
+		int[] xTest = {670, 2, 6, 77, 100000, 6849521, 243, 6, 50};
+		for(int i=0; i<xTest.length; i++) {
+			playerTest.healthPoint = xTest[i];
+			assertEquals("assign hp and test getHP()", xTest[i], playerTest.getHP());
+		}
+		
+	}
 
 }
