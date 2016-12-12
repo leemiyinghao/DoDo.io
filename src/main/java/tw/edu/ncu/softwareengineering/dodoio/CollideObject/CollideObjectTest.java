@@ -67,7 +67,6 @@ public class CollideObjectTest {
 			playerTest.healthPoint = xTest[i];
 			assertEquals("assign hp and test getHP()", xTest[i], playerTest.getHP());
 		}
-		
 	}
-
+	
 }
