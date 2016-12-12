@@ -14,6 +14,7 @@ public abstract class Character extends CollideObject {
 	private int abilityPoint;
 	private long oldTime;
 	double recoveryCD;
+	double recoveryPointBuffer;
 	double damagePoint;
 	double attackCD;
 	double attackCountDown;
@@ -43,6 +44,7 @@ public abstract class Character extends CollideObject {
 		level = 1;
 		maxHP = 200;
 		healthPoint = maxHP;
+		recoveryPointBuffer = 0;
 		recoveryCD = 2;
 		damagePoint = 100;
 		speed = 5;
@@ -75,18 +77,28 @@ public abstract class Character extends CollideObject {
 		oldTime = newTime;
 	}
 	
-	private void recover(long updateTime) {
-		while(updateTime < 0) {
+	void recover(long updateTime) {
+		while(updateTime > 0) {
 			if(healthPoint >= maxHP) {
 				healthPoint = maxHP;
+				recoveryPointBuffer = 0;
 				break;
 			}
 			healthPoint++;
 			updateTime = (long) (updateTime - recoveryCD*1000);
 		}
+		recoveryPointBuffer += 1 + updateTime/(recoveryCD*1000);
+		if(recoveryPointBuffer > 1) {
+			recoveryPointBuffer--;
+			if(healthPoint >= maxHP) {
+				healthPoint = maxHP;
+				recoveryPointBuffer = 0;
+			}
+			healthPoint++;
+		}
 	}
 	
-	private void countAttackCD(long updateTime) {
+	void countAttackCD(long updateTime) {
 		if(!attackActive) {
 			if(attackCountDown - (int) updateTime/1000 <= 0) {
 				attackCountDown = 0;
@@ -98,7 +110,7 @@ public abstract class Character extends CollideObject {
 		}
 	}
 
-	private void countSkillCD(long updateTime) {
+	void countSkillCD(long updateTime) {
 		if(!skillActive) {
 			if(skillCountDown - (int) updateTime/1000 <= 0) {
 				skillCountDown = 0;
