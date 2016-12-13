@@ -3,7 +3,7 @@ package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 import java.awt.image.BufferedImage;
 import java.util.Date;
 
-import tw.edu.ncu.softwareengineering.dodoio.Collide.Collider;
+import tw.edu.ncu.softwareengineering.dodoio.Collide.ICollider;
 
 public abstract class CollideObject {
 	protected Position position;
@@ -12,7 +12,7 @@ public abstract class CollideObject {
 	public final int collideDamage = 30;
 	protected boolean isInvincible;
 	protected int healthPoint;
-	protected Collider collider;
+	protected ICollider collider;
 	protected Date date;
 	private boolean isDead;
 	
@@ -72,14 +72,12 @@ public abstract class CollideObject {
 		return position;
 	}
 	
-	public Collider getCollider() {
+	public ICollider getCollider() {
 		return collider;
 	}
 	
-	public void move(Position nextPosition){
-		position = nextPosition;
-		collider.update(nextPosition);
-	}
+	public abstract void move(Position nextPosition);
+
 	/**To get "if the object is dead?"
 	 * 
 	 * @return

@@ -18,10 +18,19 @@ public class Slash extends AttackObject{
 	 */
 	protected Slash(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
 		super(setID, setPosition, cOManager, className, setPlayer);
+		player = setPlayer;
 		collider = new RectangleCollider(setPosition, width, height);
-		
-		move(Position.projection(player.getRadius(), setPosition));
+		isInvincible = true;
+		Position.projection(player.getRadius(), setPosition);
+		move(position);
 	}
+	
+	@Override
+	public void move(Position nextPosition) 
+	{
+		position = nextPosition;
+		collider.update(nextPosition);
+	};
 	
 	/**
 	 * update it slash time, let it dead when run out of slashTime 
@@ -41,5 +50,5 @@ public class Slash extends AttackObject{
 			updateTime -= 1000/FPS;
 		}
 	}
-
+	
 }

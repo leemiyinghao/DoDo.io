@@ -75,6 +75,13 @@ public abstract class Character extends CollideObject {
 	 * count attack CD
 	 */
 	@Override
+	public void move(Position nextPosition) 
+	{
+		position = nextPosition;
+		collider.update(nextPosition);
+	};
+	
+	@Override
 	public void update() {
 		long newTime = date.getTime();
 		long updateTime = newTime - oldTime;

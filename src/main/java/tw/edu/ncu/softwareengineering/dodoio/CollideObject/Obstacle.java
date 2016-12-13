@@ -26,6 +26,12 @@ public class Obstacle extends NonPlayer {
 		this.beHarmed((int)attacker.damagePoint);
 	}
 
+	@Override
+	public void move(Position nextPosition) 
+	{
+		position = nextPosition;
+		collider.update(nextPosition);
+	};
 
 	@Override
 	public void update() {

@@ -22,4 +22,11 @@ public abstract class Mob extends NonPlayer {
 		}
 	}
 	
+	@Override
+	public void move(Position nextPosition) 
+	{
+		position = nextPosition;
+		collider.update(nextPosition);
+	};
+	
 }

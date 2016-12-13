@@ -3,19 +3,28 @@ package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 import tw.edu.ncu.softwareengineering.dodoio.Collide.CircleCollider;
 
 public class MagicBall extends AttackObject{
-	int radius = 12;
+	int radius;
 	int range;
-	private double traversal = 0;
+	double traversal;
+	double ballSpeed;
 	int FPS = 20;//隨便設定的
 
 	protected MagicBall(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
 		super(setID, setPosition, cOManager, className, setPlayer);
 		collider = new CircleCollider(position, radius);
-		range = (int) (player.getSpeed()*3);// maybe the range is for the arrow fly for 5 seconds
-		player = setPlayer;
+		ballSpeed = player.getSpeed()*3;
+		radius = 12;
+		traversal = 0;
+		range = (int) (player.getRadius()*2*12);// maybe the range is for the arrow fly for 5 seconds
 		damage = (int) player.damagePoint;
 	}
 
+	@Override
+	public void move(Position nextPosition) 
+	{
+		position = nextPosition;
+		collider.update(nextPosition);
+	};
 
 	@Override
 	public void update() {
@@ -29,11 +38,11 @@ public class MagicBall extends AttackObject{
 	 * @param updateTime the time past between the time of last update and the time of the update now
 	 */
 	void fly(long updateTime) {
-		while(updateTime >= 0) {
+		while(updateTime > 0) {
 			if(traversal <= range && !isDead()) {
-				double arrowSpeed = player.speed*4;
-				traversal+=arrowSpeed;
-				move(Position.projection(arrowSpeed, position));
+				traversal+=ballSpeed/FPS;
+				Position.projection(ballSpeed, position);
+				move(position);
 			}
 			else{
 				dead();

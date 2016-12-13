@@ -16,7 +16,6 @@ public class CollideObjectManager{
 	Character player;
 	int recentIndex;
 	Game game;
-	boolean playerAttackActive = true, playerSkillActive = true;// initial at constructor if needed
 	public ArrayList<CollideObject> collideObjectList;
 	public BufferedImage[] collideObjectImages;
 	
@@ -27,7 +26,7 @@ public class CollideObjectManager{
 	 */
 	public CollideObjectManager(Game game) throws IOException {
 		this.game = game;
-		loadImages();
+		initializeManager();
 		//code: update to server
 	}
 	
@@ -36,6 +35,11 @@ public class CollideObjectManager{
 	 * @throws IOException 
 	 */
 	public CollideObjectManager() throws IOException {
+		initializeManager();
+	}
+	
+	private void initializeManager() throws IOException {
+		collideObjectList = new ArrayList<CollideObject>(0);
 		loadImages();
 	}
 	
