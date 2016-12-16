@@ -19,7 +19,6 @@ public abstract class CollideObject {
 	/**set data of the object
 	 * 
 	 * @param inputID
-	 * @param image
 	 * @param setPosition
 	 */
 	protected CollideObject(int inputID, Position setPosition, CollideObjectManager cOManager, int setClassName) {
@@ -73,8 +72,8 @@ public abstract class CollideObject {
 	}
 	
 	public BufferedImage getImage(CollideObjectManager manager) {
-		BufferedImage appearanec = manager.collideObjectImages[className];
-		return appearanec;
+		BufferedImage appearanece = manager.collideObjectImages[className];
+		return appearanece;
 	}
 	
 	public Collider getCollider() {

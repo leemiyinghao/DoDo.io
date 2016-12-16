@@ -269,6 +269,27 @@ public class CollideObjectManager{
 		return player;
 	}
 	
+	public void mainPlayerAttack() throws Exception {
+		if(player == null)
+			throw new Exception("Player have not set.");
+		else if(game == null)
+			throw new Exception("Game have not initialize");
+		else {
+			player.attack(game.getClient());
+		}
+	}
+	
+
+	public void mainPlayerSkill() throws Exception {
+		if(player == null)
+			throw new Exception("Player have not set.");
+		else if(game == null)
+			throw new Exception("Game have not initialize");
+		else {
+			player.skill(game.getClient());
+		}
+	}
+	
 	/**
 	 * update all the collide object in the list for convenience
 	 */

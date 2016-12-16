@@ -90,6 +90,7 @@ public abstract class Character extends CollideObject {
 		countAttackCD(updateTime);
 		countSkillCD(updateTime);
 		oldTime = newTime;
+		// client.update()
 	}
 	
 	void recover(long updateTime) {
@@ -220,12 +221,11 @@ public abstract class Character extends CollideObject {
 	 * @param setID
 	 * @return
 	 */
-	public void attack(Client client) {
+	void attack(Client client) {
 		if(attackActive) {
 			attackActive = false;
 			attackCountDown = attackCD;
 			// tell server you do attack
-			client.update(?????);
 		}
 	}
 	
@@ -234,12 +234,11 @@ public abstract class Character extends CollideObject {
 	 * @param setID
 	 * @return
 	 */
-	public void skill(Client client) {
+	void skill(Client client) {
 		if(skillActive) {
 			skillActive = false;
 			skillCountDown = skillCD;
 			// tell server you do skill
-			client.update(?????);
 		}
 	}
 	
