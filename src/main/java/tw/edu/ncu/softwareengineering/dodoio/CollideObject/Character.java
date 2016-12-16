@@ -79,6 +79,7 @@ public abstract class Character extends CollideObject {
 	{
 		position = nextPosition;
 		collider.update(nextPosition);
+		client.update();
 	};
 	
 	@Override
@@ -145,13 +146,12 @@ public abstract class Character extends CollideObject {
 		}
 	}
 	
-	/**call when get exp
+	/**call when get exp(server call only)
 	 * @param addExp
 	 */
 	public void addExp(int addExp) {
 		exp+=addExp;
 		levelUp();
-		
 	}
 	
 	/**call this when get exp
@@ -167,10 +167,9 @@ public abstract class Character extends CollideObject {
 			abilityPoint++;
 			
 		}
-		// update to client
 	}
 	
-	/**for death match game
+	/**for death match game(server call only)
 	 * call when player get score
 	 * 
 	 * @param addScore
@@ -189,6 +188,7 @@ public abstract class Character extends CollideObject {
 			throw new Exception("Exception: Run out of abilityPoint.");
 		healthPoint+=10;
 		abilityPoint--;
+		client.update();
 	}
 	
 
@@ -201,6 +201,7 @@ public abstract class Character extends CollideObject {
 			throw new Exception("Exception: Run out of abilityPoint.");
 		damagePoint+=10;
 		abilityPoint--;
+		client.update();
 	}
 
 
@@ -213,6 +214,7 @@ public abstract class Character extends CollideObject {
 			throw new Exception("Exception: Run out of abilityPoint.");
 		skillCD = skillCD*0.99;
 		abilityPoint--;
+		client.update();
 	}
 	
 	/**
@@ -242,6 +244,7 @@ public abstract class Character extends CollideObject {
 	}
 	
 	/**Only player do "attack" by using attack or skill, others do "collide"
+	 * (server call only)
 	 * 
 	 * @param attacker
 	 */
