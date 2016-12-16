@@ -7,7 +7,7 @@ import tw.edu.ncu.softwareengineering.dodoio.Collide.Collider;
 
 public abstract class CollideObject {
 	protected Position position;
-	public BufferedImage  appearance;
+	public final int className;
 	public final int ID;
 	public final int collideDamage = 30;
 	protected boolean isInvincible;
@@ -22,10 +22,10 @@ public abstract class CollideObject {
 	 * @param image
 	 * @param setPosition
 	 */
-	protected CollideObject(int inputID, Position setPosition, CollideObjectManager cOManager, int className) {
+	protected CollideObject(int inputID, Position setPosition, CollideObjectManager cOManager, int setClassName) {
 		date = new Date();
 		ID = inputID;
-		appearance = cOManager.collideObjectImages[className];
+		className = setClassName;
 		position = setPosition;
 		healthPoint = 1000;
 		isInvincible = false;
@@ -70,6 +70,11 @@ public abstract class CollideObject {
 	
 	public Position getPosition(){
 		return position;
+	}
+	
+	public BufferedImage getImage(CollideObjectManager manager) {
+		BufferedImage appearanec = manager.collideObjectImages[className];
+		return appearanec;
 	}
 	
 	public Collider getCollider() {

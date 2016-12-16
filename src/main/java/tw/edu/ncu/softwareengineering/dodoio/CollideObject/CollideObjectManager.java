@@ -227,10 +227,10 @@ public class CollideObjectManager{
 	 * @param position
 	 * @throws Exception 
 	 */
-	public void setMainPlayer(Character setPlayer) throws Exception{
+	public void setMainPlayer(CollideObject setPlayer) throws Exception{
 		if(player != null)
 			throw new Exception("Main player already exist.");
-		player = setPlayer;
+		player = (Character) setPlayer;
 	}
 	
 	/**return the collideObject queried by ID from collideObjectList
