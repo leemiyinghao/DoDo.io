@@ -1,6 +1,7 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import tw.edu.ncu.softwareengineering.dodoio.Collide.CircleCollider;
+import tw.edu.ncu.softwareengineering.dodoio.Internet.Client;
 
 public abstract class Character extends CollideObject {
 	public final String name;
@@ -219,11 +220,12 @@ public abstract class Character extends CollideObject {
 	 * @param setID
 	 * @return
 	 */
-	public void attack() {
+	public void attack(Client client) {
 		if(attackActive) {
 			attackActive = false;
 			attackCountDown = attackCD;
 			// tell server you do attack
+			client.update(?????);
 		}
 	}
 	
@@ -232,11 +234,12 @@ public abstract class Character extends CollideObject {
 	 * @param setID
 	 * @return
 	 */
-	public void skill() {
+	public void skill(Client client) {
 		if(skillActive) {
 			skillActive = false;
 			skillCountDown = skillCD;
 			// tell server you do skill
+			client.update(?????);
 		}
 	}
 	
