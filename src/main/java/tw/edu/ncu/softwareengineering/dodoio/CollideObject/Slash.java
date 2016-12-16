@@ -17,7 +17,8 @@ public class Slash extends AttackObject{
 	 * @param setPlayer
 	 */
 	protected Slash(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
-		super(setID, setPosition, cOManager, className, setPlayer);
+		super(setID, cOManager, className, setPlayer);
+		this.position = player.getPosition();
 		player = setPlayer;
 		collider = new RectangleCollider(setPosition, width, height);
 		isInvincible = true;
