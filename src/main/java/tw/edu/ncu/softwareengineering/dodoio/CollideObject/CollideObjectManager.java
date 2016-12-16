@@ -230,7 +230,10 @@ public class CollideObjectManager{
 	public void setMainPlayer(CollideObject setPlayer) throws Exception{
 		if(player != null)
 			throw new Exception("Main player already exist.");
+		if(game == null)
+			throw new Exception("game have not set.");
 		player = (Character) setPlayer;
+		player.setClient(game);
 	}
 	
 	/**return the collideObject queried by ID from collideObjectList
@@ -267,27 +270,6 @@ public class CollideObjectManager{
 			throw new Exception("There is no main player!");
 		
 		return player;
-	}
-	
-	public void mainPlayerAttack() throws Exception {
-		if(player == null)
-			throw new Exception("Player have not set.");
-		else if(game == null)
-			throw new Exception("Game have not initialize");
-		else {
-			player.attack(game.getClient());
-		}
-	}
-	
-
-	public void mainPlayerSkill() throws Exception {
-		if(player == null)
-			throw new Exception("Player have not set.");
-		else if(game == null)
-			throw new Exception("Game have not initialize");
-		else {
-			player.skill(game.getClient());
-		}
 	}
 	
 	/**

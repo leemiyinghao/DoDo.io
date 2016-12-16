@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.util.Date;
 
 import tw.edu.ncu.softwareengineering.dodoio.Collide.Collider;
+import tw.edu.ncu.softwareengineering.dodoio.Game.Game;
+import tw.edu.ncu.softwareengineering.dodoio.Internet.Client;
 
 public abstract class CollideObject {
 	protected Position position;
@@ -14,6 +16,7 @@ public abstract class CollideObject {
 	protected int healthPoint;
 	protected Collider collider;
 	protected Date date;
+	protected Client client;
 	private boolean isDead;
 	
 	/**set data of the object
@@ -22,13 +25,13 @@ public abstract class CollideObject {
 	 * @param setPosition
 	 */
 	protected CollideObject(int inputID, Position setPosition, CollideObjectManager cOManager, int setClassName) {
-		date = new Date();
 		ID = inputID;
-		className = setClassName;
 		position = setPosition;
+		className = setClassName;
 		healthPoint = 1000;
 		isInvincible = false;
 		isDead = false;
+		date = new Date();
 	}
 	
 	/**Method to complete
@@ -37,10 +40,15 @@ public abstract class CollideObject {
 	 */
 	public void onCollide(CollideObject whichObjectCollideThis){
 		this.beHarmed(collideDamage);
+		client.update();
 	}
 	
 	public boolean isInvincible() {
 		return isInvincible;
+	}
+	
+	void setClient(Game game) {
+		client = game.getClient();
 	}
 	
 	abstract public void update();

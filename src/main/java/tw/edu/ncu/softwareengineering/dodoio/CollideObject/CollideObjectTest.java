@@ -8,8 +8,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tw.edu.ncu.softwareengineering.dodoio.Collide.CircleCollider;
-
 public class CollideObjectTest {
 	CollideObjectManager manager;
 	Archer playerTest;
