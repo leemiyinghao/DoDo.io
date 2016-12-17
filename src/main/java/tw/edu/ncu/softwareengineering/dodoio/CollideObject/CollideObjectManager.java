@@ -211,6 +211,14 @@ public class CollideObjectManager{
 		toAddObject = null;
 	}
 	
+	/**
+	 * set some one as a king in kingKill mode
+	 * @param king
+	 */
+	public void setKing(Character king) {
+		king.addExp(king.expAccumulationTable[king.expAccumulationTable.length-1]);
+	}
+	
 	/**set your player
 	 * 
 	 * Exception : Main player already exist.
