@@ -146,10 +146,10 @@ public abstract class Character extends CollideObject {
 		}
 	}
 	
-	/**call when get exp(server call only)
+	/**call when get exp(CDC)
 	 * @param addExp
 	 */
-	public void addExp(int addExp) {
+	void addExp(int addExp) {
 		exp+=addExp;
 		levelUp();
 	}
