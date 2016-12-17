@@ -4,7 +4,7 @@ import tw.edu.ncu.softwareengineering.dodoio.Collide.RectangleCollider;
 
 public class SlashBig extends Slash{
 
-	protected SlashBig(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
+	public SlashBig(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
 		super(setID, setPosition, cOManager, className, setPlayer);
 		damage = damage*3;
 		width = 52;

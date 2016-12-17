@@ -16,7 +16,7 @@ public class Slash extends AttackObject{
 	 * @param setPosition
 	 * @param setPlayer
 	 */
-	protected Slash(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
+	public Slash(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
 		super(setID, cOManager, className, setPlayer);
 		this.position = player.getPosition();
 		player = setPlayer;

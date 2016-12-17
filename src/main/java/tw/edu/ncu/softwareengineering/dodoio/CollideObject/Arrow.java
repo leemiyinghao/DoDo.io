@@ -10,7 +10,7 @@ public class Arrow extends AttackObject{
 	int width = 4;
 	int FPS = 20;// set for no error. this is not real
 	
-	Arrow(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
+	public Arrow(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
 		super(setID, cOManager, className, setPlayer);
 		this.position = player.getPosition();
 		damage = (int) player.damagePoint;

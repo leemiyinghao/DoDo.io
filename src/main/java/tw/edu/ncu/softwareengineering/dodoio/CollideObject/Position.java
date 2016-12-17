@@ -34,8 +34,6 @@ public class Position {
 			angle = 0;
 	}
 	
-	//add a angle parse(? method!
-	
 	public double getDirection() {
 		return angle;
 	}

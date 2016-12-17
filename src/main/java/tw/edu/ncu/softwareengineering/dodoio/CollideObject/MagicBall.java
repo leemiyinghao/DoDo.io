@@ -9,7 +9,7 @@ public class MagicBall extends AttackObject{
 	double ballSpeed;
 	int FPS = 20;//隨便設定的
 
-	protected MagicBall(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
+	public MagicBall(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
 		super(setID, cOManager, className, setPlayer);
 		this.position = player.getPosition();
 		collider = new CircleCollider(position, radius);
