@@ -27,6 +27,7 @@ public class CollideObjectManager{
 	public CollideObjectManager(Game game) throws IOException {
 		this.game = game;
 		initializeManager();
+		loadImages();
 		//code: update to server
 	}
 	
@@ -40,7 +41,6 @@ public class CollideObjectManager{
 	
 	private void initializeManager() throws IOException {
 		collideObjectList = new ArrayList<CollideObject>(0);
-		loadImages();
 	}
 	
 	private void loadImages() throws IOException {
@@ -195,17 +195,13 @@ public class CollideObjectManager{
 	 * @param setPosition
 	 * @throws Exception No such kind of collideObject. / client try to add collide object.
 	 */
-	public void addNotFertilizerMob(collideObjecctClass className, int inputID, 
+	public void addWanderer(collideObjecctClass className, int inputID, 
 			Position setPosition) throws Exception {
 		if(game != null)
 			throw new Exception("client try to add collide object");
 		
 		CollideObject toAddObject;
-		if(className == collideObjecctClass.Chaser) {
-			toAddObject = new Chaser(inputID, setPosition, this, className.ordinal());
-			collideObjectList.add(toAddObject);
-		}
-		else if(className == collideObjecctClass.Wanderer) {
+		if(className == collideObjecctClass.Wanderer) {
 			toAddObject = new Wanderer(inputID, setPosition, this, className.ordinal());
 			collideObjectList.add(toAddObject);
 		}

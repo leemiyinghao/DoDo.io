@@ -44,7 +44,7 @@ public class CollideObjectTest {
 
 	@Test
 	public void onCollideTest() {
-		playerTest.onCollide(null);
+		playerTest.onCollide();
 		assertEquals("after collide it should be harm", 200 - playerTest.collideDamage, playerTest.getHP());
 	}
 
@@ -52,7 +52,7 @@ public class CollideObjectTest {
 	public void invincibleTest() {
 		playerTest.isInvincible = true;
 		assertEquals("now it is invictcible", true, playerTest.isInvincible());
-		playerTest.onCollide(null);
+		playerTest.onCollide();
 		assertEquals("after collide it can't be harm", 200, playerTest.getHP());
 		playerTest.beAttacked(attackerTest);
 		assertEquals("after attacked it can't be harm", 200, playerTest.getHP());

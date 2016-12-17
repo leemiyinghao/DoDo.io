@@ -6,7 +6,7 @@ public class Obstacle extends NonPlayer {
 	public final int width;
 	public final int height;
 
-	protected Obstacle(int setID, Position setPosition, CollideObjectManager cOManager,
+	public Obstacle(int setID, Position setPosition, CollideObjectManager cOManager,
 			int className, int setWidth, int setHeight, boolean destroyable) {
 		super(setID, setPosition, cOManager, className);
 		width = setWidth;

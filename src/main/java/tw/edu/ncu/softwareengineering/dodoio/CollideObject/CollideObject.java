@@ -11,7 +11,7 @@ public abstract class CollideObject {
 	protected Position position;
 	public final int className;
 	public final int ID;
-	public final int collideDamage = 30;
+	public final int collideDamage;
 	protected boolean isInvincible;
 	protected int healthPoint;
 	protected Collider collider;
@@ -28,6 +28,7 @@ public abstract class CollideObject {
 		ID = inputID;
 		position = setPosition;
 		className = setClassName;
+		collideDamage = 30;
 		healthPoint = 1000;
 		isInvincible = false;
 		isDead = false;
@@ -38,13 +39,8 @@ public abstract class CollideObject {
 	 * 
 	 * @param whichObjectCollideThis
 	 */
-	public void onCollide(CollideObject whichObjectCollideThis){
+	public void onCollide(){
 		this.beHarmed(collideDamage);
-		client.update();
-	}
-	
-	public boolean isInvincible() {
-		return isInvincible;
 	}
 	
 	void setClient(Game game) {
@@ -69,6 +65,10 @@ public abstract class CollideObject {
 	
 	protected void dead() {
 		isDead = true;
+	}
+	
+	public boolean isInvincible() {
+		return isInvincible;
 	}
 	
 	public int getHP(){

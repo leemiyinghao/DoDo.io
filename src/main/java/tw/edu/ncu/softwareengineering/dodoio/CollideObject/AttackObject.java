@@ -10,7 +10,6 @@ public abstract class AttackObject extends NonPlayer{
 		player = setPlayer;
 		oldTime = date.getTime();
 	}
-	public abstract void update();
 	
 	public int getDamage() {
 		return damage;
