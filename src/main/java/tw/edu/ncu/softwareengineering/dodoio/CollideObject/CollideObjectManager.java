@@ -35,11 +35,11 @@ public class CollideObjectManager{
 	 * this is for CDC
 	 * @throws IOException 
 	 */
-	public CollideObjectManager() throws IOException {
+	public CollideObjectManager() {
 		initializeManager();
 	}
 	
-	private void initializeManager() throws IOException {
+	private void initializeManager() {
 		collideObjectList = new ArrayList<CollideObject>(0);
 	}
 	
