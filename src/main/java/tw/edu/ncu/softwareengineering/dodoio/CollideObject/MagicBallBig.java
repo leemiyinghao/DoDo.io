@@ -6,6 +6,6 @@ public class MagicBallBig extends MagicBall{
 		super(setID, setPosition, cOManager, className, setPlayer);
 		radius = (int) (radius*1.2);
 		damage = (int) (damage*2.5);
+		priority =4;
 	}
-
 }

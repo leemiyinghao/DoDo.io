@@ -25,6 +25,7 @@ public class Slash extends AttackObject {
         Position.projection(player.getRadius(), setPosition);
         move(position);
         damage = (int) player.damagePoint;
+        priority =2;
     }
 
     @Override
@@ -51,13 +52,5 @@ public class Slash extends AttackObject {
             }
             updateTime -= 1000 / FPS;
         }
-    }
-
-    @Override
-    public void onCollide(CollideObject whichObjectCollideThis) {
-        if (whichObjectCollideThis.isDead())
-            return;
-        if (!(whichObjectCollideThis instanceof MagicBall || whichObjectCollideThis instanceof Arrow))
-            this.dead();
     }
 }

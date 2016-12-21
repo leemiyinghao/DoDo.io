@@ -18,6 +18,7 @@ public class Arrow extends AttackObject {
         traversal = 0;
         arrowSpeed = player.getSpeed() * 4;
         collider = new RectangleCollider(setPosition, width, height);
+        priority =0;
     }
 
     @Override
@@ -53,12 +54,5 @@ public class Arrow extends AttackObject {
             }
             updateTime -= 1000 / FPS;
         }
-    }
-
-    @Override
-    public void onCollide(CollideObject whichObjectCollideThis) {
-        if (whichObjectCollideThis.isDead())
-            return;
-        this.dead();
     }
 }
