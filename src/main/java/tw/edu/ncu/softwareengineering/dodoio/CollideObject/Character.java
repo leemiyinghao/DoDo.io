@@ -228,6 +228,8 @@ public abstract class Character extends CollideObject {
 			attackCountDown = attackCD;
 			// tell server you do attack
 		}
+		else
+			return;
 	}
 	
 	/**
@@ -241,6 +243,8 @@ public abstract class Character extends CollideObject {
 			skillCountDown = skillCD;
 			// tell server you do skill
 		}
+		else
+			return;
 	}
 	
 	/**Only player do "attack" by using attack or skill, others do "collide"
