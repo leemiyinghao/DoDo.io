@@ -57,6 +57,8 @@ public class MagicBall extends AttackObject {
 
     @Override
     public void onCollide(CollideObject whichObjectCollideThis) {
+        if(whichObjectCollideThis.isDead())
+            return;
         if (!(whichObjectCollideThis instanceof Arrow))
             this.dead();
     }

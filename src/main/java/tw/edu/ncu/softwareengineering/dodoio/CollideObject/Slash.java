@@ -55,6 +55,8 @@ public class Slash extends AttackObject {
 
     @Override
     public void onCollide(CollideObject whichObjectCollideThis) {
+        if (whichObjectCollideThis.isDead())
+            return;
         if (!(whichObjectCollideThis instanceof MagicBall || whichObjectCollideThis instanceof Arrow))
             this.dead();
     }

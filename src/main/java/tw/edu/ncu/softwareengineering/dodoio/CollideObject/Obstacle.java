@@ -45,6 +45,8 @@ public class Obstacle extends NonPlayer {
 
     @Override
     public void onCollide(CollideObject whichObjectCollideThis) {
+        if(whichObjectCollideThis.isDead())
+            return;
         if (whichObjectCollideThis instanceof Obstacle)
             return;
         this.beAttacked(whichObjectCollideThis);

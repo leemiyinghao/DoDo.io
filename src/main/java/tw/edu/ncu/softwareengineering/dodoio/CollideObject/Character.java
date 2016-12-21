@@ -322,6 +322,8 @@ public abstract class Character extends CollideObject {
 
     @Override
     public void onCollide(CollideObject whichObjectCollideThis) {
+        if(whichObjectCollideThis.isDead())
+            return;
         if (whichObjectCollideThis instanceof AttackObject) {
             if (!(((AttackObject) whichObjectCollideThis).player.team == this.team))
                 this.beAttacked(whichObjectCollideThis);

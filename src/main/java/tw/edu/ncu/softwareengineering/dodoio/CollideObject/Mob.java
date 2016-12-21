@@ -41,6 +41,8 @@ public abstract class Mob extends NonPlayer {
 
     @Override
     public void onCollide(CollideObject whichObjectCollideThis) {
+        if(whichObjectCollideThis.isDead())
+            return;
         this.beAttacked(whichObjectCollideThis);
         //the unit vector of whichObject to this object
         Vector v = new Vector(this.position.getX() - whichObjectCollideThis.position.getX(), this.position.getY() - whichObjectCollideThis.position.getY()).normalized();

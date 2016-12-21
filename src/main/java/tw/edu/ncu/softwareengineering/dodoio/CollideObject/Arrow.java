@@ -57,6 +57,8 @@ public class Arrow extends AttackObject {
 
     @Override
     public void onCollide(CollideObject whichObjectCollideThis) {
+        if (whichObjectCollideThis.isDead())
+            return;
         this.dead();
     }
 }
