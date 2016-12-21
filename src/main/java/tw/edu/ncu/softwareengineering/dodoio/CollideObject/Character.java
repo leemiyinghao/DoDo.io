@@ -1,8 +1,10 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import tw.edu.ncu.softwareengineering.dodoio.Collide.CircleCollider;
+import tw.edu.ncu.softwareengineering.dodoio.Collide.Vector;
 
 public abstract class Character extends CollideObject {
+
 	public final String name;
 	public final int team;
 	public final int levelMax = 30;
@@ -247,17 +249,26 @@ public abstract class Character extends CollideObject {
 			return;
 	}
 	
-	/**Only player do "attack" by using attack or skill, others do "collide"
-	 * (server call only)
-	 * 
-	 * @param attacker
-	 */
-	public void beAttacked(Character attacker){
-		this.beHarmed((int)attacker.damagePoint);
-		if(this.isDead()) {
-			attacker.addDMScore(this.level);
-		}
-	}
+	/**
+     * Only player do "attack" by using attack or skill, others do "collide"
+     * (server call only)
+     *
+     * @param attacker
+     */
+    public void beAttacked(CollideObject attacker) {
+        if (attacker instanceof AttackObject) {
+            this.beHarmed(((AttackObject) attacker).damage);
+            if (this.isDead()) {
+                ((AttackObject) attacker).player.addDMScore(this.level);
+            }
+        } else if (attacker instanceof Character) {
+            this.beHarmed(attacker.collideDamage);
+            if (this.isDead()) {
+                ((Character) attacker).addDMScore(this.level);
+            }
+        } else
+            this.beHarmed(attacker.collideDamage);
+    }
 	
 	/**for death match
 	 * 
@@ -291,6 +302,29 @@ public abstract class Character extends CollideObject {
 		return level;
 	}
 	
+	@Override
+    public void onCollide(CollideObject whichObjectCollideThis) {
+        if(whichObjectCollideThis.isDead())
+            return;
+        if (whichObjectCollideThis instanceof AttackObject) {
+            if (!(((AttackObject) whichObjectCollideThis).player.team == this.team))
+                this.beAttacked(whichObjectCollideThis);
+        } else if (whichObjectCollideThis instanceof Character) {
+            if (!(((Character) whichObjectCollideThis).team == this.team))
+                this.beAttacked(whichObjectCollideThis);
+            //the unit vector of whichObject to this object
+            Vector v = new Vector(this.position.getX() - whichObjectCollideThis.position.getX(), this.position.getY() - whichObjectCollideThis.position.getY()).normalized();
+            //the relative speed;
+            double speed = ((Character) whichObjectCollideThis).speed - this.speed;
+            if (speed >= 0)
+                this.move(new Position((int) (5 * v.getX()), (int) (5 * v.getY()), this.position.getDirection()));
+        } else {
+            this.beAttacked(whichObjectCollideThis);
+            Vector v = new Vector(this.position.getX() - whichObjectCollideThis.position.getX(), this.position.getY() - whichObjectCollideThis.position.getY()).normalized();
+            this.move(new Position((int) (5 * v.getX()), (int) (5 * v.getY()), this.position.getDirection()));
+        }
+    }
+	
 	public static enum ChracterClass {
 		Archer,
 		Magician,
@@ -302,4 +336,5 @@ public abstract class Character extends CollideObject {
 		teamBlue,
 		teamRed
 	}
+
 }
