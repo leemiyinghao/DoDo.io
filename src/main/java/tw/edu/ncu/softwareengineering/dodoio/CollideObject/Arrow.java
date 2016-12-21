@@ -19,6 +19,8 @@ public class Arrow extends AttackObject {
         arrowSpeed = player.getSpeed() * 4;
         collider = new RectangleCollider(setPosition, width, height);
         priority =0;
+        Position.projection(player.getRadius(), setPosition);
+        move(setPosition);
     }
 
     @Override

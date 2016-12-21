@@ -19,6 +19,8 @@ public class MagicBall extends AttackObject {
         range = (int) (player.getRadius() * 2 * 12);// maybe the range is for the arrow fly for 5 seconds
         damage = (int) player.damagePoint;
         priority =1;
+        Position.projection(player.getRadius(), position);
+        move(position);
     }
 
     @Override
