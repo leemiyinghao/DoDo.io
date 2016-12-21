@@ -18,6 +18,7 @@ public class MagicBall extends AttackObject {
         traversal = 0;
         range = (int) (player.getRadius() * 2 * 12);// maybe the range is for the arrow fly for 5 seconds
         damage = (int) player.damagePoint;
+        priority =1;
     }
 
     @Override
@@ -53,13 +54,5 @@ public class MagicBall extends AttackObject {
             }
             updateTime -= 1000 / FPS;
         }
-    }
-
-    @Override
-    public void onCollide(CollideObject whichObjectCollideThis) {
-        if(whichObjectCollideThis.isDead())
-            return;
-        if (!(whichObjectCollideThis instanceof Arrow))
-            this.dead();
     }
 }
