@@ -20,6 +20,7 @@ public class Wanderer extends Mob{
 	/**
 	 * call update to change the direction and move
 	 */
+	@Override
 	public void update() {
 		long newTime = date.getTime();
 		long updateTime = newTime - oldTime;
@@ -34,7 +35,8 @@ public class Wanderer extends Mob{
 	void wander(long updateTime){
 		position.setDirection(direction);
 		while(updateTime >= 0) {
-			move(Position.projection(speed/FPS, position));
+			Position.projection(speed/FPS, position);
+			move(position);
 			updateTime-=1000/FPS;
 		}
 	}

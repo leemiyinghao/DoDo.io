@@ -1,12 +1,10 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
-import java.awt.Image;
-
 
 public class Archer extends Character {
 	
 	
-	public Archer(int setID, String setName, String setTeam, Position setPosition,
+	public Archer(int setID, String setName, TeamName setTeam, Position setPosition,
 			CollideObjectManager cOManager, int className) {
 		super(setID, setName, setTeam, setPosition, cOManager, className);
 		attackCD = attackCD*0.8;

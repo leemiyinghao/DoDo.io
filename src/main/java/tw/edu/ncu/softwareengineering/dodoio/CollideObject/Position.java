@@ -16,7 +16,7 @@ public class Position {
 	}
 	
 	public void setPositionXY(int setX, int setY) {
-		if(setY >= 0)
+		if(setX >= 0)
 			x = setX;
 		else
 			x = 0;
@@ -33,8 +33,6 @@ public class Position {
 		else
 			angle = 0;
 	}
-	
-	//add a angle parse(? method!
 	
 	public double getDirection() {
 		return angle;
@@ -56,11 +54,10 @@ public class Position {
 	 * @param position from which point, in what direction
 	 */
 
-	static Position projection(double setDistance, Position position){
-		int x = (int) ((Math.cos(position.getDirection()*(2*Math.PI)))*setDistance);
-		int y = (int) ((Math.sin(position.getDirection()*(2*Math.PI)))*setDistance);
-		position.setPositionXY(position.getX()+x, position.getY()+y);
-		return position;
+	static void projection(double setDistance, Position position){
+		double x = (Math.cos(position.getDirection()*(2*Math.PI)))*setDistance;
+		double y = (Math.sin(position.getDirection()*(2*Math.PI)))*setDistance;
+		position.setPositionXY((int)(position.getX()+x), (int)(position.getY()+y));
 	}
 	
 }
