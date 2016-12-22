@@ -6,38 +6,35 @@ public class Position {
 	private double angle;
 	
 	public Position(int initialX, int initialY, double initialAngle) {
-		if(x >= 0)
-			x = initialX;
-		else
-			x = 0;
-		
-		if(y >= 0)
-			y = initialY;
-		else
-			y = 0;
-
-		if(angle >= 0 && angle < 1)
-			angle = initialAngle;
-		else
-			angle = 0;
+		setPositionXY(initialX, initialY);
+		setDirection(initialAngle);
 	}
 	
 	public void setPosition(int setX, int setY, double setAngle) {
-		if(x >= 0)
+		setPositionXY(setX, setY);
+		setDirection(setAngle);
+	}
+	
+	public void setPositionXY(int setX, int setY) {
+		if(setY >= 0)
 			x = setX;
 		else
 			x = 0;
 		
-		if(y >= 0)
+		if(setY >= 0)
 			y = setY;
 		else
 			y = 0;
-
-		if(angle >= 0 && angle < 1)
+	}
+	
+	public void setDirection(double setAngle) {
+		if(setAngle >= 0 && setAngle < 1)
 			angle = setAngle;
 		else
 			angle = 0;
 	}
+	
+	//add a angle parse(? method!
 	
 	public double getDirection() {
 		return angle;
@@ -49,6 +46,21 @@ public class Position {
 
 	public int getY() {
 		return y;
+	}
+	
+
+	/**
+	 * input the distance, the object will know where do it move to(in straight line)
+	 * 
+	 * @param setDistance How far you want to move
+	 * @param position from which point, in what direction
+	 */
+
+	static Position projection(double setDistance, Position position){
+		int x = (int) ((Math.cos(position.getDirection()*(2*Math.PI)))*setDistance);
+		int y = (int) ((Math.sin(position.getDirection()*(2*Math.PI)))*setDistance);
+		position.setPositionXY(position.getX()+x, position.getY()+y);
+		return position;
 	}
 	
 }

@@ -2,15 +2,33 @@ package tw.edu.ncu.softwareengineering.dodoio.Internet;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Vector;
+import java.util.ArrayList;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Archer;
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager.collideObjecctClass;
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Magician;
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.SwordMan;
+
 
 public class Server
 {
 	ServerSocket serversocket;
-	static Vector outputvc;
-	int idcount;
+	ArrayList<ArrayList<InetAddress>> clientaddresslist;
+	ArrayList<ArrayList<Integer>> clientidlist;
+	boolean teamcount;
+	CDC cdc;
+	
+	public int test(int a , int b)
+	{
+		return a + b;
+	}
 
 	public void startserver()
 	{
@@ -24,8 +42,18 @@ public class Server
 		try
 		{
 			serversocket = new ServerSocket(55555);
-			outputvc = new Vector();
-			idcount = 0;
+			teamcount = true;
+			
+			// initial client address list , id list
+			clientaddresslist.add(new ArrayList<InetAddress>());
+			clientaddresslist.add(new ArrayList<InetAddress>());
+			clientidlist.add(new ArrayList<Integer>());
+			clientidlist.add(new ArrayList<Integer>());
+			
+			
+			// initial CDC
+			cdc = new CDC();
+			
 			
 			while(true)
 			{
@@ -33,12 +61,45 @@ public class Server
 				if(clientsocket.isConnected())
 				{
 					DataOutputStream wdata = new DataOutputStream(clientsocket.getOutputStream());
+					DataInputStream rdata = new DataInputStream(clientsocket.getInputStream());
 					
-					wdata.writeInt(idcount + 1);
-					wdata.flush();
+					Gson gson = new Gson();
+					JsonObject newplayrejson = gson.fromJson(rdata.readUTF(), JsonObject.class);
+
+					int mode = newplayrejson.get("mode").getAsInt();
 					
-					outputvc.add(wdata);
-					++idcount;
+					clientaddresslist.get(mode).add(clientsocket.getInetAddress());
+					
+					String profession = newplayrejson.get("profession").getAsString();
+					int newid = cdc.collideObjectManager[mode].collideObjectList.size();
+					String teamname;
+					if(mode == 0)
+						teamname = "deathMatch";
+					else
+					{
+						if(teamcount)
+							teamname = "teamBlue"; 
+						else
+							teamname = "teamRed";
+						teamcount = !teamcount;
+					}
+					
+					if(profession.equals(collideObjecctClass.SwordMan.toString()))
+					{
+						cdc.collideObjectManager[mode].collideObjectList.add(new SwordMan(newid, newplayrejson.get("name").getAsString(), teamname, null, null, 0));
+					}
+					else if(profession.equals(collideObjecctClass.Archer.toString()))
+					{
+						cdc.collideObjectManager[mode].collideObjectList.add(new Archer(newid, newplayrejson.get("name").getAsString(), teamname, null, null, 0));
+					}
+					else 
+					{
+						cdc.collideObjectManager[mode].collideObjectList.add(new Magician(newid, newplayrejson.get("name").getAsString(), teamname, null, null, 0));
+					}
+					
+					
+					
+					
 					
 					Thread thread = new Thread(new clientmanager(clientsocket));
 					thread.start();
@@ -50,6 +111,14 @@ public class Server
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+	}
+	
+	public void broacast_update(int mode)
+	{
+		UDPbroacast broacaster = new UDPbroacast(clientaddresslist.get(mode), clientidlist.get(mode));
+		
+		// process the broacast data
+		
 	}
 	
 		
@@ -83,10 +152,29 @@ public class Server
 			/*
 			 * Implement run() for multi-thread
 			 * while loop to read the data from client
-			 * and broacast to every other client
+			 * and update to CDC
+			 * handle the inputstream exception
 			 */
+			
+			Gson gson = new Gson();
+			JsonObject playerupdatejson;
+			
 			while(true)
 			{
+				try
+				{
+					String playerupdatestr = rdata.readUTF();
+					
+					
+					playerupdatejson = gson.fromJson(playerupdatestr, JsonObject.class);
+					
+					
+				} 
+				catch (Exception e)
+				{
+					// TODO: handle exception
+					e.printStackTrace();
+				}
 				
 			}
 		}
