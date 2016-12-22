@@ -9,5 +9,10 @@ public class Magician extends Character{
 		damagePoint+=100;
 		skillCD = 8;
 	}
-
+	
+	@Override
+	public void attack() {
+		super.attack();
+		
+	}
 }

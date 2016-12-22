@@ -36,8 +36,6 @@ public class Obstacle extends NonPlayer {
         collider.update(nextPosition);
     }
 
-    ;
-
     @Override
     public void update() {
 
