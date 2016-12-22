@@ -4,6 +4,8 @@ import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObject;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Position;
+import tw.edu.ncu.softwareengineering.dodoio.Game.DeathMatch;
+import tw.edu.ncu.softwareengineering.dodoio.Game.KingKill;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,9 +23,11 @@ public class Renderer extends JFrame{
     private float[] windowContainSize = {30f, 9f};
     private Image overlayBasic;
     private Image menuBasic;
+    private Control control;
 
     public Renderer(CollideObjectManager collideObjectManager, Map map){
         this.collideObjectManager = collideObjectManager;
+        this.control = new Control();
     }
     public void render(int timeOffsetInMs){
         switch(getStat()){
@@ -64,9 +68,20 @@ public class Renderer extends JFrame{
             printOnScreen(object.getPosition(), (Image)object.getImage(collideObjectManager));
         }
     }
-    private void drawResult(){
-
+    private void drawResult() {
+        Graphics g = this.getGraphics();
+        Position pos = getRealPositionByPercentage(0.2f, 0.35f);
+        Position size = getRealPositionByPercentage(0.6f, 0.3f);
+        try {
+            if (collideObjectManager.getMyPlayer().getHP() == 0) { //player die
+                g.drawChars("You die.".toCharArray(), 0, 0, size.getX(), size.getY());
+            }else if(control.game instanceof KingKill) { //kingkill mode
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
     public void setStat(GameStat gameStat){
         this.gameStat = gameStat;
     }
