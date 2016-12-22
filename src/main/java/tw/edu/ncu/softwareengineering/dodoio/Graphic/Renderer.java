@@ -18,21 +18,35 @@ public class Renderer extends JFrame{
     private Map map;
     private GameStat gameStat;
     private Character mainCharacter;
-    private float[] windowContainSize = {50f, 20f};
+    private float[] windowContainSize = {30f, 9f};
 
     public Renderer(CollideObjectManager collideObjectManager, Map map){
         this.collideObjectManager = collideObjectManager;
         this.map = map;
     }
     public void render(int timeOffsetInMs){
-        for(int i=0; i<collideObjectManager.collideObjectList.size();i++){
-            printOnScreen((Image) collideObjectManager.collideObjectList[i].getImage(), collideObjectManager.collideObjectList[i].getPosition());
+        switch(getStat()){
+            case MAINMENU:
+                drawGameTypeMenu();
+                break;
+            case INGAME:
+                drawInGameEntriesLayer();
+                drawInGameOverlay();
+                break;
         }
     }
-    public void controlUpdate(int timeOffsetInMs){
+    private void drawGameTypeMenu(){
 
     }
-    public void showMenu(){
+    private void drawInGameOverlay(){
+
+    }
+    private void drawInGameEntriesLayer(){
+        for (CollideObject object: collideObjectManager.collideObjectList) {
+            printOnScreen(object.getPosition(), (Image)object.getImage(collideObjectManager));
+        }
+    }
+    private void drawResult(){
 
     }
     public void setStat(GameStat gameStat){
