@@ -20,6 +20,7 @@ public class Renderer extends JFrame{
     private Character mainCharacter;
     private float[] windowContainSize = {30f, 9f};
     private Image overlayBasic;
+    private Image menuBasic;
 
     public Renderer(CollideObjectManager collideObjectManager, Map map){
         this.collideObjectManager = collideObjectManager;
@@ -39,7 +40,8 @@ public class Renderer extends JFrame{
         return new Position((int)(x*this.getWidth()),(int)(y*this.getHeight()), 0);
     }
     private void drawGameTypeMenu(){
-
+        Graphics g = this.getGraphics();
+        g.drawImage(this.menuBasic, 0, 0, this.getWidth(), this.getHeight(), Color.BLACK, this);
     }
     private void drawInGameOverlay(){
         Graphics g = this.getGraphics();
