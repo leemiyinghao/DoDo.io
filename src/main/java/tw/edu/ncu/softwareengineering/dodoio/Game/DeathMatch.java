@@ -1,31 +1,40 @@
 package tw.edu.ncu.softwareengineering.dodoio.Game;
 
+import java.util.ArrayList;
+
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObject;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character;
 import tw.edu.ncu.softwareengineering.dodoio.Internet.Client;
 
 public class DeathMatch extends Game{
-	void start(String playerName, CollideObjectManager.ChracterClass profession, int gameMode){
+	void start(String playerName, CollideObjectManager.ChracterClass chracterclass, int gameMode){
 		this.myObjManager = new CollideObjectManager(this);
-		Client client = new Client(this, playerName, profession, gameMode);
+		this.client = new Client(this, playerName, chracterclass, gameMode);
 	}
 	int update() {
 		int updateNeed = 0;
 		int myid = this.myObjManager.getMyPlayer();
-		Character me = (Character)this.myObjManager.collideObjectList.get(myid);
+		ArrayList<CollideObject> list = this.myObjManager.collideObjectList;
+		Character me = (Character)list.get(myid);
 		int activePlayerNum = 0;
-		//get player nowHP
-		//get active player number
+		//check if player is null or not
+		//get active player number for-loop
 		
 		//return 1 if the player GG!
 		//return 2 if the player win!
 		//return 0 for nothing happened (game continue)
-		/*if (me.getHP() <= 0.0)
+		if (me == null)
 			updateNeed = 1;
-		if (this.getPlayerList().existNum == 1 && me.getHP() > 0.0)
-			updateNeed = 2;*/
+		else {
+			for(CollideObject i: list) {
+				if(i instanceof Character) {
+					activePlayerNum++;
+				}
+			}
+			if (activePlayerNum == 1)
+				updateNeed = 2;
+		}
 		return updateNeed;
 	}
-	
-
 }
