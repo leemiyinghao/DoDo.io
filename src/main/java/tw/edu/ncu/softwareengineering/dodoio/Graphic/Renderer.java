@@ -4,12 +4,10 @@ import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObject;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Position;
-import tw.edu.ncu.softwareengineering.dodoio.Game.DeathMatch;
-import tw.edu.ncu.softwareengineering.dodoio.Game.KingKill;
+import tw.edu.ncu.softwareengineering.dodoio.Game.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * Created by leemiyinghao on 2016/12/1.
@@ -24,10 +22,17 @@ public class Renderer extends JFrame{
     private Image overlayBasic;
     private Image menuBasic;
     private Control control;
+    public Game game;
 
     public Renderer(CollideObjectManager collideObjectManager, Map map){
         this.collideObjectManager = collideObjectManager;
-        this.control = new Control();
+        this.control = new Control(this.collideObjectManager, this);
+        Button startDeathMatchBtn = new StartDeathMatchBtn(this);
+        startDeathMatchBtn.position = getRealPositionByPercentage(0.2f, 0.35f);
+        this.control.addMenuBtn(startDeathMatchBtn);
+        Button startKingKillBtn = new StartKingKillBtn(this);
+        startKingKillBtn.position = getRealPositionByPercentage(0.3f, 0.35f);
+        this.control.addMenuBtn(startKingKillBtn);
     }
     public void render(int timeOffsetInMs){
         switch(getStat()){
@@ -75,7 +80,7 @@ public class Renderer extends JFrame{
         try {
             if (collideObjectManager.getMyPlayer().getHP() == 0) { //player die
                 g.drawChars("You die.".toCharArray(), 0, 0, size.getX(), size.getY());
-            }else if(control.game instanceof KingKill) { //kingkill mode
+            }else if(this.game instanceof KingKill) { //kingkill mode
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -101,6 +106,56 @@ public class Renderer extends JFrame{
                     (int)((position.getX() - windowContainSize[0])*Map.blockSize),
                     (int)((position.getY() - windowContainSize[0])*Map.blockSize),
                     this);
+        }
+    }
+}
+class StartDeathMatchBtn extends Button{
+    private Renderer renderer;
+    public StartDeathMatchBtn(Renderer renderer){
+        this.renderer = renderer;
+    }
+    @Override
+    public void onClick(){
+        renderer.game = new DeathMatch();
+        renderer.setStat(GameStat.INGAME);
+    }
+}
+class StartKingKillBtn extends Button{
+    private Renderer renderer;
+    public StartKingKillBtn (Renderer renderer){
+        this.renderer = renderer;
+    }
+    @Override
+    public void onClick(){
+        renderer.game = new KingKill();
+        renderer.setStat(GameStat.INGAME);
+    }
+}
+class UpgradeDPBtn extends Button{
+    private CollideObjectManager collideObjectManager;
+    public UpgradeDPBtn (CollideObjectManager collideObjectManager){
+        this.collideObjectManager = collideObjectManager;
+    }
+    @Override
+    public void onClick(){
+        try {
+            collideObjectManager.getMyPlayer().upgradeDP();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+class UpgradeHPBtn extends Button{
+    private CollideObjectManager collideObjectManager;
+    public UpgradeHPBtn (CollideObjectManager collideObjectManager){
+        this.collideObjectManager = collideObjectManager;
+    }
+    @Override
+    public void onClick(){
+        try {
+            collideObjectManager.getMyPlayer().upgradeHP();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
