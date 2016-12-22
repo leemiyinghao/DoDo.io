@@ -69,6 +69,14 @@ public class CollideObjectManagerTest {
 		assertEquals("query id 1, sword man",manager.collideObjectList.get(0), manager.queryObjectByID(1));
 		manager.queryObjectByID(22);
 	}
+	
+	@Test
+	public void testSetKing() throws Exception {
+		manager.addCharacter(collideObjecctClass.Magician, 19,  new Position(14, 2, 0), "magicianXX", TeamName.teamBlue);
+		Character king = (Character) manager.queryObjectByID(19);
+		manager.setKing(king);
+		assertEquals("sword man become king", 30, king.level);
+	}
 
 	@Test(expected=Exception.class)
 	public void testGetMyPlayer() throws Exception {
