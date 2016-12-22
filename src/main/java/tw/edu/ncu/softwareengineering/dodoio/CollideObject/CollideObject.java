@@ -1,91 +1,102 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.Date;
 
-import tw.edu.ncu.softwareengineering.dodoio.Collide.ICollider;
+import tw.edu.ncu.softwareengineering.dodoio.Collide.Collider;
+import tw.edu.ncu.softwareengineering.dodoio.Game.Game;
+import tw.edu.ncu.softwareengineering.dodoio.Internet.Client;
 
 public abstract class CollideObject {
-	protected Position position;
-	public Image appearance;
-	public final int ID;
-	public final int collideDamage = 30;
-	protected boolean isInvincible;
-	protected int healthPoint;
-	protected ICollider collider;
-	protected Date date;
-	private boolean isDead;
-	
-	/**set data of the object
-	 * 
-	 * @param inputID
-	 * @param image
-	 * @param setPosition
-	 */
-	protected CollideObject(int inputID, Position setPosition, CollideObjectManager cOManager, int className) {
-		date = new Date();
-		ID = inputID;
-		appearance = cOManager.collideObjectImages[className];
-		position = setPosition;
-		healthPoint = 1000;
-		isInvincible = false;
-		isDead = false;
-	}
-	
-	/**Method to complete
-	 * 
-	 * @param whichObjectCollideThis
-	 */
-	public void onCollide(CollideObject whichObjectCollideThis){
-		this.beHarmed(collideDamage);
-	}
-	
-	public boolean isInvincible() {
-		return isInvincible;
-	}
-	
-	abstract public void update();
-	
-	/**when player are attacked, check if it is invincible and change the healthPoint
-	 * 
-	 * @param damage
-	 */
-	protected void beHarmed(int damage) {
-		if(this.isInvincible()) return;
-		
-		if(damage >= this.healthPoint) {
-			this.dead();
-		}
-		else
-			this.healthPoint-=damage;
-	}
-	
-	protected void dead() {
-		isDead = true;
-	}
-	
-	public int getHP(){
-		return healthPoint;
-	}
-	
-	public Position getPosition(){
-		return position;
-	}
-	
-	public ICollider getCollider() {
-		return collider;
-	}
-	
-	public void move(Position nextPosition){
-		position = nextPosition;
-		collider.update(nextPosition);
-	}
-	/**To get "if the object is dead?"
-	 * 
-	 * @return
-	 */
-	public boolean isDead() {
-		return isDead;
-	}
-	
+    protected Position position;
+    public final int className;
+    public final int ID;
+    public final int collideDamage;
+    protected boolean isInvincible;
+    protected int healthPoint;
+    protected Collider collider;
+    protected Date date;
+    protected Client client;
+    private boolean isDead;
+
+    /**
+     * set data of the object
+     *
+     * @param inputID
+     * @param setPosition
+     */
+    protected CollideObject(int inputID, Position setPosition, CollideObjectManager cOManager, int setClassName) {
+        ID = inputID;
+        position = setPosition;
+        className = setClassName;
+        collideDamage = 30;
+        healthPoint = 1000;
+        isInvincible = false;
+        isDead = false;
+        date = new Date();
+    }
+
+    /**
+     * Method to complete
+     *
+     * @param whichObjectCollideThis
+     */
+    public abstract void onCollide(CollideObject whichObjectCollideThis);
+
+    void setClient(Game game) {
+        client = game.getClient();
+    }
+
+    abstract public void update();
+
+    /**
+     * when player are attacked, check if it is invincible and change the healthPoint
+     *
+     * @param damage
+     */
+    protected void beHarmed(int damage) {
+        if (this.isInvincible()) return;
+
+        if (damage >= this.healthPoint) {
+            this.dead();
+        } else
+            this.healthPoint -= damage;
+    }
+
+    protected void dead() {
+        isDead = true;
+    }
+
+    public boolean isInvincible() {
+        return isInvincible;
+    }
+
+    public int getHP() {
+        return healthPoint;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public BufferedImage getImage(CollideObjectManager manager) {
+        BufferedImage appearanece = manager.collideObjectImages[className];
+        return appearanece;
+    }
+
+    public Collider getCollider() {
+        return collider;
+    }
+
+    public abstract void move(Position nextPosition);
+
+    /**
+     * To get "if the object is dead?"
+     *
+     * @return
+     */
+    public boolean isDead() {
+        return isDead;
+    }
+
 }

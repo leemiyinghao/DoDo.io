@@ -28,7 +28,6 @@ public class Fertilizer extends Mob {
 		
 		collider = new CircleCollider(setPosition, radius);
 	}
-
 	
 	public static enum Size{
 		large,

@@ -15,10 +15,10 @@ public class RectangleCollider extends Collider {
     public RectangleCollider(Position position, int width, int height) {
         super();
         this.position.setPosition(position.getX(), position.getY(), position.getDirection());
-        points[0] = rotatePoint(new Point(position.getX() - width / 2, -(position.getY() - height / 2)), 2 * Math.PI * (1 - position.getDirection()));
-        points[1] = rotatePoint(new Point(position.getX() - width / 2, -(position.getY() + height / 2)), 2 * Math.PI * (1 - position.getDirection()));
-        points[2] = rotatePoint(new Point(position.getX() + width / 2, -(position.getY() + height / 2)), 2 * Math.PI * (1 - position.getDirection()));
-        points[3] = rotatePoint(new Point(position.getX() + width / 2, -(position.getY() - height / 2)), 2 * Math.PI * (1 - position.getDirection()));
+        points[0] = rotatePoint(new Point(position.getX() - width / 2, position.getY() - height / 2), 2 * Math.PI * position.getDirection());
+        points[1] = rotatePoint(new Point(position.getX() - width / 2, position.getY() + height / 2), 2 * Math.PI * position.getDirection());
+        points[2] = rotatePoint(new Point(position.getX() + width / 2, position.getY() + height / 2), 2 * Math.PI * position.getDirection());
+        points[3] = rotatePoint(new Point(position.getX() + width / 2, position.getY() - height / 2), 2 * Math.PI * position.getDirection());
     }
 
     /**
@@ -30,11 +30,11 @@ public class RectangleCollider extends Collider {
 
     @Override
     public void update(Position position) {
-        int XOffset = position.getX() - this.position.getX();
-        int YOffset = -(position.getY() - this.position.getY());
+        int xOffset = position.getX() - this.position.getX();
+        int yOffset = position.getY() - this.position.getY();
         for (Point point : points) {
-            point.x += XOffset;
-            point.y += YOffset;
+            point.x += xOffset;
+            point.y += yOffset;
         }
         this.position.setPosition(position.getX(), position.getY(), position.getDirection());
     }
@@ -49,13 +49,13 @@ public class RectangleCollider extends Collider {
     private Point rotatePoint(Point p, double angle) {
         //change origin to current position
         double x = p.x - position.getX();
-        double y = p.y + position.getY();
+        double y = p.y - position.getY();
         //multiply rotate matrix
         double mx = Math.round(Math.cos(angle) * x - Math.sin(angle) * y);
         double my = Math.round(Math.sin(angle) * x + Math.cos(angle) * y);
         //change origin to 0,0
         mx += position.getX();
-        my -= position.getY();
+        my += position.getY();
         return new Point(mx, my);
     }
 }
