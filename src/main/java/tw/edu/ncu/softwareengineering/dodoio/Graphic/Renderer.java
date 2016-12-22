@@ -27,12 +27,24 @@ public class Renderer extends JFrame{
     public Renderer(CollideObjectManager collideObjectManager, Map map){
         this.collideObjectManager = collideObjectManager;
         this.control = new Control(this.collideObjectManager, this);
+        //add menu button stuff
         Button startDeathMatchBtn = new StartDeathMatchBtn(this);
         startDeathMatchBtn.position = getRealPositionByPercentage(0.2f, 0.35f);
+        startDeathMatchBtn.size = getRealPositionByPercentage(0.6f, 0.1f);
         this.control.addMenuBtn(startDeathMatchBtn);
         Button startKingKillBtn = new StartKingKillBtn(this);
         startKingKillBtn.position = getRealPositionByPercentage(0.3f, 0.35f);
+        startKingKillBtn.size = getRealPositionByPercentage(0.6f, 0.1f);
         this.control.addMenuBtn(startKingKillBtn);
+        //add ingame button stuff
+        Button upgradeDP = new UpgradeDPBtn(this.collideObjectManager);
+        upgradeDP.position = getRealPositionByPercentage(0f, 0.9f);
+        upgradeDP.size = getRealPositionByPercentage(0.04f, 0.02f);
+        this.control.addInGameBtn(upgradeDP);
+        Button upgradeHP = new UpgradeHPBtn(this.collideObjectManager);
+        upgradeHP.position = getRealPositionByPercentage(0f, 0.96f);
+        upgradeHP.size = getRealPositionByPercentage(0.04f, 0.02f);
+        this.control.addInGameBtn(upgradeHP);
     }
     public void render(int timeOffsetInMs){
         switch(getStat()){

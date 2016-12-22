@@ -11,6 +11,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import static java.lang.Math.PI;
+import static java.lang.Math.atan2;
+
 /**
  * Created by leemiyinghao on 2016/12/22.
  */
@@ -59,9 +62,10 @@ public class Control extends MouseAdapter implements KeyListener {
     public void addMenuBtn(Button btn){
         this.menuBtnList.add(btn);
     }
-    public float angleBetweenTwoPoint(Position pos1, Position pos2){
+    public double angleBetweenTwoPoint(Position pos1, Position pos2){
         float xDiff = pos2.getX() - pos1.getX();
         float yDiff = pos2.getY() - pos1.getY();
+        return atan2(xDiff, yDiff)/PI;
     }
     @Override
     public void keyTyped(KeyEvent e) {
