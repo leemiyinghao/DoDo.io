@@ -17,7 +17,7 @@ public class CollideObjectManager{
 	int recentIndex;
 	Game game;
 	public ArrayList<CollideObject> collideObjectList;
-	public BufferedImage[] collideObjectImages;
+	static public BufferedImage[] collideObjectImages;
 	
 	/**
 	 * this is for client(DOM)

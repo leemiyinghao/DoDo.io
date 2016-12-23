@@ -79,8 +79,8 @@ public abstract class CollideObject {
         return position;
     }
 
-    public BufferedImage getImage(CollideObjectManager manager) {
-        BufferedImage appearanece = manager.collideObjectImages[className];
+    public BufferedImage getImage() {
+        BufferedImage appearanece = CollideObjectManager.collideObjectImages[className];
         return appearanece;
     }
 
