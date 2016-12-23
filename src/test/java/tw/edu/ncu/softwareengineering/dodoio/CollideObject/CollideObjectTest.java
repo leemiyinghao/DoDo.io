@@ -8,6 +8,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager.collideObjecctClass;
+
 public class CollideObjectTest {
 	CollideObjectManager manager;
 	Archer playerTest;
@@ -61,7 +63,7 @@ public class CollideObjectTest {
 	@Test
 	public void attackToDeadTest() {
 		attackerTest.damagePoint = 10000;
-		playerTest.beAttacked(attackerTest);
+		playerTest.beAttacked(new Slash(15, new Position(0,0,0), manager, collideObjecctClass.Slash.ordinal(), attackerTest));
 		assertEquals("archerX will die", true, playerTest.isDead());
 	}
 	

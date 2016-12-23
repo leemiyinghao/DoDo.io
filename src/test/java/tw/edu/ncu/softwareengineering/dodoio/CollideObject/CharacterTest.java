@@ -8,6 +8,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tw.edu.ncu.softwareengineering.dodoio.Internet.Client;
+
 public class CharacterTest extends CollideObjectTest{
 
 	@BeforeClass
@@ -62,7 +64,7 @@ public class CharacterTest extends CollideObjectTest{
 	@Test
 	public void countAttackCDTest() {
 		//after attack()
-		playerTest.attack();
+		playerTest.attackActive = false;
 		
 		playerTest.countAttackCD((long) (miliSecond*playerTest.attackCD));
 		assertTrue("player can attack again", playerTest.attackActive);
@@ -79,7 +81,7 @@ public class CharacterTest extends CollideObjectTest{
 	@Test
 	public void countSkillCDTest() {
 		//after attack()
-		playerTest.skill();
+		playerTest.skillActive = false;
 		
 		playerTest.countSkillCD((long) (miliSecond*playerTest.skillCD));
 		assertTrue("player can use skill again", playerTest.skillActive);

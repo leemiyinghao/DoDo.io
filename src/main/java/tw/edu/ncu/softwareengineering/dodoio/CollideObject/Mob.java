@@ -46,6 +46,6 @@ public abstract class Mob extends NonPlayer {
         this.beAttacked(whichObjectCollideThis);
         //the unit vector of whichObject to this object
         Vector v = new Vector(this.position.getX() - whichObjectCollideThis.position.getX(), this.position.getY() - whichObjectCollideThis.position.getY()).normalized();
-        this.move(new Position((int) (5 * v.getX()), (int) (+5 * v.getY()), this.position.getDirection()));
+        this.move(new Position((int) (5 * v.getX())+position.getX(), (int) (+5 * v.getY())+position.getY(), this.position.getDirection()));
     }
 }
