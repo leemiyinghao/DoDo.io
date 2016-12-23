@@ -98,13 +98,13 @@ public class CharacterTest extends CollideObjectTest{
 	@Test
 	public void addExpCDTest() {
 		for(int i=0; i<playerTest.levelMax-1; i++) {
-			playerTest.addExp(playerTest.expTable[i+1]);
+			playerTest.addExp(playerTest.expTable[i]);
 			assertEquals("now player is level "+ (i+1)+".", (i+1), playerTest.level);
 		}
-		for(int i=0; i<playerTest.levelMax-1; i++) {
+		for(int i=1; i<playerTest.levelMax-1; i++) {
 			playerTest.exp = 0;
 			playerTest.level = 1;
-			playerTest.addExp(playerTest.expAccumulationTable[i+1]);
+			playerTest.addExp(playerTest.expAccumulationTable[i]);
 			assertEquals("player become level "+ (i+1)+" immediatly.", (i+1), playerTest.level);
 		}
 	}
