@@ -8,8 +8,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import tw.edu.ncu.softwareengineering.dodoio.Internet.Client;
-
 public class CharacterTest extends CollideObjectTest{
 
 	@BeforeClass
@@ -65,15 +63,18 @@ public class CharacterTest extends CollideObjectTest{
 	public void countAttackCDTest() {
 		//after attack()
 		playerTest.attackActive = false;
+		playerTest.attackCountDown = playerTest.attackCD;
 		
 		playerTest.countAttackCD((long) (miliSecond*playerTest.attackCD));
 		assertTrue("player can attack again", playerTest.attackActive);
-		
-		playerTest.attack();
+
+		playerTest.attackActive = false;
+		playerTest.attackCountDown = playerTest.attackCD;
 		playerTest.countAttackCD((long) (miliSecond*playerTest.attackCD+1200000));
 		assertTrue("player can attack again", playerTest.attackActive);
 
-		playerTest.attack();
+		playerTest.attackActive = false;
+		playerTest.attackCountDown = playerTest.attackCD;
 		playerTest.countAttackCD(20);
 		assertFalse("player can't attack now", playerTest.attackActive);
 	}
@@ -82,15 +83,18 @@ public class CharacterTest extends CollideObjectTest{
 	public void countSkillCDTest() {
 		//after attack()
 		playerTest.skillActive = false;
+		playerTest.skillCountDown = playerTest.skillCD;
 		
 		playerTest.countSkillCD((long) (miliSecond*playerTest.skillCD));
 		assertTrue("player can use skill again", playerTest.skillActive);
 		
-		playerTest.skill();
+		playerTest.skillActive = false;
+		playerTest.skillCountDown = playerTest.skillCD;
 		playerTest.countSkillCD((long) (miliSecond*playerTest.skillCD+1200000));
 		assertTrue("player can use skill again", playerTest.skillActive);
 
-		playerTest.skill();
+		playerTest.skillActive = false;
+		playerTest.skillCountDown = playerTest.skillCD;
 		playerTest.countSkillCD(20);
 		assertFalse("player can't use skill now", playerTest.skillActive);
 	}
