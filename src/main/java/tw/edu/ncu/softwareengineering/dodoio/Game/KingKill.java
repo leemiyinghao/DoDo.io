@@ -1,64 +1,79 @@
 package tw.edu.ncu.softwareengineering.dodoio.Game;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character;
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObject;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
 import tw.edu.ncu.softwareengineering.dodoio.Internet.Client;
 
 public class KingKill extends Game{
 	private int friendPlayerKingID = -1;
 	private int enemyPlayerKingID = -1;
+	private GameState inner_gamestate = GameState.ZERO;
+	private int activePlayerNum = 0;
 	public void start(String playerName, CollideObjectManager.collideObjecctClass chracterclass, int gameMode){
-		//need to get friend and enemy King ID
 		try {
 			this.myObjManager = new CollideObjectManager(this);
 		} catch (IOException e) {
 			System.out.println("can't new a instance of collideobjectmanager!");
 			e.printStackTrace();
 		}
+		//need to get friend and enemy King ID
 		this.client = new Client(this, playerName, chracterclass, gameMode);
 	}
 
 	/*
-	 * return CONTINUE for nothing happened (game continue)!
-	 * return 1 if the enemy boss is dead! -> player team win!
-	 * return 2 if the friend boss is dead! -> enemy team win!
-	 * return 3 if the player is dead! -> player GG, return to title!
+	 * return GameState.CONTINUE		for nothing happened)!
+	 * return GameState.PLAYERTEAMWIN	if the enemy boss is dead!
+	 * return GameState.ENEMYTEANWIN	if the friend boss is dead!
+	 * return GameState.PLAYERDEAD		if the player is dead! -> then return to title!
 	 */
 	public GameState update() {
 		GameState gamestate = GameState.CONTINUE;
-		Character me = null;
+		activePlayerNum = GetActivePlayerNum(this.myObjManager.collideObjectList);
+		InnerStateMachineRun();
 		
-		try {
-			me = this.myObjManager.getMyPlayer();
-		} catch (Exception e) {
-			System.out.println("can't get player, is player dead?");
-			e.printStackTrace();
-		}
-		
-		if ((CheckEnemyKing() && CheckFriendKing())) {
-			Character enemyKing = null;
-			Character friendKing = null;
-			try {
-				enemyKing = (Character)this.myObjManager.queryObjectByID(enemyPlayerKingID);
-			} catch (Exception e) {
-				enemyKing = null;
+		if(inner_gamestate == GameState.MORETHENONE) {
+			if ((CheckEnemyKing() && CheckFriendKing())) {
+				Character me = null;
+				Character enemyKing = null;
+				Character friendKing = null;
+				try {
+					me = this.myObjManager.getMyPlayer();
+				} catch (Exception e) {
+					//if null then the player is dead!
+				}
+				try {
+					enemyKing = (Character)this.myObjManager.queryObjectByID(enemyPlayerKingID);
+				} catch (Exception e) {
+					//if not get then enemyKing is dead!
+				}
+				try {
+					friendKing = (Character)this.myObjManager.queryObjectByID(friendPlayerKingID);
+				} catch (Exception e) {
+					//if not get then friendKing is dead!
+				}
+				if (enemyKing == null || enemyKing.getHP() <= 0) {
+					gamestate = GameState.PLAYERTEAMWIN;
+					inner_gamestate = GameState.PLAYERTEAMWIN;
+				}
+				else if (friendKing == null || friendKing.getHP() <= 0) {
+					gamestate = GameState.ENEMYTEAMWIN;
+					inner_gamestate = GameState.PLAYERTEAMWIN;
+				}
+				else if (me == null) {
+					gamestate = GameState.PLAYERDEAD;
+					inner_gamestate = GameState.MORETHENONE;
+				}
+				else 
+					gamestate = GameState.CONTINUE;
 			}
-			try {
-				friendKing = (Character)this.myObjManager.queryObjectByID(friendPlayerKingID);
-			} catch (Exception e) {
-				friendKing = null;
+			else {
+				//no friendKing or enemyKing
+				gamestate = GameState.CONTINUE;
 			}
-			if (enemyKing.getHP() <= 0.0)
-				gamestate = GameState.PLAYERTEAMWIN;
-			else if (friendKing.getHP() <= 0.0)
-				gamestate = GameState.ENEMYTEAMWIN;
-			else if(me == null)
-				gamestate = GameState.PLAYERDEAD;
-		}
-		else {
-			System.out.println("no friendKing or enemyKing");
 		}
 		return gamestate;
 	}
@@ -76,16 +91,43 @@ public class KingKill extends Game{
 		enemyPlayerKingID = id;
 	}
 	
-	private Boolean CheckEnemyKing() {
+	boolean CheckEnemyKing() {
 		if (enemyPlayerKingID == -1) {
 			return false;
 		}
 		return true;
 	}
-	private Boolean CheckFriendKing() {
+	boolean CheckFriendKing() {
 		if (friendPlayerKingID == -1) {
 			return false;
 		}
 		return true;
+	}
+	//get active player number by for-loop
+	int GetActivePlayerNum(ArrayList<CollideObject> list){
+		int activePlayerNum = 0;
+		for(CollideObject i: list) {
+			if(i instanceof Character) {
+				activePlayerNum++;
+			}
+		}
+		return activePlayerNum;
+	}
+	
+	void InnerStateMachineRun() {
+		if (inner_gamestate == GameState.ZERO || inner_gamestate == GameState.ONE) {
+			if (inner_gamestate == GameState.ZERO && activePlayerNum > 0) {
+				if (activePlayerNum == 1)
+					inner_gamestate = GameState.ONE;
+				else
+					inner_gamestate = GameState.MORETHENONE;
+				return;
+			}
+			if (inner_gamestate == GameState.ONE && activePlayerNum > 1) {
+				inner_gamestate = GameState.MORETHENONE;
+				return;
+			}
+		}
+		return;
 	}
 }
