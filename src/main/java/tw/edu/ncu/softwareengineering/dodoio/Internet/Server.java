@@ -2,32 +2,81 @@ package tw.edu.ncu.softwareengineering.dodoio.Internet;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
-import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Archer;
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character.TeamName;
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObject;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager.collideObjecctClass;
-import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Magician;
-import tw.edu.ncu.softwareengineering.dodoio.CollideObject.SwordMan;
-
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Position;
+import tw.edu.ncu.softwareengineering.dodoio.Internet.CDC;
+import tw.edu.ncu.softwareengineering.dodoio.Internet.ColliderTypeAdapterFactory;
 
 public class Server
 {
 	ServerSocket serversocket;
 	ArrayList<ArrayList<InetAddress>> clientaddresslist;
-	ArrayList<ArrayList<Integer>> clientidlist;
+	private ArrayList<ArrayList<Integer>> clientidlist;
+	int [] playercount;
+	int[] idcount;
+	int[] king;
 	boolean teamcount;
 	CDC cdc;
+	GsonBuilder gsonBuilder;
+	Gson gson;
+
 	
-	public int test(int a , int b)
+	public Server()
 	{
-		return a + b;
+		// TODO Auto-generated constructor stub
+		
+		// initial client address list , id list
+		clientaddresslist = new ArrayList<ArrayList<InetAddress>>();
+		clientaddresslist.add(new ArrayList<InetAddress>());
+		clientaddresslist.add(new ArrayList<InetAddress>());
+		
+		clientidlist = new ArrayList<ArrayList<Integer>>();
+		clientidlist.add(new ArrayList<Integer>());
+		clientidlist.add(new ArrayList<Integer>());
+		
+		// initial CDC
+		cdc = new CDC();
+		
+		// initial gson
+		gsonBuilder = new GsonBuilder();
+		gsonBuilder.registerTypeAdapterFactory(new ColliderTypeAdapterFactory());
+		gson = gsonBuilder.create();
+		
+		// initial socket
+		try
+		{
+			serversocket = new ServerSocket(55555);
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// initial counter
+		idcount = new int[2];
+		idcount[0] = 0;
+		idcount[1] = 0;
+		teamcount = true;
+		playercount = new int[2];
+		playercount[0] = 0;
+		playercount[1] = 0;
+		king = new int[2];
+		king[0] = -1;
+		king[1] = -1;
+		
 	}
 
 	public void startserver()
@@ -41,69 +90,65 @@ public class Server
 		
 		try
 		{
-			serversocket = new ServerSocket(55555);
-			teamcount = true;
-			
-			// initial client address list , id list
-			clientaddresslist.add(new ArrayList<InetAddress>());
-			clientaddresslist.add(new ArrayList<InetAddress>());
-			clientidlist.add(new ArrayList<Integer>());
-			clientidlist.add(new ArrayList<Integer>());
-			
-			
-			// initial CDC
-			cdc = new CDC();
-			
 			
 			while(true)
 			{
+				
 				Socket clientsocket = serversocket.accept();
 				if(clientsocket.isConnected())
 				{
 					DataOutputStream wdata = new DataOutputStream(clientsocket.getOutputStream());
 					DataInputStream rdata = new DataInputStream(clientsocket.getInputStream());
 					
-					Gson gson = new Gson();
-					JsonObject newplayrejson = gson.fromJson(rdata.readUTF(), JsonObject.class);
 
+					// read message from client and add new player
+					JsonObject newplayrejson = gson.fromJson(rdata.readUTF(), JsonObject.class);
 					int mode = newplayrejson.get("mode").getAsInt();
-					
 					clientaddresslist.get(mode).add(clientsocket.getInetAddress());
-					
 					String profession = newplayrejson.get("profession").getAsString();
-					int newid = cdc.collideObjectManager[mode].collideObjectList.size();
 					String teamname;
 					if(mode == 0)
 						teamname = "deathMatch";
 					else
 					{
 						if(teamcount)
-							teamname = "teamBlue"; 
+						{
+							teamname = "teamBlue";
+							if(king[0] == -1)
+								king[0] = idcount[mode];
+						}
 						else
+						{
+							if(king[1] == -1)
+								king[1] = idcount[mode];
 							teamname = "teamRed";
+						}
 						teamcount = !teamcount;
 					}
+
+					cdc.collideObjectManager[mode].addCharacter(collideObjecctClass.valueOf(profession), idcount[mode], randposition(), newplayrejson.get("name").getAsString(), TeamName.valueOf(teamname));
+					clientidlist.get(mode).add(idcount[mode]);
+					++idcount[mode];
+					++playercount[mode];
 					
-					if(profession.equals(collideObjecctClass.SwordMan.toString()))
+					// sending collideobject list to client
+					wdata.writeInt(idcount[mode]);
+					wdata.flush();
+										
+					for(CollideObject object : cdc.collideObjectManager[mode].collideObjectList)
 					{
-						cdc.collideObjectManager[mode].collideObjectList.add(new SwordMan(newid, newplayrejson.get("name").getAsString(), teamname, null, null, 0));
-					}
-					else if(profession.equals(collideObjecctClass.Archer.toString()))
-					{
-						cdc.collideObjectManager[mode].collideObjectList.add(new Archer(newid, newplayrejson.get("name").getAsString(), teamname, null, null, 0));
-					}
-					else 
-					{
-						cdc.collideObjectManager[mode].collideObjectList.add(new Magician(newid, newplayrejson.get("name").getAsString(), teamname, null, null, 0));
+						wdata.writeUTF(object.getClass().getName());
+						wdata.writeUTF(gson.toJson(object));
+						wdata.flush();
 					}
 					
+					wdata.writeUTF("done");
+					wdata.flush();
 					
-					
-					
-					
-					Thread thread = new Thread(new clientmanager(clientsocket));
+					Thread thread = new Thread(new clientmanager(clientsocket , this , mode));
 					thread.start();
 				}
+				
 			}
 		}
 		catch (Exception e)
@@ -113,27 +158,43 @@ public class Server
 		}
 	}
 	
-	public void broacast_update(int mode)
+	private Position randposition()
+	{
+		// future to change alogorithm
+		Random random = new Random();
+		Position position = new Position(random.nextInt(7680), random.nextInt(4320), random.nextDouble());
+		return position;
+	}
+	
+	public void broacast_update(int mode , int index)
 	{
 		UDPbroacast broacaster = new UDPbroacast(clientaddresslist.get(mode), clientidlist.get(mode));
 		
 		// process the broacast data
+		CollideObject target = cdc.collideObjectManager[mode].collideObjectList.get(index);
+		JsonObject data = new JsonObject();
+		data.addProperty("index", index);
+		data.add("object", gson.toJsonTree(target));
+		broacaster.broacast(data.toString());
 		
 	}
 	
-		
 	static class clientmanager implements Runnable
 	{
+		Server server;
 		Socket clientsocket;
 		DataInputStream rdata;
+		int mode;
 		
-		public clientmanager(Socket client)
+		public clientmanager(Socket client , Server ss , int md)
 		{
 			/*
 			 * clientmanager constructor
 			 * handle the inputstream exception
 			 */
-
+			server = ss;
+			mode = md;
+			
 			try
 			{
 				clientsocket = client;
@@ -150,7 +211,7 @@ public class Server
 		public void run()
 		{
 			/*
-			 * Implement run() for multi-thread
+			 * Implement run() for multithread
 			 * while loop to read the data from client
 			 * and update to CDC
 			 * handle the inputstream exception
@@ -159,17 +220,36 @@ public class Server
 			Gson gson = new Gson();
 			JsonObject playerupdatejson;
 			
+			
 			while(true)
 			{
 				try
 				{
-					String playerupdatestr = rdata.readUTF();
+					// get type for update. 1 for object update, 2 for new attack object
+					int type = rdata.readInt();
 					
-					
-					playerupdatejson = gson.fromJson(playerupdatestr, JsonObject.class);
-					
-					
-				} 
+					if(type == 0)
+					{
+						String playerupdatestr = rdata.readUTF();
+						JsonObject jsonObject = gson.fromJson(playerupdatestr, JsonObject.class);
+						int index = findlistindex(jsonObject.get("ID").getAsInt());
+						CollideObject obj =  gson.fromJson(jsonObject, server.cdc.collideObjectManager[mode].collideObjectList.get(index).getClass());
+						
+						server.cdc.collideObjectManager[mode].collideObjectList.set(index,obj);
+						server.cdc.caculatecollide(mode);
+						server.broacast_update(mode , index);
+					}
+					else
+					{
+						String classname = rdata.readUTF();
+						int id = rdata.readInt();
+						int index = findlistindex(id);
+						
+						server.cdc.collideObjectManager[mode].addAttackObject(collideObjecctClass.valueOf(classname), server.idcount[mode], server.randposition(), server.cdc.collideObjectManager[mode].collideObjectList.get(index));
+						++server.idcount[mode];
+					}
+
+				}
 				catch (Exception e)
 				{
 					// TODO: handle exception
@@ -177,6 +257,19 @@ public class Server
 				}
 				
 			}
+		}
+		
+		private int findlistindex(int id)
+		{
+			ArrayList<CollideObject> temp = server.cdc.collideObjectManager[mode].collideObjectList;
+			
+			for(int i = 0 ; i < temp.size() ; ++i)
+			{
+				if(temp.get(i).ID == id)
+					 return i;
+			}
+			
+			return -1;
 		}
 		
 	}

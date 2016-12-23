@@ -4,8 +4,10 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObject;
 import tw.edu.ncu.softwareengineering.dodoio.Game.Game;
 
 public class UDPreceive implements Runnable
@@ -31,10 +33,12 @@ public class UDPreceive implements Runnable
 		// TODO Auto-generated method stub
 		try
 		{
-			DatagramSocket socket = new DatagramSocket(10000);
+			DatagramSocket socket = new DatagramSocket(10000 + game.myObjManager.getMyPlayer().ID);
 			DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 			String broacaststr;
-			Gson gson = new Gson();
+			GsonBuilder gsonBuilder = new GsonBuilder();
+			gsonBuilder.registerTypeAdapterFactory(new ColliderTypeAdapterFactory());
+			Gson gson = gsonBuilder.create();
 			JsonObject broacastobj;
 			
 			while(true)
@@ -44,8 +48,9 @@ public class UDPreceive implements Runnable
 				
 				// process string to object
 				broacastobj = gson.fromJson(broacaststr, JsonObject.class);
-				
-				
+				int index = broacastobj.get("index").getAsInt();
+				CollideObject target = gson.fromJson(broacastobj.get("objext"), game.myObjManager.collideObjectList.get(index).getClass());
+				game.myObjManager.collideObjectList.set(index, target);
 			}
 			
 		} 
