@@ -270,6 +270,10 @@ public abstract class Character extends CollideObject {
             this.beHarmed(attacker.collideDamage);
     }
 	
+    public int getMaxHP() {
+		return maxHP;
+    }
+    
 	/**for death match
 	 * 
 	 * @return

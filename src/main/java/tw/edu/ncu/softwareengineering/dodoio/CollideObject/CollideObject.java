@@ -26,6 +26,8 @@ public abstract class CollideObject {
      * @param setPosition
      */
     protected CollideObject(int inputID, Position setPosition, CollideObjectManager cOManager, int setClassName) {
+    	assert(inputID>=0);
+    	assert(setPosition!=null);
         ID = inputID;
         position = setPosition;
         className = setClassName;
@@ -44,6 +46,7 @@ public abstract class CollideObject {
     public abstract void onCollide(CollideObject whichObjectCollideThis);
 
     void setClient(Game game) {
+    	assert(game!=null);
         client = game.getClient();
     }
 
@@ -80,6 +83,7 @@ public abstract class CollideObject {
     }
 
     public BufferedImage getImage() {
+    	assert(CollideObjectManager.collideObjectImages[className]!=null);
         BufferedImage appearanece = CollideObjectManager.collideObjectImages[className];
         return appearanece;
     }
