@@ -8,11 +8,11 @@ import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character;
 import tw.edu.ncu.softwareengineering.dodoio.Internet.Client;
 
 public class DeathMatch extends Game{
-	void start(String playerName, CollideObjectManager.ChracterClass chracterclass, int gameMode){
+	public void start(String playerName, CollideObjectManager.ChracterClass chracterclass, int gameMode){
 		this.myObjManager = new CollideObjectManager(this);
 		this.client = new Client(this, playerName, chracterclass, gameMode);
 	}
-	int update() {
+	public int update() {
 		int updateNeed = 0;
 		int myid = this.myObjManager.getMyPlayer();
 		ArrayList<CollideObject> list = this.myObjManager.collideObjectList;

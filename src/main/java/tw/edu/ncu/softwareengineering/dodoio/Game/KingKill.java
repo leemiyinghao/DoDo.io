@@ -6,12 +6,12 @@ import tw.edu.ncu.softwareengineering.dodoio.Internet.Client;
 public class KingKill extends Game{
 	private int friendPlayerKingID;
 	private int enemyPlayerKingID;
-	void start(String playerName, CollideObjectManager.ChracterClass chracterclass, int gameMode){
+	public void start(String playerName, CollideObjectManager.ChracterClass chracterclass, int gameMode){
 		//need to get friend and enemy King ID
 		this.myObjManager = new CollideObjectManager(this);
 		this.client = new Client(this, playerName, chracterclass, gameMode);
 	}
-	int update() {
+	public int update() {
 		/*return 0 for nothing happened (game continue)!
 		 *return 1 if the enemy boss is dead! -> 友方贏, 遊戲結束
 		 *return 2 if the friend boss is dead! -> 敵方贏, 遊戲結束
