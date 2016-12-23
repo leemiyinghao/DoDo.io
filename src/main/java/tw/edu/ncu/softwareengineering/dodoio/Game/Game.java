@@ -9,7 +9,7 @@ public abstract class Game {
 	public Client getClient() {
 		return this.client;
 	}
-	public abstract void start(String playerName, CollideObjectManager.ChracterClass chracterclass, int gameMode);
-	public abstract int update();
+	public abstract void start(String playerName, CollideObjectManager.collideObjecctClass chracterclass, int gameMode);
+	public abstract GameState update();
 	
 }
