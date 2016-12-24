@@ -153,13 +153,14 @@ public abstract class Character extends CollideObject {
 	 */
 	void addExp(int addExp) {
 		exp+=addExp;
-		levelUp();
+		if(level < levelMax)
+			levelUp();
 	}
 	
 	/**call this when get exp
 	 */
 	void levelUp() {
-		while(exp > expTable[level] && level < levelMax) {
+		while(level < levelMax && exp >= expTable[level]) {
 			exp -= expTable[level];
 			level++;
 			maxHP++;
@@ -270,6 +271,10 @@ public abstract class Character extends CollideObject {
             this.beHarmed(attacker.collideDamage);
     }
 	
+    public int getMaxHP() {
+		return maxHP;
+    }
+    
 	/**for death match
 	 * 
 	 * @return
@@ -317,11 +322,11 @@ public abstract class Character extends CollideObject {
             //the relative speed;
             double speed = ((Character) whichObjectCollideThis).speed - this.speed;
             if (speed >= 0)
-                this.move(new Position((int) (5 * v.getX()), (int) (5 * v.getY()), this.position.getDirection()));
+                this.move(new Position((int) (5 * v.getX())+position.getX(), (int) (5 * v.getY())+position.getY(), this.position.getDirection()));
         } else {
             this.beAttacked(whichObjectCollideThis);
             Vector v = new Vector(this.position.getX() - whichObjectCollideThis.position.getX(), this.position.getY() - whichObjectCollideThis.position.getY()).normalized();
-            this.move(new Position((int) (5 * v.getX()), (int) (5 * v.getY()), this.position.getDirection()));
+            this.move(new Position((int) (5 * v.getX())+position.getX(), (int) (5 * v.getY())+position.getX(), this.position.getDirection()));
         }
     }
 	

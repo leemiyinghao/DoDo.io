@@ -1,6 +1,5 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
-import java.awt.image.BufferedImage;
 import java.util.Date;
 
 import tw.edu.ncu.softwareengineering.dodoio.Collide.Collider;
@@ -26,6 +25,8 @@ public abstract class CollideObject {
      * @param setPosition
      */
     protected CollideObject(int inputID, Position setPosition, CollideObjectManager cOManager, int setClassName) {
+    	assert(inputID>=0);
+    	assert(setPosition!=null);
         ID = inputID;
         position = setPosition;
         className = setClassName;
@@ -36,14 +37,10 @@ public abstract class CollideObject {
         date = new Date();
     }
 
-    /**
-     * Method to complete
-     *
-     * @param whichObjectCollideThis
-     */
     public abstract void onCollide(CollideObject whichObjectCollideThis);
 
     void setClient(Game game) {
+    	assert(game!=null);
         client = game.getClient();
     }
 
@@ -78,11 +75,12 @@ public abstract class CollideObject {
     public Position getPosition() {
         return position;
     }
-
-    public BufferedImage getImage(CollideObjectManager manager) {
-        BufferedImage appearanece = manager.collideObjectImages[className];
-        return appearanece;
-    }
+//
+//    public BufferedImage getImage() {
+//    	assert(CollideObjectManager.collideObjectImages[className]!=null);
+//        BufferedImage appearanece = CollideObjectManager.collideObjectImages[className];
+//        return appearanece;
+//    }
 
     public Collider getCollider() {
         return collider;

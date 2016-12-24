@@ -1,5 +1,6 @@
 package tw.edu.ncu.softwareengineering.dodoio.Game;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObject;
@@ -8,33 +9,45 @@ import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character;
 import tw.edu.ncu.softwareengineering.dodoio.Internet.Client;
 
 public class DeathMatch extends Game{
-	void start(String playerName, CollideObjectManager.ChracterClass chracterclass, int gameMode){
-		this.myObjManager = new CollideObjectManager(this);
+	public void start(String playerName, CollideObjectManager.collideObjecctClass chracterclass, int gameMode){
+		try {
+			this.myObjManager = new CollideObjectManager(this);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.client = new Client(this, playerName, chracterclass, gameMode);
 	}
-	int update() {
-		int updateNeed = 0;
-		int myid = this.myObjManager.getMyPlayer();
-		ArrayList<CollideObject> list = this.myObjManager.collideObjectList;
-		Character me = (Character)list.get(myid);
-		int activePlayerNum = 0;
-		//check if player is null or not
-		//get active player number for-loop
+
+	/* 
+	 * return PLAYERDEAD	if the player GG!
+	 * return PLAYERWIN		if the player win!
+	 * return CONTINUE		for nothing happened (game continue) 
+	 */
+	public GameState update() {
+		GameState gamestate = GameState.CONTINUE;
+		Character me = null;
+		try {
+			me = this.myObjManager.getMyPlayer();
+		} catch (Exception e) {
+			System.out.println("player appears to be dead?");
+		}
 		
-		//return 1 if the player GG!
-		//return 2 if the player win!
-		//return 0 for nothing happened (game continue)
+		//check if player is null or not
+		//get active player number by for-loop
 		if (me == null)
-			updateNeed = 1;
+			gamestate = GameState.PLAYERDEAD;
 		else {
+			int activePlayerNum = 0;
+			ArrayList<CollideObject> list = this.myObjManager.collideObjectList;
 			for(CollideObject i: list) {
 				if(i instanceof Character) {
 					activePlayerNum++;
 				}
 			}
 			if (activePlayerNum == 1)
-				updateNeed = 2;
+				gamestate = GameState.PLAYERWIN;
 		}
-		return updateNeed;
+		return gamestate;
 	}
 }
