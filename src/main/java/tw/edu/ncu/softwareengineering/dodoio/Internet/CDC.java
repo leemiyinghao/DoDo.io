@@ -1,25 +1,34 @@
 package tw.edu.ncu.softwareengineering.dodoio.Internet;
 
-import java.util.ArrayList;
-
+import tw.edu.ncu.softwareengineering.dodoio.Collide.Bound;
+import tw.edu.ncu.softwareengineering.dodoio.Collide.Utils;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObject;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
 
 public class CDC
 {
-	public CollideObjectManager[] collideObjectManager;
+	CollideObjectManager[] collideObjectManager;
+	Utils utils = Utils.getInstance();
 	
 	public CDC()
 	{
+		// initial collide object manager
 		collideObjectManager = new CollideObjectManager[2];
 		collideObjectManager[0] = new CollideObjectManager();
 		collideObjectManager[1] = new CollideObjectManager();
+
 	}
 	
-	public void caculatecollide(int mode)
+	public void calculatecollide(int mode)
 	{
+		// calculate collide
+		utils.CalculateCollide(collideObjectManager[mode], new Bound(0, 0, 7680, 4320));
 		
-		
+		// find changed object and broadcast
+		for(CollideObject temp : collideObjectManager[mode].collideObjectList)
+		{
+			
+		}
 	}
 	
 }
