@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class UDPbroacast
 {
-	ArrayList<InetAddress> clientlist;
-	ArrayList<Integer> idlist;
+	private ArrayList<InetAddress> clientlist;
+	private ArrayList<Integer> idlist;
 	
 	
 	public UDPbroacast(ArrayList<InetAddress> clientlist , ArrayList<Integer> idlist)

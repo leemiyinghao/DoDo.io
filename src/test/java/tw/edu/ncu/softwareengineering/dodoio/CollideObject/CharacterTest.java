@@ -62,16 +62,19 @@ public class CharacterTest extends CollideObjectTest{
 	@Test
 	public void countAttackCDTest() {
 		//after attack()
-		playerTest.attack();
+		playerTest.attackActive = false;
+		playerTest.attackCountDown = playerTest.attackCD;
 		
 		playerTest.countAttackCD((long) (miliSecond*playerTest.attackCD));
 		assertTrue("player can attack again", playerTest.attackActive);
-		
-		playerTest.attack();
+
+		playerTest.attackActive = false;
+		playerTest.attackCountDown = playerTest.attackCD;
 		playerTest.countAttackCD((long) (miliSecond*playerTest.attackCD+1200000));
 		assertTrue("player can attack again", playerTest.attackActive);
 
-		playerTest.attack();
+		playerTest.attackActive = false;
+		playerTest.attackCountDown = playerTest.attackCD;
 		playerTest.countAttackCD(20);
 		assertFalse("player can't attack now", playerTest.attackActive);
 	}
@@ -79,16 +82,19 @@ public class CharacterTest extends CollideObjectTest{
 	@Test
 	public void countSkillCDTest() {
 		//after attack()
-		playerTest.skill();
+		playerTest.skillActive = false;
+		playerTest.skillCountDown = playerTest.skillCD;
 		
 		playerTest.countSkillCD((long) (miliSecond*playerTest.skillCD));
 		assertTrue("player can use skill again", playerTest.skillActive);
 		
-		playerTest.skill();
+		playerTest.skillActive = false;
+		playerTest.skillCountDown = playerTest.skillCD;
 		playerTest.countSkillCD((long) (miliSecond*playerTest.skillCD+1200000));
 		assertTrue("player can use skill again", playerTest.skillActive);
 
-		playerTest.skill();
+		playerTest.skillActive = false;
+		playerTest.skillCountDown = playerTest.skillCD;
 		playerTest.countSkillCD(20);
 		assertFalse("player can't use skill now", playerTest.skillActive);
 	}
@@ -96,13 +102,13 @@ public class CharacterTest extends CollideObjectTest{
 	@Test
 	public void addExpCDTest() {
 		for(int i=0; i<playerTest.levelMax-1; i++) {
-			playerTest.addExp(playerTest.expTable[i+1]);
+			playerTest.addExp(playerTest.expTable[i]);
 			assertEquals("now player is level "+ (i+1)+".", (i+1), playerTest.level);
 		}
-		for(int i=0; i<playerTest.levelMax-1; i++) {
+		for(int i=1; i<playerTest.levelMax-1; i++) {
 			playerTest.exp = 0;
 			playerTest.level = 1;
-			playerTest.addExp(playerTest.expAccumulationTable[i+1]);
+			playerTest.addExp(playerTest.expAccumulationTable[i]);
 			assertEquals("player become level "+ (i+1)+" immediatly.", (i+1), playerTest.level);
 		}
 	}

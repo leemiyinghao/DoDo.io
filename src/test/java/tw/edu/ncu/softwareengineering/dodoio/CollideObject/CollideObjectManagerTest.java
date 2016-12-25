@@ -75,7 +75,7 @@ public class CollideObjectManagerTest {
 		manager.addCharacter(collideObjecctClass.Magician, 19,  new Position(14, 2, 0), "magicianXX", TeamName.teamBlue);
 		Character king = (Character) manager.queryObjectByID(19);
 		manager.setKing(king);
-		assertEquals("sword man become king", 30, king.level);
+		assertEquals("sword man become king", king.levelMax, king.level);
 	}
 
 	@Test(expected=Exception.class)

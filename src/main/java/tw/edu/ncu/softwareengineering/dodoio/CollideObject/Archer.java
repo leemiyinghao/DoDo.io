@@ -14,27 +14,27 @@ public class Archer extends Character {
 		skillCD = 11;
 	}
 	
-//	@Override
-//	public void attack() {
-//		if(attackActive) {
-//			attackActive = false;
-//			attackCountDown = attackCD;
-//			// tell server you do attack
-//			client.newAttack(collideObjecctClass.Arrow, this.ID);
-//		}
-//		else
-//			return;
-//	}
-//
-//	@Override
-//	public void skill() {
-//		if(skillActive) {
-//			skillActive = false;
-//			skillCountDown = skillCD;
-//			// tell server you do skill
-//			client.newAttack(collideObjecctClass.ArrowStrong, this.ID);
-//		}
-//		else
-//			return;
-//	}
+	@Override
+	public void attack() {
+		if(attackActive) {
+			attackActive = false;
+			attackCountDown = attackCD;
+			assert(client!=null);
+			client.newattack(collideObjecctClass.Arrow, this.ID);
+		}
+		else
+			return;
+	}
+
+	@Override
+	public void skill() {
+		if(skillActive) {
+			skillActive = false;
+			skillCountDown = skillCD;
+			assert(client!=null);
+			client.newattack(collideObjecctClass.ArrowStrong, this.ID);
+		}
+		else
+			return;
+	}
 }
