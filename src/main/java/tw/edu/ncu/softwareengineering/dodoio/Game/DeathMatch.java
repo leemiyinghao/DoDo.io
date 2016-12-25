@@ -34,20 +34,25 @@ public class DeathMatch extends Game{
 		}
 		
 		//check if player is null or not
-		//get active player number by for-loop
-		if (me == null)
+		if (me == null || me.getHP() <= 0)
 			gamestate = GameState.PLAYERDEAD;
 		else {
-			int activePlayerNum = 0;
-			ArrayList<CollideObject> list = this.myObjManager.collideObjectList;
-			for(CollideObject i: list) {
-				if(i instanceof Character) {
-					activePlayerNum++;
-				}
-			}
+			int activePlayerNum = GetActivePlayerNum(this.myObjManager.collideObjectList);
+			
 			if (activePlayerNum == 1)
 				gamestate = GameState.PLAYERWIN;
 		}
 		return gamestate;
+	}
+
+	//get active player number by for-loop
+	int GetActivePlayerNum(ArrayList<CollideObject> list) {
+		int activePlayerNum = 0;
+		for(CollideObject i: list) {
+			if(i instanceof Character) {
+				activePlayerNum++;
+			}
+		}
+		return activePlayerNum;
 	}
 }
