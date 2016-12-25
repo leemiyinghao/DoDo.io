@@ -9,15 +9,13 @@ import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
 import tw.edu.ncu.softwareengineering.dodoio.Internet.Client;
 
 public class KingKill extends Game{
-	private int friendPlayerKingID = -1;
-	private int enemyPlayerKingID = -1;
-	private GameState inner_gamestate = GameState.ZERO;
-	private int activePlayerNum = 0;
+	GameState inner_gamestate = GameState.ZERO;
+	int activePlayerNum = 0;
 	public void start(String playerName, CollideObjectManager.collideObjecctClass chracterclass, int gameMode){
 		try {
 			this.myObjManager = new CollideObjectManager(this);
 		} catch (IOException e) {
-			System.out.println("can't new a instance of collideobjectmanager!");
+			System.out.println("can't new an instance of CollideObjectManager!");
 			e.printStackTrace();
 		}
 		//need to get friend and enemy King ID
@@ -77,27 +75,15 @@ public class KingKill extends Game{
 		}
 		return gamestate;
 	}
-	public int getFriendPlayerKingID() {
-		return friendPlayerKingID;
-	}
 	
-	public int getEnemyPlayerKingID() {
-		return enemyPlayerKingID;
-	}
-	public void setFriendPlayerKingID(int id) {
-		friendPlayerKingID = id;
-	}
-	public void setEnemyPlayerKingID(int id) {
-		enemyPlayerKingID = id;
-	}
 	
-	boolean CheckEnemyKing() {
+	public boolean CheckEnemyKing() {
 		if (enemyPlayerKingID == -1) {
 			return false;
 		}
 		return true;
 	}
-	boolean CheckFriendKing() {
+	public boolean CheckFriendKing() {
 		if (friendPlayerKingID == -1) {
 			return false;
 		}
