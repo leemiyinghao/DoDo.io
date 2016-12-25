@@ -69,6 +69,11 @@ public class Client
 			//add main character
 			this.game.myObjManager.setMainPlayer(this.game.myObjManager.queryObjectByID(newid));
 			
+			// set king id if mode is kingkill
+			if(mode == 1)
+			{
+				
+			}
 				
 			Thread thread = new Thread(new UDPreceive(this.game));
 			thread.start();

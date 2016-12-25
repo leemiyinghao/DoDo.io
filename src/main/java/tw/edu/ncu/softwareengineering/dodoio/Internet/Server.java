@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character.TeamName;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObject;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager.collideObjecctClass;
@@ -24,14 +25,15 @@ public class Server
 {
 	ServerSocket serversocket;
 	ArrayList<ArrayList<InetAddress>> clientaddresslist;
-	private ArrayList<ArrayList<Integer>> clientidlist;
-	int [] playercount;
-	int[] idcount;
-	int[] king;
-	boolean teamcount;
+	ArrayList<ArrayList<Integer>> clientidlist;
+	ArrayList<MOBclient> mobclients;
 	CDC cdc;
 	GsonBuilder gsonBuilder;
 	Gson gson;
+	int[] idcount;
+	int [] playercount;
+	int[] king;
+	boolean teamcount;
 
 	
 	public Server()
@@ -50,6 +52,14 @@ public class Server
 		// initial CDC
 		cdc = new CDC();
 		
+		//initial mobclient and start client
+		mobclients = new ArrayList<MOBclient>();
+		mobclients.add(new MOBclient(this, 0));
+		mobclients.add(new MOBclient(this, 1));
+		new Thread(mobclients.get(0)).start();
+		new Thread(mobclients.get(1)).start();
+		
+		
 		// initial gson
 		gsonBuilder = new GsonBuilder();
 		gsonBuilder.registerTypeAdapterFactory(new ColliderTypeAdapterFactory());
@@ -66,13 +76,15 @@ public class Server
 		}
 		
 		// initial counter
-		idcount = new int[2];
-		idcount[0] = 0;
-		idcount[1] = 0;
 		teamcount = true;
 		playercount = new int[2];
 		playercount[0] = 0;
 		playercount[1] = 0;
+		idcount = new int[2];
+		idcount[0] = 0;
+		idcount[1] = 0;
+		
+		//initial king
 		king = new int[2];
 		king[0] = -1;
 		king[1] = -1;
@@ -119,9 +131,9 @@ public class Server
 						}
 						else
 						{
+							teamname = "teamRed";
 							if(king[1] == -1)
 								king[1] = idcount[mode];
-							teamname = "teamRed";
 						}
 						teamcount = !teamcount;
 					}
@@ -145,6 +157,14 @@ public class Server
 					wdata.writeUTF("done");
 					wdata.flush();
 					
+					// send king id if mode is kingkill
+					if(mode == 1)
+					{
+						wdata.writeInt(king[0]);
+						wdata.writeInt(king[1]);
+						wdata.flush();
+					}
+					
 					Thread thread = new Thread(new clientmanager(clientsocket , this , mode));
 					thread.start();
 				}
@@ -158,7 +178,7 @@ public class Server
 		}
 	}
 	
-	private Position randposition()
+	public Position randposition()
 	{
 		// future to change alogorithm
 		Random random = new Random();
@@ -216,11 +236,7 @@ public class Server
 			 * and update to CDC
 			 * handle the inputstream exception
 			 */
-			
-			Gson gson = new Gson();
-			JsonObject playerupdatejson;
-			
-			
+
 			while(true)
 			{
 				try
@@ -231,12 +247,12 @@ public class Server
 					if(type == 0)
 					{
 						String playerupdatestr = rdata.readUTF();
-						JsonObject jsonObject = gson.fromJson(playerupdatestr, JsonObject.class);
+						JsonObject jsonObject = server.gson.fromJson(playerupdatestr, JsonObject.class);
 						int index = findlistindex(jsonObject.get("ID").getAsInt());
-						CollideObject obj =  gson.fromJson(jsonObject, server.cdc.collideObjectManager[mode].collideObjectList.get(index).getClass());
+						CollideObject obj =  server.gson.fromJson(jsonObject, server.cdc.collideObjectManager[mode].collideObjectList.get(index).getClass());
 						
 						server.cdc.collideObjectManager[mode].collideObjectList.set(index,obj);
-						server.cdc.caculatecollide(mode);
+						server.cdc.calculatecollide(mode);
 						server.broacast_update(mode , index);
 					}
 					else
@@ -245,7 +261,7 @@ public class Server
 						int id = rdata.readInt();
 						int index = findlistindex(id);
 						
-						server.cdc.collideObjectManager[mode].addAttackObject(collideObjecctClass.valueOf(classname), server.idcount[mode], server.randposition(), server.cdc.collideObjectManager[mode].collideObjectList.get(index));
+						server.cdc.collideObjectManager[mode].addAttackObject(collideObjecctClass.valueOf(classname), server.idcount[mode], server.randposition(),(Character) server.cdc.collideObjectManager[mode].collideObjectList.get(index));
 						++server.idcount[mode];
 					}
 
