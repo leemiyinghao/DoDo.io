@@ -22,6 +22,7 @@ public abstract class AttackObject extends NonPlayer {
 
     @Override
     public void onCollide(CollideObject whichObjectCollideThis) {
+        setFlag();
         if (whichObjectCollideThis.isDead())
             return;
         if (whichObjectCollideThis instanceof AttackObject && ((AttackObject) whichObjectCollideThis).player.team == this.player.team || this.priority > ((AttackObject) whichObjectCollideThis).priority)
