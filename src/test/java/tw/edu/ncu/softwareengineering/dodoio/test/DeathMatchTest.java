@@ -8,8 +8,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class DeathMatchTest {
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
+import tw.edu.ncu.softwareengineering.dodoio.Game.DeathMatch;
 
+public class DeathMatchTest {
+	private DeathMatch game;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -20,30 +23,44 @@ public class DeathMatchTest {
 
 	@Before
 	public void setUp() throws Exception {
+		game = new DeathMatch();
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		game = null;
 	}
 
 	@Test
 	public void testStart() {
-		fail("Not yet implemented");
+		game.start("kirito", CollideObjectManager.collideObjecctClass.SwordMan, 0);
+		assertNotNull("ObjectMangager should be created!", game.myObjManager);
 	}
 
 	@Test
-	public void testUpdate() {
-		fail("Not yet implemented");
+	public void testUpdate_forContinue() {
+		game.start("kirito", CollideObjectManager.collideObjecctClass.SwordMan, 0);
+		
+		
 	}
-
+	
 	@Test
-	public void testGetActivePlayerNum() {
-		fail("Not yet implemented");
+	public void testUpdate_forPlayerDead() {
+		game.start("kirito", CollideObjectManager.collideObjecctClass.SwordMan, 0);
+		
+		
 	}
-
+	
+	@Test
+	public void testUpdate_forPlayerWin() {
+		game.start("kirito", CollideObjectManager.collideObjecctClass.SwordMan, 0);
+		
+		
+	}
+	
 	@Test
 	public void testGetClient() {
-		fail("Not yet implemented");
+		assertNotNull("Client should be created!", game.getClient());
 	}
 
 }

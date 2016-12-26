@@ -8,8 +8,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class KingKillTest {
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
+import tw.edu.ncu.softwareengineering.dodoio.Game.Game;
+import tw.edu.ncu.softwareengineering.dodoio.Game.KingKill;
 
+public class KingKillTest {
+	private KingKill game;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -20,15 +24,20 @@ public class KingKillTest {
 
 	@Before
 	public void setUp() throws Exception {
+		game = new KingKill();
+		
+		game.start("kirito", CollideObjectManager.collideObjecctClass.SwordMan, 1);
+		
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		game = null;
 	}
 
 	@Test
 	public void testStart() {
-		fail("Not yet implemented");
+		assertNotNull("CollideObjectManager should be created!", game.myObjManager);
 	}
 
 	@Test
@@ -38,47 +47,57 @@ public class KingKillTest {
 
 	@Test
 	public void testGetFriendPlayerKingID() {
-		fail("Not yet implemented");
+		int id = 123;
+		Game game2 = (Game)game;
+		game2.setFriendPlayerKingID(id);
+		assertEquals("It should be the same!", id, game2.getFriendPlayerKingID());
 	}
 
 	@Test
 	public void testGetEnemyPlayerKingID() {
-		fail("Not yet implemented");
+		int id = 456;
+		Game game2 = (Game)game;
+		game2.setEnemyPlayerKingID(id);
+		assertEquals("It should be the same!", id, game2.getEnemyPlayerKingID());
 	}
 
 	@Test
 	public void testSetFriendPlayerKingID() {
-		fail("Not yet implemented");
+		int id = 789;
+		Game game2 = (Game)game;
+		game2.setFriendPlayerKingID(id);
+		assertEquals("It should be the same!", id, game2.getFriendPlayerKingID());
 	}
 
 	@Test
 	public void testSetEnemyPlayerKingID() {
-		fail("Not yet implemented");
+		int id = 678;
+		Game game2 = (Game)game;
+		game2.setEnemyPlayerKingID(id);
+		assertEquals("It should be the same!", id, game2.getEnemyPlayerKingID());
 	}
 
 	@Test
-	public void testCheckEnemyKing() {
-		fail("Not yet implemented");
+	public void testCheckEnemyKing_NotSet() {
+		assertFalse("If not set, it should be -1!", game.CheckEnemyKing());
+	}
+	
+	@Test
+	public void testCheckEnemyKing_IsSet() {
+		int id = 10;
+		game.setEnemyPlayerKingID(id);
+		assertTrue("It's set and should be true!", game.CheckEnemyKing());
 	}
 
 	@Test
-	public void testCheckFriendKing() {
-		fail("Not yet implemented");
+	public void testCheckFriendKing_NotSet() {
+		assertFalse("If not set, it should be false!", game.CheckFriendKing());
 	}
-
+	
 	@Test
-	public void testGetActivePlayerNum() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testInnerStateMachineRun() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetClient() {
-		fail("Not yet implemented");
+	public void testCheckFriendKing_IsSet() {
+		
+		assertTrue("It's set and should be true!", game.CheckFriendKing());
 	}
 
 }
