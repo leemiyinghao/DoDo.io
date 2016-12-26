@@ -198,6 +198,7 @@ public class Server
 		broacaster.broacast(data.toString());
 		
 	}
+
 	
 	static class clientmanager implements Runnable
 	{
@@ -249,11 +250,27 @@ public class Server
 						String playerupdatestr = rdata.readUTF();
 						JsonObject jsonObject = server.gson.fromJson(playerupdatestr, JsonObject.class);
 						int index = findlistindex(jsonObject.get("ID").getAsInt());
-						CollideObject obj =  server.gson.fromJson(jsonObject, server.cdc.collideObjectManager[mode].collideObjectList.get(index).getClass());
+						ArrayList<CollideObject> templist = server.cdc.collideObjectManager[mode].collideObjectList;
+						CollideObject obj =  server.gson.fromJson(jsonObject, templist.get(index).getClass());
 						
-						server.cdc.collideObjectManager[mode].collideObjectList.set(index,obj);
-						server.cdc.calculatecollide(mode);
-						server.broacast_update(mode , index);
+						templist.set(index,obj);
+						if(obj.getFlag())
+						{
+							server.cdc.calculatecollide(mode);
+							for(int i = 0 ; i < templist.size() ; ++i)
+							{
+								if(templist.get(i).getFlag())
+								{
+									templist.get(i).resetFlag();
+									server.broacast_update(mode, i);
+								}
+							}
+						}
+						else
+						{
+							server.broacast_update(mode , index);
+							templist.get(index).resetFlag();
+						}
 					}
 					else
 					{

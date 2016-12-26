@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
 
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObject;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character.TeamName;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager.collideObjecctClass;
 import tw.edu.ncu.softwareengineering.dodoio.Game.Game;
 import tw.edu.ncu.softwareengineering.dodoio.Internet.ColliderTypeAdapterFactory;
@@ -72,7 +73,16 @@ public class Client
 			// set king id if mode is kingkill
 			if(mode == 1)
 			{
-				
+				if(game.myObjManager.getMyPlayer().team == TeamName.teamBlue.ordinal())
+				{
+					game.setFriendPlayerKingID(rdata.readInt());
+					game.setEnemyPlayerKingID(rdata.readInt());
+				}
+				else
+				{
+					game.setEnemyPlayerKingID(rdata.readInt());
+					game.setFriendPlayerKingID(rdata.readInt());
+				}
 			}
 				
 			Thread thread = new Thread(new UDPreceive(this.game));
