@@ -1,14 +1,15 @@
 package tw.edu.ncu.softwareengineering.dodoio.Internet;
 
+
 import tw.edu.ncu.softwareengineering.dodoio.Collide.Bound;
 import tw.edu.ncu.softwareengineering.dodoio.Collide.Utils;
-import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObject;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
 
 public class CDC
 {
 	CollideObjectManager[] collideObjectManager;
 	Utils utils = Utils.getInstance();
+
 	
 	public CDC()
 	{
@@ -20,15 +21,10 @@ public class CDC
 	}
 	
 	public void calculatecollide(int mode)
-	{
+	{		
 		// calculate collide
 		utils.CalculateCollide(collideObjectManager[mode], new Bound(0, 0, 7680, 4320));
-		
-		// find changed object and broadcast
-		for(CollideObject temp : collideObjectManager[mode].collideObjectList)
-		{
-			
-		}
+
 	}
 	
 }
