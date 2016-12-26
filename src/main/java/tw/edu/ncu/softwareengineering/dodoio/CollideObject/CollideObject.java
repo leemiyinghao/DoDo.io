@@ -113,4 +113,8 @@ public abstract class CollideObject {
     	flag = false;
     }
 
+    public boolean getFlag()
+    {
+    	return flag;
+    }
 }
