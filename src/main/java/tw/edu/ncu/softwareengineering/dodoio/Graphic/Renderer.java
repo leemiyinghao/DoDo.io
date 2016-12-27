@@ -82,7 +82,7 @@ public class Renderer extends JFrame{
     }
     private void drawInGameEntriesLayer(){
         for (CollideObject object: collideObjectManager.collideObjectList) {
-            printOnScreen(object.getPosition(), (Image)object.getImage(collideObjectManager));
+            printOnScreen(object.getPosition(), (Image)object.getImage());
         }
     }
     private void drawResult() {
