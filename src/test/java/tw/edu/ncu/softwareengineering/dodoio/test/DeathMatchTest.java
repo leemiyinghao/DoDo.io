@@ -12,7 +12,7 @@ import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
 import tw.edu.ncu.softwareengineering.dodoio.Game.DeathMatch;
 
 public class DeathMatchTest {
-	private DeathMatch game;
+	private DeathMatch dm;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -23,44 +23,46 @@ public class DeathMatchTest {
 
 	@Before
 	public void setUp() throws Exception {
-		game = new DeathMatch();
+		dm = new DeathMatch();
+		dm.start("kirito", CollideObjectManager.collideObjecctClass.SwordMan, 0);
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		game = null;
+		dm = null;
 	}
 
 	@Test
 	public void testStart() {
-		game.start("kirito", CollideObjectManager.collideObjecctClass.SwordMan, 0);
-		assertNotNull("ObjectMangager should be created!", game.myObjManager);
+		assertNotNull("ObjectMangager should be created!", dm.myObjManager);
 	}
+	
+	@Test
+	public void testGetClient() {
+		assertNotNull("Client should be created and available!", dm.getClient());
+	}
+	/**************************************************************************/
+	
 
+	/**************************************************************************/
+	// test update in DeathMatch
 	@Test
 	public void testUpdate_forContinue() {
-		game.start("kirito", CollideObjectManager.collideObjecctClass.SwordMan, 0);
-		
-		
+		System.out.println(dm.myObjManager.collideObjectList);
 	}
 	
 	@Test
 	public void testUpdate_forPlayerDead() {
-		game.start("kirito", CollideObjectManager.collideObjecctClass.SwordMan, 0);
 		
 		
 	}
 	
 	@Test
 	public void testUpdate_forPlayerWin() {
-		game.start("kirito", CollideObjectManager.collideObjecctClass.SwordMan, 0);
 		
 		
 	}
 	
-	@Test
-	public void testGetClient() {
-		assertNotNull("Client should be created!", game.getClient());
-	}
+	
 
 }

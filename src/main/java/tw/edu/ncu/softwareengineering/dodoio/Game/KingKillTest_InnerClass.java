@@ -8,10 +8,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character.TeamName;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Position;
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.SwordMan;
 
 public class KingKillTest_InnerClass {
 	private KingKill game;
+	private SwordMan mainPlayer;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -23,7 +27,9 @@ public class KingKillTest_InnerClass {
 	@Before
 	public void setUp() throws Exception {
 		game = new KingKill();
+		mainPlayer = new SwordMan(0, "kirito", TeamName.deathMatch, new Position(0, 0, 0.0), game.myObjManager, 0);
 		game.start("kirito", CollideObjectManager.collideObjecctClass.SwordMan, 1);
+		game.myObjManager.setMainPlayer(mainPlayer);
 	}
 
 	@After
@@ -37,7 +43,8 @@ public class KingKillTest_InnerClass {
 		System.out.println(game.myObjManager.collideObjectList);
 		assertEquals("It should be only 1 player!", 1, num);
 	}
-
+	/*****************************************************************************/
+	//For InnerStateMachine Test
 	@Test
 	public void testInnerStateMachineRun_0_to_1() {
 		game.activePlayerNum = 1;

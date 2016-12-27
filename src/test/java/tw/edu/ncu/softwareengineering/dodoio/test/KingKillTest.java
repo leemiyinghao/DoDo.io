@@ -13,7 +13,7 @@ import tw.edu.ncu.softwareengineering.dodoio.Game.Game;
 import tw.edu.ncu.softwareengineering.dodoio.Game.KingKill;
 
 public class KingKillTest {
-	private KingKill game;
+	private KingKill kk;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -24,80 +24,100 @@ public class KingKillTest {
 
 	@Before
 	public void setUp() throws Exception {
-		game = new KingKill();
-		
-		game.start("kirito", CollideObjectManager.collideObjecctClass.SwordMan, 1);
-		
+		kk = new KingKill();
+		kk.start("kirito", CollideObjectManager.collideObjecctClass.SwordMan, 1);
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		game = null;
+		kk = null;
 	}
 
 	@Test
 	public void testStart() {
-		assertNotNull("CollideObjectManager should be created!", game.myObjManager);
+		assertNotNull("CollideObjectManager should be created!", kk.myObjManager);
 	}
-
+	
 	@Test
-	public void testUpdate() {
-		fail("Not yet implemented");
+	public void testGetClient() {
+		assertNotNull("It's not set and should be false!", kk.getClient());
 	}
-
-	@Test
-	public void testGetFriendPlayerKingID() {
-		int id = 123;
-		Game game2 = (Game)game;
-		game2.setFriendPlayerKingID(id);
-		assertEquals("It should be the same!", id, game2.getFriendPlayerKingID());
-	}
-
-	@Test
-	public void testGetEnemyPlayerKingID() {
-		int id = 456;
-		Game game2 = (Game)game;
-		game2.setEnemyPlayerKingID(id);
-		assertEquals("It should be the same!", id, game2.getEnemyPlayerKingID());
-	}
-
-	@Test
-	public void testSetFriendPlayerKingID() {
-		int id = 789;
-		Game game2 = (Game)game;
-		game2.setFriendPlayerKingID(id);
-		assertEquals("It should be the same!", id, game2.getFriendPlayerKingID());
-	}
-
-	@Test
-	public void testSetEnemyPlayerKingID() {
-		int id = 678;
-		Game game2 = (Game)game;
-		game2.setEnemyPlayerKingID(id);
-		assertEquals("It should be the same!", id, game2.getEnemyPlayerKingID());
-	}
-
+	
+	/**************************************************************************/
+	// CheckEmemyKing_isSet / notSet method in class KingKill
 	@Test
 	public void testCheckEnemyKing_NotSet() {
-		assertFalse("If not set, it should be -1!", game.CheckEnemyKing());
+		assertFalse("It's not set and should be false!", kk.CheckEnemyKing());
 	}
 	
 	@Test
 	public void testCheckEnemyKing_IsSet() {
 		int id = 10;
-		game.setEnemyPlayerKingID(id);
-		assertTrue("It's set and should be true!", game.CheckEnemyKing());
+		Game game2 = (Game)this.kk;
+		game2.setEnemyPlayerKingID(id);
+		assertTrue("It's set and should be true!", kk.CheckEnemyKing());
 	}
+	/**************************************************************************/
 
+	/**************************************************************************/
+	// CheckFriendKing_isSet / notSet method in class KingKill
 	@Test
 	public void testCheckFriendKing_NotSet() {
-		assertFalse("If not set, it should be false!", game.CheckFriendKing());
+		assertFalse("It's not set and should be false!", kk.CheckFriendKing());
 	}
 	
 	@Test
 	public void testCheckFriendKing_IsSet() {
-		
-		assertTrue("It's set and should be true!", game.CheckFriendKing());
+		int id = 20;
+		kk.setFriendPlayerKingID(id);
+		assertTrue("It's set and should be true!", kk.CheckFriendKing());
+	}
+	/**************************************************************************/
+	
+	/**************************************************************************/
+	// Get_King_ID method in class Game
+	@Test
+	public void testGetFriendPlayerKingID() {
+		int id = 123;
+		Game game2 = (Game)kk;
+		game2.setFriendPlayerKingID(id);
+		assertEquals("It should be the same!", id, kk.getFriendPlayerKingID());
+	}
+
+	@Test
+	public void testGetEnemyPlayerKingID() {
+		int id = 456;
+		Game game2 = (Game)kk;
+		game2.setEnemyPlayerKingID(id);
+		assertEquals("It should be the same!", id, kk.getEnemyPlayerKingID());
+	}
+	/**************************************************************************/
+	
+	/**************************************************************************/
+	// Set_King_ID method in class Game
+	@Test
+	public void testSetFriendPlayerKingID() {
+		int id = 789;
+		Game game2 = (Game)kk;
+		game2.setFriendPlayerKingID(id);
+		assertEquals("It should be the same!", id, kk.getFriendPlayerKingID());
+	}
+
+	@Test
+	public void testSetEnemyPlayerKingID() {
+		int id = 678;
+		Game game2 = (Game)kk;
+		game2.setEnemyPlayerKingID(id);
+		assertEquals("It should be the same!", id, kk.getEnemyPlayerKingID());
+	}
+	/**************************************************************************/
+	
+	
+	/**************************************************************************/
+	// test update in KingKill
+	@Test
+	public void testUpdate() {
+		//fail("Not yet implemented");
 	}
 
 }
