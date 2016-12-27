@@ -46,7 +46,8 @@ public final class Main {
 				System.out.println("You decide to create a client!");
 				myCOM = new CollideObjectManager();
 				myMap = new Map();
-				myRenderer =  new Renderer(myCOM, myMap);
+				myRenderer = new Renderer(myCOM, myMap);
+				myRenderer.setVisible(true);
 				break;
 			default:
         }

@@ -52,14 +52,6 @@ public class Server
 		// initial CDC
 		cdc = new CDC();
 		
-		//initial mobclient and start client
-		mobclients = new ArrayList<MOBclient>();
-		mobclients.add(new MOBclient(this, 0));
-		mobclients.add(new MOBclient(this, 1));
-		new Thread(mobclients.get(0)).start();
-		new Thread(mobclients.get(1)).start();
-		
-		
 		// initial gson
 		gsonBuilder = new GsonBuilder();
 		gsonBuilder.registerTypeAdapterFactory(new ColliderTypeAdapterFactory());
@@ -88,6 +80,14 @@ public class Server
 		king = new int[2];
 		king[0] = -1;
 		king[1] = -1;
+		
+		//initial mobclient and start client
+		mobclients = new ArrayList<MOBclient>();
+		mobclients.add(new MOBclient(this, 0));
+		mobclients.add(new MOBclient(this, 1));
+		
+		new Thread(mobclients.get(0)).start();
+		new Thread(mobclients.get(1)).start();
 		
 	}
 

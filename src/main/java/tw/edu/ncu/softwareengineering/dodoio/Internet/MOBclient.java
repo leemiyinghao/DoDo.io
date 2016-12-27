@@ -36,6 +36,7 @@ public class MOBclient implements Runnable
 			try
 			{
 				server.cdc.collideObjectManager[mode].addFertilizer(collideObjecctClass.Fertilizer, server.idcount[mode], server.randposition() , Size.small);
+				
 				++smallcount;
 				++server.idcount[mode];
 			} 
