@@ -2,6 +2,8 @@ package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import static org.junit.Assert.*;
 
+import java.awt.Image;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -89,6 +91,12 @@ public class CollideObjectTest {
 		assertFalse("player still alive", playerTest.isDead());
 		playerTest.dead();
 		assertTrue("player die", playerTest.isDead());
+	}
+
+	@Test
+	public void getImageTest() {
+		Image playerImage = playerTest.getImage();
+		assertEquals("test image getted", CollideObjectManager.collideObjectImages[playerTest.className], playerImage);
 	}
 
 }

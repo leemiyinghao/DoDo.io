@@ -11,8 +11,6 @@ import org.junit.Test;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character.TeamName;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager.collideObjecctClass;
 import tw.edu.ncu.softwareengineering.dodoio.Game.DeathMatch;
-import tw.edu.ncu.softwareengineering.dodoio.Game.Game;
-import tw.edu.ncu.softwareengineering.dodoio.Game.GameState;
 
 public class CollideObjectManagerTest {
 	CollideObjectManager manager;
