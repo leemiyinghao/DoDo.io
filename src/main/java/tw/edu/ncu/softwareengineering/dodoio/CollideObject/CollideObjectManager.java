@@ -43,7 +43,7 @@ public class CollideObjectManager{
 		collideObjectList = new ArrayList<CollideObject>(0);
 	}
 	
-	private void loadImages() throws IOException {
+	void loadImages() throws IOException {
 		collideObjectImages = new BufferedImage[collideObjecctClass.values().length];
 		collideObjectImages[collideObjecctClass.Archer.ordinal()] = ImageIO.read(new FileInputStream("Resource/Archer.png"));
 		collideObjectImages[collideObjecctClass.Arrow.ordinal()] = ImageIO.read(new FileInputStream("Resource/Arrow.png"));

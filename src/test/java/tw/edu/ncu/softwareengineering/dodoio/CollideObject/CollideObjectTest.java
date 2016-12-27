@@ -3,6 +3,7 @@ package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 import static org.junit.Assert.*;
 
 import java.awt.Image;
+import java.io.IOException;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -95,6 +96,12 @@ public class CollideObjectTest {
 
 	@Test
 	public void getImageTest() {
+		try {
+			manager.loadImages();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Image playerImage = playerTest.getImage();
 		assertEquals("test image getted", CollideObjectManager.collideObjectImages[playerTest.className], playerImage);
 	}
