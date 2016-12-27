@@ -32,6 +32,7 @@ public class Obstacle extends NonPlayer {
 
     @Override
     public void move(Position nextPosition) {
+        setFlag();
         position = nextPosition;
         collider.update(nextPosition);
     }
@@ -43,6 +44,7 @@ public class Obstacle extends NonPlayer {
 
     @Override
     public void onCollide(CollideObject whichObjectCollideThis) {
+        setFlag();
         if(whichObjectCollideThis.isDead())
             return;
         if (whichObjectCollideThis instanceof Obstacle)

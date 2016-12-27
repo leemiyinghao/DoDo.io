@@ -81,6 +81,7 @@ public abstract class Character extends CollideObject {
 	{
 		position = nextPosition;
 		collider.update(nextPosition);
+		setFlag();
 		client.update();
 	};
 	
@@ -312,11 +313,15 @@ public abstract class Character extends CollideObject {
         if(whichObjectCollideThis.isDead())
             return;
         if (whichObjectCollideThis instanceof AttackObject) {
-            if (!(((AttackObject) whichObjectCollideThis).player.team == this.team))
+            if (!(((AttackObject) whichObjectCollideThis).player.team == this.team)) {
                 this.beAttacked(whichObjectCollideThis);
+                setFlag();
+            }
         } else if (whichObjectCollideThis instanceof Character) {
-            if (!(((Character) whichObjectCollideThis).team == this.team))
+            if (!(((Character) whichObjectCollideThis).team == this.team)) {
                 this.beAttacked(whichObjectCollideThis);
+            }
+            setFlag();
             //the unit vector of whichObject to this object
             Vector v = new Vector(this.position.getX() - whichObjectCollideThis.position.getX(), this.position.getY() - whichObjectCollideThis.position.getY()).normalized();
             //the relative speed;
@@ -324,6 +329,7 @@ public abstract class Character extends CollideObject {
             if (speed >= 0)
                 this.move(new Position((int) (5 * v.getX())+position.getX(), (int) (5 * v.getY())+position.getY(), this.position.getDirection()));
         } else {
+            setFlag();
             this.beAttacked(whichObjectCollideThis);
             Vector v = new Vector(this.position.getX() - whichObjectCollideThis.position.getX(), this.position.getY() - whichObjectCollideThis.position.getY()).normalized();
             this.move(new Position((int) (5 * v.getX())+position.getX(), (int) (5 * v.getY())+position.getX(), this.position.getDirection()));

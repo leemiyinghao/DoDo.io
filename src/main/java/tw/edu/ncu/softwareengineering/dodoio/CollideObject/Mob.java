@@ -35,12 +35,14 @@ public abstract class Mob extends NonPlayer {
 
     @Override
     public void move(Position nextPosition) {
+        setFlag();
         position = nextPosition;
         collider.update(nextPosition);
     }
 
     @Override
     public void onCollide(CollideObject whichObjectCollideThis) {
+        setFlag();
         if(whichObjectCollideThis.isDead())
             return;
         this.beAttacked(whichObjectCollideThis);

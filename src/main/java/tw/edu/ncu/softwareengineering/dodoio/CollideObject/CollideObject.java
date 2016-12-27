@@ -17,6 +17,7 @@ public abstract class CollideObject {
     protected Date date;
     protected Client client;
     private boolean isDead;
+    private boolean flag;// server reset it to false
 
     /**
      * set data of the object
@@ -34,6 +35,7 @@ public abstract class CollideObject {
         healthPoint = 1000;
         isInvincible = false;
         isDead = false;
+        flag = false;
         date = new Date();
     }
 
@@ -62,6 +64,13 @@ public abstract class CollideObject {
 
     protected void dead() {
         isDead = true;
+    }
+    
+    /**
+     * when move, onCollide set true.
+     */
+    void setFlag() {
+    	flag = true;
     }
 
     public boolean isInvincible() {
@@ -96,5 +105,16 @@ public abstract class CollideObject {
     public boolean isDead() {
         return isDead;
     }
+    
+    /**
+     * server reset it to false
+     */
+    public void resetFlag() {
+    	flag = false;
+    }
 
+    public boolean getFlag()
+    {
+    	return flag;
+    }
 }
