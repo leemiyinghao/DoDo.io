@@ -4,12 +4,13 @@ import tw.edu.ncu.softwareengineering.dodoio.Collide.CircleCollider;
 
 public class Fertilizer extends Mob {
 	public final int[][] breedTable = {{75, 300, 1}, {50, 600, 2}, {25, 1200, 4}};// breedTable[size][ability]
-	
+	public final int size;
 
 	public Fertilizer(int setID, Position setPosition, CollideObjectManager cOManager,
 			int className, Size setSize) {
 		super(setID, setPosition, cOManager, className);
 		// TODO Auto-generated constructor stub
+		size = setSize.ordinal();
 		if(setSize.equals(Size.large)){
 			radius = breedTable[0][0];
 			healthPoint = breedTable[0][1];
