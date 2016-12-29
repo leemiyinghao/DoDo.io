@@ -50,7 +50,7 @@ public class Server
 		clientidlist.add(new ArrayList<Integer>());
 		
 		// initial CDC
-		cdc = new CDC();
+		cdc = new CDC(this);
 		
 		// initial gson
 		gsonBuilder = new GsonBuilder();
@@ -186,16 +186,12 @@ public class Server
 		return position;
 	}
 	
-	public void broacast_update(int mode , int index)
+	public void broacast_update(int mode , CollideObject tobroacast)
 	{
 		UDPbroacast broacaster = new UDPbroacast(clientaddresslist.get(mode), clientidlist.get(mode));
 		
 		// process the broacast data
-		CollideObject target = cdc.collideObjectManager[mode].collideObjectList.get(index);
-		JsonObject data = new JsonObject();
-		data.addProperty("index", index);
-		data.add("object", gson.toJsonTree(target));
-		broacaster.broacast(data.toString());
+		broacaster.broacast(gson.toJson(tobroacast));
 		
 	}
 
@@ -255,22 +251,9 @@ public class Server
 						
 						templist.set(index,obj);
 						if(obj.getFlag())
-						{
 							server.cdc.calculatecollide(mode);
-							for(int i = 0 ; i < templist.size() ; ++i)
-							{
-								if(templist.get(i).getFlag())
-								{
-									templist.get(i).resetFlag();
-									server.broacast_update(mode, i);
-								}
-							}
-						}
 						else
-						{
-							server.broacast_update(mode , index);
-							templist.get(index).resetFlag();
-						}
+							server.broacast_update(mode , obj);
 					}
 					else
 					{

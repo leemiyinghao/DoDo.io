@@ -2,6 +2,7 @@ package tw.edu.ncu.softwareengineering.dodoio.Internet;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -48,9 +49,14 @@ public class UDPreceive implements Runnable
 				
 				// process string to object
 				broacastobj = gson.fromJson(broacaststr, JsonObject.class);
-				int index = broacastobj.get("index").getAsInt();
-				CollideObject target = gson.fromJson(broacastobj.get("objext"), game.myObjManager.collideObjectList.get(index).getClass());
-				game.myObjManager.collideObjectList.set(index, target);
+				int index = findlistindex(broacastobj.get("ID").getAsInt());
+				CollideObject target = gson.fromJson(broacaststr , game.myObjManager.collideObjectList.get(index).getClass());
+				
+				// if flag is set, means object is dead, then remove object
+				if(target.getFlag())
+					game.myObjManager.collideObjectList.remove(game.myObjManager.queryObjectByID(target.ID));
+				else
+					game.myObjManager.collideObjectList.set(index, target);
 			}
 			
 		} 
@@ -60,6 +66,18 @@ public class UDPreceive implements Runnable
 			e.printStackTrace();
 		}
 		
+	}
+	
+	private int findlistindex(int id)
+	{
+		ArrayList<CollideObject> temp = game.myObjManager.collideObjectList;
 		
+		for(int i = 0 ; i < temp.size() ; ++i)
+		{
+			if(temp.get(i).ID == id)
+				 return i;
+		}
+		
+		return -1;
 	}
 }
