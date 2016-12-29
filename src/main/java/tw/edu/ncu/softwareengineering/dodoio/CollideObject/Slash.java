@@ -16,13 +16,13 @@ public class Slash extends AttackObject {
      * @param setPosition
      * @param setPlayer
      */
-    public Slash(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
+    public Slash(int setID, CollideObjectManager cOManager, int className, Character setPlayer) {
         super(setID, cOManager, className, setPlayer);
         this.position = player.getPosition();
         player = setPlayer;
-        collider = new RectangleCollider(setPosition, width, height);
+        collider = new RectangleCollider(position, width, height);
         isInvincible = true;
-        Position.projection(player.getRadius(), setPosition);
+        Position.projection(player.getRadius(), position);
         move(position);
         damage = (int) player.damagePoint;
         priority =2;

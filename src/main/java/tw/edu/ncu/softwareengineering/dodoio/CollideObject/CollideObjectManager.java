@@ -50,8 +50,8 @@ public class CollideObjectManager{
 		Arrow arrow = new Arrow(1,  new Position(0, 0, 0), this, 1, archer);
 		ArrowStrong arrowStrong = new ArrowStrong(1,  new Position(0, 0, 0), this, 1, archer);
 		Magician magician = new Magician(1, null, TeamName.deathMatch, new Position(0, 0, 0), this, 1);
-		MagicBall magicBall = new MagicBall(1, null, this, 1, null);
-		MagicBallBig magicBallBig = new MagicBallBig(1, null, this, 1, null);
+		MagicBall magicBall = new MagicBall(1, this, 1, magician);
+		MagicBallBig magicBallBig = new MagicBallBig(1, this, 1, magician);
 		Slash slash = new Slash(1, null, this, 2, null);
 		SlashBig slasBig = new SlashBig(1, null, this, 2, null);
 		SwordMan swordMan = new SwordMan(1, null, TeamName.deathMatch, new Position(0, 0, 0), this, 4);
