@@ -96,12 +96,7 @@ public class CollideObjectTest {
 
 	@Test
 	public void getImageTest() {
-		try {
-			manager.loadImages();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		manager.loadImages();
 		Image playerImage = playerTest.getImage();
 		assertEquals("test image getted", CollideObjectManager.collideObjectImages[playerTest.className], playerImage);
 	}

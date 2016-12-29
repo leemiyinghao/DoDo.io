@@ -135,7 +135,7 @@ public class MOBclient implements Runnable
 		{
 			try
 			{
-				server.cdc.collideObjectManager[mode].addFertilizer(collideObjecctClass.Fertilizer, server.idcount[mode], server.randposition() , Size.small);
+				server.cdc.collideObjectManager[mode].addFertilizer(collideObjecctClass.FertilizerSmall, server.idcount[mode], server.randposition() , Size.small);
 				++fertilizercount[Size.small.ordinal()];
 				++server.idcount[mode];
 			} 
@@ -153,7 +153,7 @@ public class MOBclient implements Runnable
 		{
 			try
 			{
-				server.cdc.collideObjectManager[mode].addFertilizer(collideObjecctClass.Fertilizer, server.idcount[mode], server.randposition() , Size.medium);
+				server.cdc.collideObjectManager[mode].addFertilizer(collideObjecctClass.FertilizerMedium, server.idcount[mode], server.randposition() , Size.medium);
 				++fertilizercount[Size.medium.ordinal()];
 				++server.idcount[mode];
 			} 
@@ -171,7 +171,7 @@ public class MOBclient implements Runnable
 		{
 			try
 			{
-				server.cdc.collideObjectManager[mode].addFertilizer(collideObjecctClass.Fertilizer, server.idcount[mode], server.randposition() , Size.large);
+				server.cdc.collideObjectManager[mode].addFertilizer(collideObjecctClass.FertilizerBig, server.idcount[mode], server.randposition() , Size.large);
 				++fertilizercount[Size.large.ordinal()];
 				++server.idcount[mode];
 			} 

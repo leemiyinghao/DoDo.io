@@ -41,7 +41,9 @@ public class CDC
 					tohandle.resetFlag();
 				else
 				{
-					if(tohandle.className == collideObjecctClass.Fertilizer.ordinal())
+					if(tohandle.className == collideObjecctClass.FertilizerBig.ordinal() ||
+							tohandle.className == collideObjecctClass.FertilizerMedium.ordinal() || 
+							tohandle.className == collideObjecctClass.FertilizerSmall.ordinal())
 						server.mobclients.get(mode).removefertilizer(((Fertilizer)tohandle).size);
 					else if(tohandle.className == collideObjecctClass.Wanderer.ordinal())
 						server.mobclients.get(mode).removewandermonster(tohandle.ID);

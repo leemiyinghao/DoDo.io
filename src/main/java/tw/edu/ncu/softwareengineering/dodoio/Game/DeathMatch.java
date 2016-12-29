@@ -10,12 +10,7 @@ import tw.edu.ncu.softwareengineering.dodoio.Internet.Client;
 
 public class DeathMatch extends Game{
 	public void start(String playerName, CollideObjectManager.collideObjecctClass chracterclass, int gameMode){
-		try {
-			this.myObjManager = new CollideObjectManager(this);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.myObjManager = new CollideObjectManager(this);
 		this.client = new Client(this, playerName, chracterclass, gameMode);
 	}
 

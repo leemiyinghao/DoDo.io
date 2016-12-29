@@ -1,5 +1,6 @@
 package tw.edu.ncu.softwareengineering.dodoio;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;

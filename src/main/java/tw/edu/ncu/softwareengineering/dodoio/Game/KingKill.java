@@ -12,12 +12,7 @@ public class KingKill extends Game{
 	GameState inner_gamestate = GameState.ZERO;
 	int activePlayerNum = 0;
 	public void start(String playerName, CollideObjectManager.collideObjecctClass chracterclass, int gameMode){
-		try {
-			this.myObjManager = new CollideObjectManager(this);
-		} catch (IOException e) {
-			System.out.println("can't new an instance of CollideObjectManager!");
-			e.printStackTrace();
-		}
+		this.myObjManager = new CollideObjectManager(this);
 		//need to get friend and enemy King ID
 		this.client = new Client(this, playerName, chracterclass, gameMode);
 	}
