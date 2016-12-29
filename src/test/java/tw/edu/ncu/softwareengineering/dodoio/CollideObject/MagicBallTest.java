@@ -31,7 +31,7 @@ public class MagicBallTest {
 		setPosition = new Position(0, 0, 0);
 		manager = new CollideObjectManager();
 		setPlayer = new Magician(1, "archerX", TeamName.deathMatch, setPosition, manager, collideObjecctClass.Magician.ordinal());
-		magicBall = new MagicBall(4, setPosition, manager, collideObjecctClass.MagicBall.ordinal(), setPlayer);
+		magicBall = new MagicBall(4, manager, collideObjecctClass.MagicBall.ordinal(), setPlayer);
 		manager.collideObjectList.add(setPlayer);
 		manager.collideObjectList.add(magicBall);
 	}

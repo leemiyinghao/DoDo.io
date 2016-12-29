@@ -52,9 +52,9 @@ public class CollideObjectManager{
 		Magician magician = new Magician(1, null, TeamName.deathMatch, new Position(0, 0, 0), this, 1);
 		MagicBall magicBall = new MagicBall(1, this, 1, magician);
 		MagicBallBig magicBallBig = new MagicBallBig(1, this, 1, magician);
-		Slash slash = new Slash(1, null, this, 2, null);
-		SlashBig slasBig = new SlashBig(1, null, this, 2, null);
 		SwordMan swordMan = new SwordMan(1, null, TeamName.deathMatch, new Position(0, 0, 0), this, 4);
+		Slash slash = new Slash(1, this, 2, swordMan);
+		SlashBig slasBig = new SlashBig(1, this, 2, swordMan);
 		BufferedImage img = ImageIO.read(new FileInputStream("Resource/Archer.png"));
 		collideObjectImages[collideObjecctClass.Archer.ordinal()] = scaleImage(img, archer.getRadius()*2, archer.getRadius()*2);
 		img = ImageIO.read(new FileInputStream("Resource/Arrow.png"));
@@ -62,11 +62,11 @@ public class CollideObjectManager{
 		img = ImageIO.read(new FileInputStream("Resource/ArrowStrong.png"));
 		collideObjectImages[collideObjecctClass.ArrowStrong.ordinal()] = scaleImage(img, arrowStrong.width, arrowStrong.height);
 		img = ImageIO.read(new FileInputStream("Resource/Fertilizer.png"));
-		Fertilizer FBig = new Fertilizer(1, null, this, collideObjecctClass.FertilizerBig.ordinal(), Size.large);
+		Fertilizer FBig = new Fertilizer(1, new Position(0, 0, 0), this, collideObjecctClass.FertilizerBig.ordinal(), Size.large);
 		collideObjectImages[collideObjecctClass.FertilizerBig.ordinal()] = scaleImage(img, FBig.radius*2, FBig.radius*2);
-		Fertilizer FMed = new Fertilizer(1, null, this, collideObjecctClass.FertilizerMedium.ordinal(), Size.medium);
+		Fertilizer FMed = new Fertilizer(1, new Position(0, 0, 0), this, collideObjecctClass.FertilizerMedium.ordinal(), Size.medium);
 		collideObjectImages[collideObjecctClass.FertilizerMedium.ordinal()] = scaleImage(img, FMed.radius*2, FMed.radius*2);
-		Fertilizer FSma = new Fertilizer(1, null, this, collideObjecctClass.FertilizerBig.ordinal(), Size.small);
+		Fertilizer FSma = new Fertilizer(1, new Position(0, 0, 0), this, collideObjecctClass.FertilizerBig.ordinal(), Size.small);
 		collideObjectImages[collideObjecctClass.FertilizerSmall.ordinal()] = scaleImage(img, FSma.radius*2, FSma.radius*2);
 		img = ImageIO.read(new FileInputStream("Resource/MagicBall.png"));
 		collideObjectImages[collideObjecctClass.MagicBall.ordinal()] = scaleImage(img, magicBall.getRadius()*2, magicBall.getRadius()*2);
@@ -84,7 +84,7 @@ public class CollideObjectManager{
 		img = ImageIO.read(new FileInputStream("Resource/SwordMan.png"));
 		collideObjectImages[collideObjecctClass.SwordMan.ordinal()] = scaleImage(img, swordMan.getRadius()*2, swordMan.getRadius()*2);
 		img = ImageIO.read(new FileInputStream("Resource/Wanderer.png"));
-		Wanderer wanderer = new Wanderer(1, null, this, 5);
+		Wanderer wanderer = new Wanderer(1, new Position(0, 0, 0), this, 5);
 		collideObjectImages[collideObjecctClass.Wanderer.ordinal()] = scaleImage(img, wanderer.radius*2, wanderer.radius*2);
 	}
     
@@ -155,19 +155,19 @@ public class CollideObjectManager{
 			collideObjectList.add(toAddObject);
 		}
 		else if(className == collideObjecctClass.MagicBall) {
-			toAddObject = new MagicBall(inputID, setPosition, this, className.ordinal(), setPlayer);
+			toAddObject = new MagicBall(inputID, this, className.ordinal(), setPlayer);
 			collideObjectList.add(toAddObject);
 		}
 		else if(className == collideObjecctClass.MagicBallBig) {
-			toAddObject = new MagicBallBig(inputID, setPosition, this, className.ordinal(), setPlayer);
+			toAddObject = new MagicBallBig(inputID, this, className.ordinal(), setPlayer);
 			collideObjectList.add(toAddObject);
 		}
 		else if(className == collideObjecctClass.Slash) {
-			toAddObject = new Slash(inputID, setPosition, this, className.ordinal(), setPlayer);
+			toAddObject = new Slash(inputID, this, className.ordinal(), setPlayer);
 			collideObjectList.add(toAddObject);
 		}
 		else if(className == collideObjecctClass.SlashBig) {
-			toAddObject = new SlashBig(inputID, setPosition, this, className.ordinal(), setPlayer);
+			toAddObject = new SlashBig(inputID, this, className.ordinal(), setPlayer);
 			collideObjectList.add(toAddObject);
 		}
 		else
