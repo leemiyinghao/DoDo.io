@@ -52,6 +52,15 @@ public class Renderer extends JFrame{
                 drawGameTypeMenu();
                 break;
             case INGAME:
+                int result = this.game.update();
+                switch(result){
+                    case 1:
+                        this.setStat(GameStat.RESULT_LOSE);
+                        break;
+                    case 2:
+                        this.setStat(GameStat.RESULT_WIN);
+                        break;
+                }
                 drawInGameEntriesLayer();
                 drawInGameOverlay();
                 break;
