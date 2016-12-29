@@ -48,7 +48,6 @@ public class CollideObjectManager{
 		collideObjectImages[collideObjecctClass.Archer.ordinal()] = ImageIO.read(new FileInputStream("Resource/Archer.png"));
 		collideObjectImages[collideObjecctClass.Arrow.ordinal()] = ImageIO.read(new FileInputStream("Resource/Arrow.png"));
 		collideObjectImages[collideObjecctClass.ArrowStrong.ordinal()] = ImageIO.read(new FileInputStream("Resource/ArrowStrong.png"));
-		collideObjectImages[collideObjecctClass.Chaser.ordinal()] = ImageIO.read(new FileInputStream("Resource/Chaser.png"));
 		collideObjectImages[collideObjecctClass.Fertilizer.ordinal()] = ImageIO.read(new FileInputStream("Resource/Fertilizer.png"));
 		collideObjectImages[collideObjecctClass.MagicBall.ordinal()] = ImageIO.read(new FileInputStream("Resource/MagicBall.png"));
 		collideObjectImages[collideObjecctClass.MagicBallBig.ordinal()] = ImageIO.read(new FileInputStream("Resource/MagicBallBig.png"));
@@ -289,7 +288,6 @@ public class CollideObjectManager{
 		Archer,
 		Arrow,
 		ArrowStrong,
-		Chaser,
 		Fertilizer,
 		MagicBall,
 		MagicBallBig,
