@@ -2,12 +2,13 @@ package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import tw.edu.ncu.softwareengineering.dodoio.Collide.RectangleCollider;
 
+
 public class Arrow extends AttackObject {
     double traversal;
     int range;
     double arrowSpeed;
-    int height = 50;
-    int width = 4;
+    public final int height = 50;
+    public final int width = 4;
     int FPS = 20;// set for no error. this is not real
 
     public Arrow(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {

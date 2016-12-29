@@ -1,5 +1,6 @@
 package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -35,7 +36,7 @@ public class CollideObjectManager{
 	 * this is for CDC
 	 * @throws IOException 
 	 */
-	public CollideObjectManager() {
+	public CollideObjectManager() throws IOException {
 		initializeManager();
 	}
 	
@@ -45,19 +46,71 @@ public class CollideObjectManager{
 	
 	void loadImages() throws IOException {
 		collideObjectImages = new BufferedImage[collideObjecctClass.values().length];
-		collideObjectImages[collideObjecctClass.Archer.ordinal()] = ImageIO.read(new FileInputStream("Resource/Archer.png"));
-		collideObjectImages[collideObjecctClass.Arrow.ordinal()] = ImageIO.read(new FileInputStream("Resource/Arrow.png"));
-		collideObjectImages[collideObjecctClass.ArrowStrong.ordinal()] = ImageIO.read(new FileInputStream("Resource/ArrowStrong.png"));
-		collideObjectImages[collideObjecctClass.Fertilizer.ordinal()] = ImageIO.read(new FileInputStream("Resource/Fertilizer.png"));
-		collideObjectImages[collideObjecctClass.MagicBall.ordinal()] = ImageIO.read(new FileInputStream("Resource/MagicBall.png"));
-		collideObjectImages[collideObjecctClass.MagicBallBig.ordinal()] = ImageIO.read(new FileInputStream("Resource/MagicBallBig.png"));
-		collideObjectImages[collideObjecctClass.Magician.ordinal()] = ImageIO.read(new FileInputStream("Resource/Magician.png"));
+		BufferedImage img = ImageIO.read(new FileInputStream("Resource/Archer.png"));
+		Archer archer = new Archer(1, null, null, null, this, collideObjecctClass.Archer.ordinal());
+		collideObjectImages[collideObjecctClass.Archer.ordinal()] = scaleImage(img, archer.getRadius()*2, archer.getRadius()*2);
+		archer = null;
+		img = ImageIO.read(new FileInputStream("Resource/Arrow.png"));
+		Arrow arrow = new Arrow(1, null, this, 1, null);
+		collideObjectImages[collideObjecctClass.Arrow.ordinal()] = scaleImage(img, arrow.width, arrow.height);
+		arrow = null;
+		img = ImageIO.read(new FileInputStream("Resource/ArrowStrong.png"));
+		ArrowStrong arrowStrong = new ArrowStrong(1, null, this, 1, null);
+		collideObjectImages[collideObjecctClass.ArrowStrong.ordinal()] = scaleImage(img, arrowStrong.width, arrowStrong.height);
+		arrowStrong = null;
+		img = ImageIO.read(new FileInputStream("Resource/Fertilizer.png"));
+		Fertilizer FBig = new Fertilizer(1, null, this, collideObjecctClass.FertilizerBig.ordinal(), Size.large);
+		collideObjectImages[collideObjecctClass.FertilizerBig.ordinal()] = scaleImage(img, FBig.radius*2, FBig.radius*2);
+		FBig = null;
+		Fertilizer FMed = new Fertilizer(1, null, this, collideObjecctClass.FertilizerMedium.ordinal(), Size.medium);
+		collideObjectImages[collideObjecctClass.FertilizerMedium.ordinal()] = scaleImage(img, FMed.radius*2, FMed.radius*2);
+		FMed = null;
+		Fertilizer FSma = new Fertilizer(1, null, this, collideObjecctClass.FertilizerBig.ordinal(), Size.small);
+		collideObjectImages[collideObjecctClass.FertilizerSmall.ordinal()] = scaleImage(img, FSma.radius*2, FSma.radius*2);
+		FSma = null;
+		img = ImageIO.read(new FileInputStream("Resource/MagicBall.png"));
+		MagicBall magicBall = new MagicBall(1, null, this, 1, null);
+		collideObjectImages[collideObjecctClass.MagicBall.ordinal()] = scaleImage(img, magicBall.getRadius()*2, magicBall.getRadius()*2);
+		magicBall = null;
+		img = ImageIO.read(new FileInputStream("Resource/MagicBallBig.png"));
+		MagicBallBig magicBallBig = new MagicBallBig(1, null, this, 1, null);
+		collideObjectImages[collideObjecctClass.MagicBallBig.ordinal()] = scaleImage(img, magicBallBig.getRadius()*2, magicBallBig.getRadius()*2);
+		magicBallBig = null;
+		img = ImageIO.read(new FileInputStream("Resource/Magician.png"));
+		Magician magician = new Magician(1, null, null, null, null, 1);
+		collideObjectImages[collideObjecctClass.Magician.ordinal()] = scaleImage(img, magician.getRadius()*2, magician.getRadius()*2);
+		magician = null;
+		
 		collideObjectImages[collideObjecctClass.Obstacle.ordinal()] = ImageIO.read(new FileInputStream("Resource/Obstacle.png"));
-		collideObjectImages[collideObjecctClass.Slash.ordinal()] = ImageIO.read(new FileInputStream("Resource/Slash.png"));;
-		collideObjectImages[collideObjecctClass.SlashBig.ordinal()] = ImageIO.read(new FileInputStream("Resource/SlashBig.png"));
-		collideObjectImages[collideObjecctClass.SwordMan.ordinal()] = ImageIO.read(new FileInputStream("Resource/SwordMan.png"));
-		collideObjectImages[collideObjecctClass.Wanderer.ordinal()] = ImageIO.read(new FileInputStream("Resource/Wanderer.png"));
+		
+		img = ImageIO.read(new FileInputStream("Resource/Slash.png"));
+		Slash slash = new Slash(1, null, this, 2, null);
+		collideObjectImages[collideObjecctClass.Slash.ordinal()] = scaleImage(img, slash.width, slash.height);
+		slash = null;
+		img = ImageIO.read(new FileInputStream("Resource/SlashBig.png"));
+		SlashBig slasBig = new SlashBig(1, null, this, 2, null);
+		collideObjectImages[collideObjecctClass.SlashBig.ordinal()] = scaleImage(img, slasBig.width, slasBig.height);
+		slasBig = null;
+		img = ImageIO.read(new FileInputStream("Resource/SwordMan.png"));
+		SwordMan swordMan = new SwordMan(1, null, null, null, this, 4);
+		collideObjectImages[collideObjecctClass.SwordMan.ordinal()] = scaleImage(img, swordMan.getRadius()*2, swordMan.getRadius()*2);
+		swordMan = null;
+		img = ImageIO.read(new FileInputStream("Resource/Wanderer.png"));
+		Wanderer wanderer = new Wanderer(1, null, this, 5);
+		collideObjectImages[collideObjecctClass.Wanderer.ordinal()] = scaleImage(img, wanderer.radius*2, wanderer.radius*2);
+		wanderer = null;
 	}
+    
+    protected BufferedImage scaleImage(java.awt.image.BufferedImage appearanece, int w, int h) {
+    	// creates output image
+        BufferedImage outputImage = new BufferedImage(w,
+                h, appearanece.getType());
+        // scales the input image to the output image
+        Graphics2D g2d = outputImage.createGraphics();
+        g2d.drawImage(appearanece, 0, 0, 25, 25, null);
+        g2d.dispose();
+    	return outputImage;
+    }
 	
 	/**
 	 * add character to list
@@ -177,7 +230,7 @@ public class CollideObjectManager{
 			throw new Exception("client try to add collide object");
 		
 		CollideObject toAddObject;
-		if(className == collideObjecctClass.Fertilizer) {
+		if(className == collideObjecctClass.FertilizerBig) {
 			toAddObject = new Fertilizer(inputID, setPosition, this, className.ordinal(), setSize);
 			collideObjectList.add(toAddObject);
 		}
@@ -288,7 +341,9 @@ public class CollideObjectManager{
 		Archer,
 		Arrow,
 		ArrowStrong,
-		Fertilizer,
+		FertilizerBig,
+		FertilizerMedium,
+		FertilizerSmall,
 		MagicBall,
 		MagicBallBig,
 		Magician,

@@ -2,6 +2,7 @@ package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 
 import tw.edu.ncu.softwareengineering.dodoio.Collide.CircleCollider;
 
+
 public class MagicBall extends AttackObject {
     int radius;
     int range;
@@ -21,6 +22,10 @@ public class MagicBall extends AttackObject {
         priority =1;
         Position.projection(player.getRadius(), position);
         move(position);
+    }
+    
+    public int getRadius() {
+		return radius;
     }
 
     @Override
@@ -57,4 +62,5 @@ public class MagicBall extends AttackObject {
             updateTime -= 1000 / FPS;
         }
     }
+    
 }
