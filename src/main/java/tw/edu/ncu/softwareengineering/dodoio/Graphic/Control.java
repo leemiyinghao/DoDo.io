@@ -31,6 +31,8 @@ public class Control extends MouseAdapter implements KeyListener {
     public Control(CollideObjectManager collideObjectManager, Renderer renderer){
         this.collideObjectManager = collideObjectManager;
         this.renderer = renderer;
+        this.menuBtnList = new ArrayList<Button>();
+        this.inGameBtnList = new ArrayList<Button>();
     }
 
     public void update(int timeDiff){

@@ -1,5 +1,8 @@
 package tw.edu.ncu.softwareengineering.dodoio.Graphic;
 
+import tw.edu.ncu.softwareengineering.dodoio.Collide.CircleCollider;
+import tw.edu.ncu.softwareengineering.dodoio.Collide.Collider;
+import tw.edu.ncu.softwareengineering.dodoio.Collide.RectangleCollider;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Character;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObject;
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
@@ -52,9 +55,21 @@ public class Renderer extends JFrame{
                 drawGameTypeMenu();
                 break;
             case INGAME:
+                int result = this.game.update();
+                switch(result){
+                    case 1:
+                        this.setStat(GameStat.RESULT_LOSE);
+                        break;
+                    case 2:
+                        this.setStat(GameStat.RESULT_WIN);
+                        break;
+                }
                 drawInGameEntriesLayer();
                 drawInGameOverlay();
                 break;
+            case RESULT_LOSE:
+            case RESULT_WIN:
+                drawResult();
         }
     }
     private Position getRealPositionByPercentage(float x, float y){
@@ -82,7 +97,21 @@ public class Renderer extends JFrame{
     }
     private void drawInGameEntriesLayer(){
         for (CollideObject object: collideObjectManager.collideObjectList) {
+
             printOnScreen(object.getPosition(), (Image)object.getImage());
+
+            Position size;
+            Collider collider = object.getCollider();
+            if (collider instanceof CircleCollider){
+                size = getRealPositionByPercentage(2/windowContainSize[0]*((CircleCollider) collider).getRadius(),
+                        2/windowContainSize[1]*((CircleCollider) collider).getRadius());
+            }else if (collider instanceof RectangleCollider){
+                float width = (float) ((((RectangleCollider) collider).getPoints()[2].x - ((RectangleCollider) collider).getPoints()[0].x)*windowContainSize[0]);
+                float height = (float) ((((RectangleCollider) collider).getPoints()[2].y - ((RectangleCollider) collider).getPoints()[0].y)*windowContainSize[0]);
+                size = getRealPositionByPercentage(width, height);
+            }
+            printOnScreen(object.getPosition(), (Image)object.getImage());
+
         }
     }
     private void drawResult() {
@@ -122,7 +151,7 @@ public class Renderer extends JFrame{
     }
 }
 class StartDeathMatchBtn extends Button{
-    private Renderer renderer;
+    public Renderer renderer;
     public StartDeathMatchBtn(Renderer renderer){
         this.renderer = renderer;
     }
