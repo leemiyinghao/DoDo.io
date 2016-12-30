@@ -10,6 +10,7 @@ import tw.edu.ncu.softwareengineering.dodoio.CollideObject.Position;
 import tw.edu.ncu.softwareengineering.dodoio.Game.*;
 
 import javax.swing.*;
+
 import java.awt.*;
 
 /**
@@ -17,10 +18,10 @@ import java.awt.*;
  */
 public class Renderer extends JFrame{
 
-    private CollideObjectManager collideObjectManager;
+    public CollideObjectManager collideObjectManager;
     private Map map;
     private GameStat gameStat;
-    private Character mainCharacter;
+    public Character mainCharacter;
     private float[] windowContainSize = {30f, 9f};
     private Image overlayBasic;
     private Image menuBasic;
@@ -48,8 +49,17 @@ public class Renderer extends JFrame{
         upgradeHP.position = getRealPositionByPercentage(0f, 0.96f);
         upgradeHP.size = getRealPositionByPercentage(0.04f, 0.02f);
         this.control.addInGameBtn(upgradeHP);
+        
     }
     public void render(int timeOffsetInMs){
+    	/*try {
+			System.out.println("inrender X:" + this.collideObjectManager.queryObjectByID(0).getPosition().getX() + " Y:"+ 
+					this.collideObjectManager.queryObjectByID(0).getPosition().getY());
+			
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}*/
         switch(getStat()){
             case MAINMENU:
                 drawGameTypeMenu();
@@ -102,14 +112,14 @@ public class Renderer extends JFrame{
 
             Position size;
             Collider collider = object.getCollider();
-            if (collider instanceof CircleCollider){
+            /*if (collider instanceof CircleCollider){
                 size = getRealPositionByPercentage(2/windowContainSize[0]*((CircleCollider) collider).getRadius(),
                         2/windowContainSize[1]*((CircleCollider) collider).getRadius());
             }else if (collider instanceof RectangleCollider){
                 float width = (float) ((((RectangleCollider) collider).getPoints()[2].x - ((RectangleCollider) collider).getPoints()[0].x)*windowContainSize[0]);
                 float height = (float) ((((RectangleCollider) collider).getPoints()[2].y - ((RectangleCollider) collider).getPoints()[0].y)*windowContainSize[0]);
                 size = getRealPositionByPercentage(width, height);
-            }
+            }*/
             printOnScreen(object.getPosition(), (Image)object.getImage());
 
         }

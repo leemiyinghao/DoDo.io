@@ -25,6 +25,10 @@ public abstract class Game {
 	public void setEnemyPlayerKingID(int id) {
 		this.enemyPlayerKingID = id;
 	}
+	
+	public CollideObjectManager getCollideObjectManager(){
+		return this.myObjManager;
+	}
 	public abstract void start(String playerName, CollideObjectManager.collideObjecctClass chracterclass, int gameMode);
 	public abstract GameState update();
 	

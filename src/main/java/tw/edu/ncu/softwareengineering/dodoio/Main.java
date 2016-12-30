@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.swing.JFrame;
 
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
+import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager.collideObjecctClass;
+import tw.edu.ncu.softwareengineering.dodoio.Game.DeathMatch;
 import tw.edu.ncu.softwareengineering.dodoio.Graphic.Control;
 import tw.edu.ncu.softwareengineering.dodoio.Graphic.GameStat;
 import tw.edu.ncu.softwareengineering.dodoio.Graphic.Map;
@@ -57,14 +59,33 @@ public final class Main {
 				myRenderer = new Renderer(myCOM, myMap);
 				myRenderer.setTitle("DoDo.io");
 				myControl = new Control(myCOM, myRenderer);
-				myRenderer.setStat(GameStat.MAINMENU);
+				//myRenderer.setStat(GameStat.MAINMENU);
+				myRenderer.setStat(GameStat.INGAME);
+				myRenderer.game = new DeathMatch();
+				myRenderer.game.start("fuck", collideObjecctClass.Archer, 0);
+				myRenderer.collideObjectManager = myRenderer.game.getCollideObjectManager();
+				myControl.collideObjectManager = myRenderer.game.getCollideObjectManager();
 				
+			try {
+				myRenderer.mainCharacter = myRenderer.collideObjectManager.getMyPlayer();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 				myRenderer.addKeyListener(myControl);
 				myRenderer.setSize(1024, 768);
 				myRenderer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				myRenderer.setVisible(true);
+				/*try {
+					System.out.println("X:" + myRenderer.collideObjectManager.queryObjectByID(0).getPosition().getX() + " Y:"+ 
+							myRenderer.collideObjectManager.queryObjectByID(0).getPosition().getY());
+					
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}*/
 				
 				myRenderer.pack();
+				myRenderer.setVisible(true);
 				long oldTime = System.currentTimeMillis();
 				while(true) {
 					long newTime = System.currentTimeMillis();

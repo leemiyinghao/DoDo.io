@@ -26,11 +26,12 @@ public class UDPbroacast
 		 */
 		try
 		{
-			DatagramSocket socket = new DatagramSocket();
-			DatagramPacket packet = new DatagramPacket(broacastdata.getBytes(), broacastdata.getBytes().length);
+			
 			
 			for(int i = 0 ; i < clientlist.size() ; ++i)
 			{
+				DatagramSocket socket = new DatagramSocket(10000 + idlist.get(i));
+				DatagramPacket packet = new DatagramPacket(broacastdata.getBytes(), broacastdata.getBytes().length);
 				packet.setAddress(clientlist.get(i));
 				packet.setPort(10000 + idlist.get(i));
 				

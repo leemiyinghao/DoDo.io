@@ -18,7 +18,7 @@ import static java.lang.Math.atan2;
  * Created by leemiyinghao on 2016/12/22.
  */
 public class Control extends MouseAdapter implements KeyListener {
-    private CollideObjectManager collideObjectManager;
+    public CollideObjectManager collideObjectManager;
     private Renderer renderer;
     private boolean wPressed = false;
     private boolean aPressed = false;

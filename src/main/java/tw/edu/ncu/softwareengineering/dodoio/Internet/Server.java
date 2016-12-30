@@ -144,7 +144,7 @@ public class Server
 					++playercount[mode];
 					
 					// sending collideobject list to client
-					wdata.writeInt(idcount[mode]);
+					wdata.writeInt(idcount[mode] - 1);
 					wdata.flush();
 										
 					for(CollideObject object : cdc.collideObjectManager[mode].collideObjectList)
