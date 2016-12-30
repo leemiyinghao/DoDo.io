@@ -55,7 +55,7 @@ public class Renderer extends JFrame{
                 drawGameTypeMenu();
                 break;
             case INGAME:
-                int result = this.game.update();
+                int result = this.game.update().ordinal();
                 switch(result){
                     case 1:
                         this.setStat(GameStat.RESULT_LOSE);
