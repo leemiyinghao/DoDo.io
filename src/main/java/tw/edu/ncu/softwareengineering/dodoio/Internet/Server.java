@@ -234,7 +234,8 @@ public class Server
 			 * handle the inputstream exception
 			 */
 
-			while(true)
+			
+			while(clientsocket.isConnected())
 			{
 				try
 				{
@@ -269,7 +270,9 @@ public class Server
 				catch (Exception e)
 				{
 					// TODO: handle exception
-					e.printStackTrace();
+					//e.printStackTrace();
+					
+					break;
 				}
 				
 			}

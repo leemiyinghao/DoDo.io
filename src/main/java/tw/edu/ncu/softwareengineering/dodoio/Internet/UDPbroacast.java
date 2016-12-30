@@ -27,15 +27,15 @@ public class UDPbroacast
 		try
 		{
 			
-			
 			for(int i = 0 ; i < clientlist.size() ; ++i)
 			{
-				DatagramSocket socket = new DatagramSocket(10000 + idlist.get(i));
+				DatagramSocket socket = new DatagramSocket();
 				DatagramPacket packet = new DatagramPacket(broacastdata.getBytes(), broacastdata.getBytes().length);
 				packet.setAddress(clientlist.get(i));
 				packet.setPort(10000 + idlist.get(i));
 				
 				socket.send(packet);
+				socket.close();
 			}
 			
 		} 

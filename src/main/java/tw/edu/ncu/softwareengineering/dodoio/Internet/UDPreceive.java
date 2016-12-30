@@ -46,7 +46,9 @@ public class UDPreceive implements Runnable
 			{
 				socket.receive(packet);
 				broacaststr = new String(packet.getData());
-				
+				int temp = broacaststr.indexOf("flag");
+				temp = broacaststr.indexOf("}", temp);
+				broacaststr = broacaststr.substring(0, temp+1);
 				// process string to object
 				broacastobj = gson.fromJson(broacaststr, JsonObject.class);
 				int index = findlistindex(broacastobj.get("ID").getAsInt());

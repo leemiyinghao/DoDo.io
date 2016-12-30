@@ -82,7 +82,8 @@ public abstract class Character extends CollideObject {
 		position = nextPosition;
 		collider.update(nextPosition);
 		setFlag();
-		client.update();
+		if(client != null)
+			client.update();
 	};
 	
 	@Override
