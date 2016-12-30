@@ -23,7 +23,7 @@ public final class Main {
 		Map myMap = null;
 		Renderer myRenderer = null;
 		Control myControl = null;
-		JFrame frame = null;
+		//JFrame frame = null;
 		
 		Scanner scanner = new Scanner(System.in);
 		String choice = "123";
@@ -53,19 +53,18 @@ public final class Main {
 				System.out.println("You decide to create a client!");
 				myCOM = new CollideObjectManager();
 				myMap = new Map();
-				frame = new JFrame("DoDo.io");
-				
+
 				myRenderer = new Renderer(myCOM, myMap);
+				myRenderer.setTitle("DoDo.io");
 				myControl = new Control(myCOM, myRenderer);
 				myRenderer.setStat(GameStat.MAINMENU);
 				
-				frame.addKeyListener(myControl);
-				frame.add(myRenderer);
-				frame.setSize(1024, 768);
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				frame.setVisible(true);
+				myRenderer.addKeyListener(myControl);
+				myRenderer.setSize(1024, 768);
+				myRenderer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				myRenderer.setVisible(true);
 				
-				frame.pack();
+				myRenderer.pack();
 				long oldTime = System.currentTimeMillis();
 				while(true) {
 					long newTime = System.currentTimeMillis();
