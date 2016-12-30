@@ -15,7 +15,7 @@ public class MagicBall extends AttackObject {
         this.position = player.getPosition();
         collider = new CircleCollider(position, radius);
         ballSpeed = player.getSpeed() * 3;
-        radius = 12;
+        radius = (int) (player.getRadius()*1.8);
         traversal = 0;
         range = (int) (player.getRadius() * 2 * 12);// maybe the range is for the arrow fly for 5 seconds
         damage = (int) player.damagePoint;
