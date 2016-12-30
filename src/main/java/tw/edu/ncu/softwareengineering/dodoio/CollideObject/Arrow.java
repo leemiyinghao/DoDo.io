@@ -7,8 +7,8 @@ public class Arrow extends AttackObject {
     double traversal;
     int range;
     double arrowSpeed;
-    public final int height = 50;
-    public final int width = 4;
+    public final int height;
+    public final int width;
     int FPS = 20;// set for no error. this is not real
 
     public Arrow(int setID, Position setPosition, CollideObjectManager cOManager, int className, Character setPlayer) {
@@ -18,6 +18,8 @@ public class Arrow extends AttackObject {
         range = (int) (player.getRadius() * 2 * 24);
         traversal = 0;
         arrowSpeed = player.getSpeed() * 4;
+        height = player.getRadius() * 2;
+        width = height/10;
         collider = new RectangleCollider(setPosition, width, height);
         priority =0;
         Position.projection(player.getRadius(), setPosition);

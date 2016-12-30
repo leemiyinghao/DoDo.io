@@ -3,8 +3,8 @@ package tw.edu.ncu.softwareengineering.dodoio.CollideObject;
 import tw.edu.ncu.softwareengineering.dodoio.Collide.RectangleCollider;
 
 public class Slash extends AttackObject {
-    int height = 35;
-    int width = 25;
+    int height;
+    int width;
     int FPS = 20;// set for no error. this is not real
     double slashTime = 0.5;
 
@@ -20,6 +20,8 @@ public class Slash extends AttackObject {
         super(setID, cOManager, className, setPlayer);
         this.position = player.getPosition();
         player = setPlayer;
+        width = (int) (player.getRadius()*2);
+        height = player.getRadius();
         collider = new RectangleCollider(position, width, height);
         isInvincible = true;
         Position.projection(player.getRadius(), position);
