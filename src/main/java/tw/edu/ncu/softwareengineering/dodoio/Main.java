@@ -1,9 +1,11 @@
 package tw.edu.ncu.softwareengineering.dodoio;
 
-import java.io.IOException;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
+import tw.edu.ncu.softwareengineering.dodoio.Graphic.GameStat;
 import tw.edu.ncu.softwareengineering.dodoio.Graphic.Map;
 import tw.edu.ncu.softwareengineering.dodoio.Graphic.Renderer;
 import tw.edu.ncu.softwareengineering.dodoio.Internet.Server;
@@ -48,6 +50,11 @@ public final class Main {
 				myCOM = new CollideObjectManager();
 				myMap = new Map();
 				myRenderer = new Renderer(myCOM, myMap);
+				myRenderer.setTitle("DoDo.io");
+				myRenderer.setSize(1024, 768);
+				myRenderer.setStat(GameStat.MAINMENU);
+				myRenderer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				myRenderer.render(33); // 1/30 sec. = 33.3 msec.
 				myRenderer.setVisible(true);
 				break;
 			default:
