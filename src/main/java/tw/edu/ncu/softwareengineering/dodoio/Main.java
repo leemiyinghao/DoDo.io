@@ -5,6 +5,7 @@ import java.util.Scanner;
 import javax.swing.JFrame;
 
 import tw.edu.ncu.softwareengineering.dodoio.CollideObject.CollideObjectManager;
+import tw.edu.ncu.softwareengineering.dodoio.Graphic.Control;
 import tw.edu.ncu.softwareengineering.dodoio.Graphic.GameStat;
 import tw.edu.ncu.softwareengineering.dodoio.Graphic.Map;
 import tw.edu.ncu.softwareengineering.dodoio.Graphic.Renderer;
@@ -20,6 +21,8 @@ public final class Main {
 		CollideObjectManager myCOM = null;
 		Map myMap = null;
 		Renderer myRenderer = null;
+		Control myControl = null;
+		JFrame frame = null;
 		
 		Scanner scanner = new Scanner(System.in);
 		String choice = "123";
@@ -49,15 +52,29 @@ public final class Main {
 				System.out.println("You decide to create a client!");
 				myCOM = new CollideObjectManager();
 				myMap = new Map();
+				frame = new JFrame("DoDo.io");
+				
 				myRenderer = new Renderer(myCOM, myMap);
-				myRenderer.setTitle("DoDo.io");
-				myRenderer.setSize(1024, 768);
+				myControl = new Control(myCOM, myRenderer);
 				myRenderer.setStat(GameStat.MAINMENU);
-				myRenderer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				myRenderer.render(33); // 1/30 sec. = 33.3 msec.
-				myRenderer.setVisible(true);
-				break;
-			default:
+				
+				frame.addKeyListener(myControl);
+				frame.add(myRenderer);
+				frame.pack();
+				frame.setSize(1024, 768);
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setVisible(true);
+				while(true) {
+					myControl.update(33);
+					try {
+						Thread.sleep(5);
+					}catch(InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+		default:
+				System.out.println("You should never see this line!");
         }
 	}
 }
