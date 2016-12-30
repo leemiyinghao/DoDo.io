@@ -225,7 +225,9 @@ public class CollideObjectManager{
 			throw new Exception("client try to add collide object");
 		
 		CollideObject toAddObject;
-		if(className == collideObjecctClass.FertilizerBig) {
+		if(className == collideObjecctClass.FertilizerBig || 
+				className == collideObjecctClass.FertilizerMedium || 
+				className == collideObjecctClass.FertilizerSmall) {
 			toAddObject = new Fertilizer(inputID, setPosition, this, className.ordinal(), setSize);
 			collideObjectList.add(toAddObject);
 		}

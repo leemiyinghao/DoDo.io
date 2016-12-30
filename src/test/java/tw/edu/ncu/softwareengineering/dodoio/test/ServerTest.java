@@ -9,6 +9,8 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
+import tw.edu.ncu.softwareengineering.dodoio.Internet.Server;
+
 public class ServerTest
 {
 	@Rule
