@@ -1,6 +1,7 @@
 package tw.edu.ncu.softwareengineering.dodoio;
 
 import java.util.Scanner;
+import java.util.Date;
 
 import javax.swing.JFrame;
 
@@ -57,16 +58,20 @@ public final class Main {
 				myRenderer = new Renderer(myCOM, myMap);
 				myControl = new Control(myCOM, myRenderer);
 				myRenderer.setStat(GameStat.MAINMENU);
-				myRenderer.render(33); // 1/30 sec. = 33.3 msec.
 				
 				frame.addKeyListener(myControl);
 				frame.add(myRenderer);
-				frame.pack();
 				frame.setSize(1024, 768);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setVisible(true);
+				
+				frame.pack();
+				long oldTime = System.currentTimeMillis();
 				while(true) {
-					myControl.update(33);
+					long newTime = System.currentTimeMillis();
+					int timeDiff = (int)newTime-(int)oldTime;
+					myRenderer.render(timeDiff);
+					myControl.update(timeDiff);
 					try {
 						Thread.sleep(5);
 					}catch(InterruptedException e) {
